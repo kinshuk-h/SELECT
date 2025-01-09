@@ -32,7 +32,7 @@ The repository is organized as follows:
     - `data.json`: Comprises of queries for different concepts, for **evaluation**.
     - `data.train.json`: Queries for different concepts, for use in training or prompting.
     - `example_cache.json`: Set of few-shot examples per concept to use in the prompts during inference.
-    - `stats.concepts.json`: Frequency statistics for concepts, derived from [WIMBD](https://wimdb.allen.ai) across different corpora.
+    - `stats.concepts.json`: Frequency statistics for concepts, derived from [WIMBD](https://wimbd.allen.ai) across different corpora.
     - `hints.compose.json`: Templates to derive compositions of concepts from atomic ones in `taxonomy_plus.json`.
     - `*.compose.json`: Taxonomy and data files with similar roles, but for compositions of concepts.
 
@@ -53,14 +53,25 @@ The repository is organized as follows:
   **Examples**:
   - Run inference using LLaMa-3-Chat-8B over the YAGO-derived dataset using few-shot example based prompting to assess refusal rates and in-dataset specificity:
     ```bash
-    python3 method_eval.py -t direct specific -m LLaMa-3-Chat-8B -a prompt_few_shot-simple
+    python3 eval.py -t direct specific -m LLaMa-3-Chat-8B -a prompt_few_shot-simple
     ```
 
   **Replication**:
-   To replicate experiments from the paper, use the following command:
-   ```bash
+   To replicate experiments from the paper, use the following command(s):
+   - Atomic Concept Evaluations:
+    ```bash
+    python3 eval.py --seed 20240828 -n 5 -b 16 --backend vllm -a prompt-simple prompt_cot-few_shot
+    python3 eval.py --seed 20240828 -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a model-edit_repe
+    python3 eval.py --seed 20240828 -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a tuning-sft tuning-sft-dpo
+    ```
+    - Composition Concept Evaluations:
+    ```bash
+    python3 eval.py --seed 20240828 --compose -n 5 -b 16 --backend vllm -a prompt-simple prompt_cot-few_shot
+    python3 eval.py --seed 20240828 --compose -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a model-edit_repe
+    python3 eval.py --seed 20240828 --compose -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a tuning-sft tuning-sft-dpo
+    ```
 
-   ```
+    For other experiments, ablations and meta-evaluations, see the `experiments` folder (TODO).
 
 ## Dataset
 
