@@ -39,38 +39,47 @@ The repository is organized as follows:
 - `results/expr.abstain.select`: Abstention experiment results
 
 - `src`: Source code for experiment related utility modules.
+  - `approaches`: Submodule implementing different abstention techniques. Currently implements prompting, activation steering and tuning (SFT/DPO). To add a new abstention technique, follow the steps below.
+  - `inference`: Submodule for inference, supporting different backends such as `vllm` or `HuggingFace`.
   - `evaluation`: Module for utilities related to evaluation.
-    - `experiments`: Submodule for experiment specific utilities.
-      - `refusal.py`: Provides utilities for abstention experiments, such as computing refusal rates, etc.
-    - `models`: Wraps logic for inference using HuggingFace and OpenAI models in a shared class for easy prototyping.
+    - `refusal.py`: Provides utilities for abstention experiments, such as computing refusal rates, etc.
+    - `dataset.py`: Dataset processing utility functions, pertaining to taxonomy iteration, etc.
+    - `task.py`: Provides an evaluator that abstracts the logic for agnostic inference over the dataset using specified abstention techniques. Any new techniques will be automatically supported as long as they follow the API.
   - `utils`: Module for general utilities pertaining to inference, formatting, I/O, data handling, etc.
-- `method_eval_utils.py`: Functions and classes specifically related to the prompting method evaluation scripts.
 
 ## Notebooks and Scripts
+
+To evaluate techniques using the benchmark, the following scripts can be used:
 
 - `generate.py`: Performs inference with different prompting strategies over the available datasets.
 - `evaluate.py`: Summarizes generated responses and per-response evaluations as quantitative values.
 
-  **Examples**:
-  - Run inference using LLaMa-3-Chat-8B using CoT based few-shot example based prompting to assess refusal rates and in-dataset specificity:
+#### Examples
+
+- Run inference using LLaMa-3-Chat-8B using CoT based few-shot example based prompting to assess refusal rates and in-dataset specificity:
     ```bash
     python3 generate.py -t direct specific -m LLaMa-3-Chat-8B -a prompt_cot-few_shot
     ```
-  - Evaluate generations and summarize different metrics for the chosen setting:
+- Evaluate generations and summarize different metrics for the chosen setting:
     ```bash
     python3 evaluate.py -t direct specific -m LLaMa-3-Chat-8B -a prompt_cot-few_shot
     ```
 
-  **Replication**:
-   To replicate experiments from the paper, use the following command(s):
-   - Atomic Concept Evaluations:
+#### Replication
+
+To replicate the experiments corresponding to the main tables from the paper, use the following command(s):
+
+For atomic concept evaluations:
+
     ```bash
     python3 generate.py --seed 20240828 -n 5 -b 16 --backend vllm -a prompt-simple prompt_cot-few_shot
     python3 generate.py --seed 20240828 -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a model-edit_repe
     python3 generate.py --seed 20240828 -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a tuning-sft tuning-sft-dpo
     python3 evaluate.py
     ```
-    - Composition Concept Evaluations:
+
+For compositions of concepts based evaluations:
+
     ```bash
     python3 generate.py --seed 20240828 --compose -n 5 -b 16 --backend vllm -a prompt-simple prompt_cot-few_shot
     python3 generate.py --seed 20240828 --compose -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a model-edit_repe
@@ -78,7 +87,7 @@ The repository is organized as follows:
     python3 evaluate.py --compose
     ```
 
-    For other experiments, ablations and meta-evaluations, see the `experiments` folder (TODO).
+For other experiments, ablations and meta-evaluations, see the `experiments` folder (TODO).
 
 ## Dataset
 
@@ -106,3 +115,59 @@ The composition of concepts has a slightly different file structure, but the fil
     - `names`: resolved names for concepts in same order as the IDs
   - `context`: parent concept data. This is only a placeholder for compatibility with the file structure for atomic concepts
   - `queries`: Queries for the concept, generated using GPT-4o
+
+## Extending the Evaluation of `SELECT`
+
+To add a new abstention technique for evaluation via `SELECT`, follow these steps:
+
+1. Create a new class that extends `src.approaches.base.AbstentionTechnique`. This abstract class provides the base API for all techniques. Specifically, ensure the new class implements the `prepare()` and `generate()` methods. Additionally, provide metadata such as the name of the technique in the call of the `super().__init__()`. For example:
+
+```python
+# file: custom_abst.py
+
+from src.approaches.base import AbstentionTechnique
+
+class MyCustomAbstentionTechnique(AbstentionTechnique):
+    def __init__(self):
+        super().__init__(
+            nature='CUSTOM',
+            name='Custom Technique',
+            short_name='C. Tech.',
+            # this is not automatically used by default
+            instruction=None,
+            # See templates/prompts.yaml for options
+            template='no_instruction'
+        )
+
+    def prepare(self, ...):
+        # Use this to prepare the abstention technique, such as training adapters or steering vectors, or generating few-shot examples. This is run only once per model.
+        ...
+
+    def generate(self, ...):
+        # Actual generation code, specific to a batch of prompts, goes here. Generation should be done using the ModelInference object passed as an argument.
+        ...
+
+```
+
+2. In the main script (`{generate,evaluate}.py`), link an instance of the abstention technique to the shared `APPROACHES` object. Following this step, the technique can be referred when invoking the script:
+
+```python
+from src.approaches import APPROACHES
+
+from custom_abst import MyCustomAbstentionTechnique
+
+...
+
+def main():
+    APPROACHES['abst-custom'] = MyCustomAbstentionTechnique()
+
+    parser = make_parser()
+    ...
+```
+
+3. Evaluate models with the added abstention technique(s):
+
+```bash
+python3 generate.py -m Gemma-2-IT-2B -a abst-custom -n 1 -b 32
+python3 evaluate.py -m Gemma-2-IT-2B -a abst-custom
+```
