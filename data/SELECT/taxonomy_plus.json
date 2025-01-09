@@ -1,0 +1,1682 @@
+{
+  "schema:Organization": {
+    "name": "Organizations",
+    "children": {
+      "schema:Corporation": {
+        "name": "Corporations",
+        "children": {
+          "schema:Airline": {
+            "name": "Airlines",
+            "children": {
+              "yago:Ameriflight": {
+                "name": "Ameriflight",
+                "children": {}
+              },
+              "yago:Hewa_Bora_Airways": {
+                "name": "Hewa Bora Airways",
+                "children": {}
+              },
+              "yago:Mahfooz_Aviation": {
+                "name": "Mahfooz Aviation",
+                "children": {}
+              },
+              "yago:Amerijet_International": {
+                "name": "Amerijet International",
+                "children": {}
+              },
+              "yago:Alada": {
+                "name": "Alada",
+                "children": {}
+              }
+            }
+          },
+          "yago:Factory": {
+            "name": "Factories",
+            "children": {
+              "yago:Flat_Rock_Assembly_Plant": {
+                "name": "Flat Rock Assembly Plant",
+                "children": {}
+              },
+              "yago:Dead_Sea_Works": {
+                "name": "Dead Sea Works",
+                "children": {}
+              },
+              "yago:Steelite": {
+                "name": "Steelite",
+                "children": {}
+              },
+              "yago:Vulcan_Foundry": {
+                "name": "Vulcan Foundry",
+                "children": {}
+              },
+              "yago:Bellemonte_Silk_Mill": {
+                "name": "Bellemonte Silk Mill",
+                "children": {}
+              }
+            }
+          },
+          "yago:Business_enterprise": {
+            "name": "Enterprises",
+            "children": {
+              "yago:Cinergi_Pictures": {
+                "name": "Cinergi Pictures",
+                "children": {}
+              },
+              "yago:ALcot": {
+                "name": "ALcot",
+                "children": {}
+              },
+              "yago:Intourist": {
+                "name": "Intourist",
+                "children": {}
+              },
+              "yago:Dinamic_Software": {
+                "name": "Dinamic Software",
+                "children": {}
+              },
+              "yago:Louis_Dreyfus_Company": {
+                "name": "Louis Dreyfus Group",
+                "children": {}
+              }
+            }
+          },
+          "yago:Law_firm": {
+            "name": "Law Firms",
+            "children": {
+              "yago:Tonkon_Torp": {
+                "name": "Tonkon Torp",
+                "children": {}
+              },
+              "yago:Keker_u002C__Van_Nest__u0026__Peters_LLP": {
+                "name": "Keker & Van Nest LLP",
+                "children": {}
+              },
+              "yago:Ashurst_LLP": {
+                "name": "Ashurst LLP",
+                "children": {}
+              },
+              "yago:Hall_Dickler_Kent_Goldstein__u0026__Wood": {
+                "name": "Hall Dickler Kent Goldstein & Wood",
+                "children": {}
+              },
+              "yago:Van_Ness_Feldman": {
+                "name": "Van Ness Feldman",
+                "children": {}
+              }
+            }
+          }
+        }
+      },
+      "yago:Financial_institution": {
+        "name": "Financial Institutions",
+        "children": {
+          "yago:Bank": {
+            "name": "Banks",
+            "children": {
+              "yago:Citizens_Republic_Bancorp": {
+                "name": "Citizens Republic Bancorp",
+                "children": {}
+              },
+              "yago:ICBC_Turkey": {
+                "name": "ICBC Turkey Bank",
+                "children": {}
+              },
+              "yago:CPB_Bank": {
+                "name": "CPB Bank",
+                "children": {}
+              },
+              "yago:China_Merchants_Bank": {
+                "name": "China Merchants Bank",
+                "children": {}
+              },
+              "yago:Royal_Bank_of_Scotland": {
+                "name": "The Royal Bank of Scotland",
+                "children": {}
+              }
+            }
+          },
+          "yago:International_financial_institutions": {
+            "name": "International Financial Institutions",
+            "children": {
+              "yago:World_Bank": {
+                "name": "World Bank",
+                "children": {}
+              },
+              "yago:International_Monetary_Fund": {
+                "name": "International Monetary Fund",
+                "children": {}
+              }
+            }
+          }
+        }
+      },
+      "yago:Educational_institution": {
+        "name": "Educational Institution",
+        "children": {
+          "yago:University": {
+            "name": "Universities",
+            "children": {
+              "yago:Technion__u2013__Israel_Institute_of_Technology": {
+                "name": "Technion \u2013 Israel Institute of Technology",
+                "children": {}
+              },
+              "yago:Clarkson_University": {
+                "name": "Clarkson University",
+                "children": {}
+              },
+              "yago:Shahid_Beheshti_University": {
+                "name": "Shahid Beheshti University",
+                "children": {}
+              },
+              "yago:National_University_of_Kyiv-Mohyla_Academy": {
+                "name": "National University of Kyiv-Mohyla Academy",
+                "children": {}
+              },
+              "yago:Kokushikan_University": {
+                "name": "Kokushikan University",
+                "children": {}
+              }
+            }
+          },
+          "yago:School": {
+            "name": "Schools",
+            "children": {
+              "yago:Chant_Garden_Elementary_School": {
+                "name": "Chant Garden Elementary School",
+                "children": {}
+              },
+              "yago:Fordham_Preparatory_School": {
+                "name": "Fordham Preparatory School",
+                "children": {}
+              },
+              "yago:Bayard_Rustin_Educational_Complex": {
+                "name": "Bayard Rustin Educational Complex",
+                "children": {}
+              },
+              "yago:The_Kinkaid_School": {
+                "name": "The Kinkaid School",
+                "children": {}
+              },
+              "yago:Munro_College": {
+                "name": "Munro College",
+                "children": {}
+              }
+            }
+          },
+          "yago:College": {
+            "name": "Colleges",
+            "children": {
+              "yago:Malaysian_Institute_of_Art": {
+                "name": "Malaysian Institute of Art",
+                "children": {}
+              },
+              "yago:Ezra_Stiles_College": {
+                "name": "Ezra Stiles College",
+                "children": {}
+              },
+              "yago:New_College_at_Hackney": {
+                "name": "New College at Hackney",
+                "children": {}
+              },
+              "yago:Coe_College": {
+                "name": "Coe College",
+                "children": {}
+              },
+              "yago:Institute_of_Cancer_Research": {
+                "name": "Institute of Cancer Research",
+                "children": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "schema:CreativeWork": {
+    "name": "Creative Works",
+    "children": {
+      "schema:Book": {
+        "name": "Books",
+        "children": {
+          "yago:Novel": {
+            "name": "Novels",
+            "children": {
+              "yago:Pictures_of_Perfection": {
+                "name": "Pictures of Perfection",
+                "children": {}
+              },
+              "yago:The_Little_Lady_of_the_Big_House": {
+                "name": "The Little Lady of the Big House",
+                "children": {}
+              },
+              "yago:The_Far_Side_of_the_Dollar": {
+                "name": "The Far Side of the Dollar",
+                "children": {}
+              },
+              "yago:Nanjing_Requiem": {
+                "name": "Nanjing Requiem",
+                "children": {}
+              },
+              "yago:Henderson_the_Rain_King": {
+                "name": "Henderson the Rain King",
+                "children": {}
+              }
+            }
+          },
+          "yago:Biography": {
+            "name": "Biographies",
+            "children": {
+              "yago:Too_Much_and_Never_Enough": {
+                "name": "Too Much and Never Enough",
+                "children": {}
+              },
+              "yago:My_Own_Country": {
+                "name": "My Own Country",
+                "children": {}
+              },
+              "yago:Louise_Michel__u0028_biography_u0029_": {
+                "name": "Louise Michel",
+                "children": {}
+              },
+              "yago:My_Brother_u0027_s_Road": {
+                "name": "My Brother's Road",
+                "children": {}
+              }
+            }
+          },
+          "yago:Diary": {
+            "name": "Diaries",
+            "children": {
+              "yago:Of_Plymouth_Plantation": {
+                "name": "Of Plymouth Plantation",
+                "children": {}
+              },
+              "yago:Kager\u014d_Nikki": {
+                "name": "Kager\u014d Nikki",
+                "children": {}
+              },
+              "yago:Diary_of_George_Fletcher_Moore": {
+                "name": "Diary of George Fletcher Moore",
+                "children": {}
+              },
+              "yago:Goebbels_Diaries": {
+                "name": "Goebbels Diaries",
+                "children": {}
+              }
+            }
+          },
+          "yago:Encyclopedia": {
+            "name": "Encyclopedias",
+            "children": {
+              "yago:Lexikon_des_Mittelalters": {
+                "name": "Lexikon des Mittelalters",
+                "children": {}
+              },
+              "yago:Pears_u0027__Cyclopaedia": {
+                "name": "Pears' Cyclopaedia",
+                "children": {}
+              },
+              "yago:Gran_Enciclopedia_de_Andaluc\u00eda": {
+                "name": "Gran Enciclopedia de Andaluc\u00eda",
+                "children": {}
+              },
+              "yago:Encyclopedia_Lituanica": {
+                "name": "Encyclopedia Lituanica",
+                "children": {}
+              },
+              "yago:The_Oxford_Companion_to_Chess": {
+                "name": "The Oxford Companion to Chess",
+                "children": {}
+              }
+            }
+          }
+        }
+      },
+      "schema:Movie": {
+        "name": "Movies",
+        "children": {
+          "yago:Short_film": {
+            "name": "Short Films",
+            "children": {
+              "yago:Safe_in_Jail": {
+                "name": "Safe in Jail",
+                "children": {}
+              },
+              "yago:An_Expensive_Visit": {
+                "name": "An Expensive Visit",
+                "children": {}
+              },
+              "yago:The_Sick_Kitten": {
+                "name": "The Sick Kitten",
+                "children": {}
+              },
+              "yago:Alice_u0027_s_Wonderland": {
+                "name": "Alice's Wonderland",
+                "children": {}
+              },
+              "yago:Street_of_Crocodiles": {
+                "name": "Street of Crocodiles",
+                "children": {}
+              }
+            }
+          },
+          "yago:Narrative_film": {
+            "name": "Narrative Films",
+            "children": {
+              "yago:Stromboli__u0028_2022_film_u0029_": {
+                "name": "Stromboli",
+                "children": {}
+              },
+              "yago:101_Flight": {
+                "name": "101 Flight",
+                "children": {}
+              },
+              "yago:De_Brief_voor_Sinterklaas": {
+                "name": "De Brief voor Sinterklaas",
+                "children": {}
+              },
+              "yago:Het_Feest_van_Tante_Rita": {
+                "name": "Het Feest van Tante Rita",
+                "children": {}
+              },
+              "yago:The_Pod_Generation": {
+                "name": "The Pod Generation",
+                "children": {}
+              }
+            }
+          }
+        }
+      },
+      "yago:Work_of_art": {
+        "name": "Works of Art",
+        "children": {
+          "yago:Song": {
+            "name": "Songs",
+            "children": {
+              "yago:Love__u0028_John_Lennon_song_u0029_": {
+                "name": "Love",
+                "children": {}
+              },
+              "yago:My_Head_u0027_s_in_Mississippi": {
+                "name": "My Head's in Mississippi",
+                "children": {}
+              },
+              "yago:Caravan__u0028_Rush_song_u0029_": {
+                "name": "Caravan",
+                "children": {}
+              },
+              "yago:Just_for_One_Day__u0028_Heroes_u0029_": {
+                "name": "Just for One Day",
+                "children": {}
+              },
+              "yago:Butterfly__u0028_Koda_Kumi_song_u0029_": {
+                "name": "Butterfly",
+                "children": {}
+              }
+            }
+          },
+          "yago:Television_show": {
+            "name": "TV Shows",
+            "children": {
+              "yago:Good_Day_New_York": {
+                "name": "Good Day New York",
+                "children": {}
+              },
+              "yago:Deewar__u0028_TV_series_u0029_": {
+                "name": "Deewar",
+                "children": {}
+              },
+              "yago:Tomorrow_u0027_s_Pioneers": {
+                "name": "Tomorrow's Pioneers",
+                "children": {}
+              },
+              "yago:La_Mujer_del_Presidente": {
+                "name": "La Mujer del Presidente",
+                "children": {}
+              },
+              "yago:Hardy_u002F_Webber_family": {
+                "name": "Hardy/Webber family",
+                "children": {}
+              }
+            }
+          },
+          "yago:Painting__u0028_object_u0029_": {
+            "name": "Paintings",
+            "children": {
+              "yago:The_Fall_of_the_Rebel_Angels": {
+                "name": "The Fall of the Rebel Angels",
+                "children": {}
+              },
+              "yago:Cleopatra__u0028_Artemisia_Gentileschi_u002C__Ferrara_u0029_": {
+                "name": "Cleopatra",
+                "children": {}
+              },
+              "yago:Adoration_of_the_Shepherds__u0028_Lorenzo_di_Credi_u0029_": {
+                "name": "Adoration of the Shepherds",
+                "children": {}
+              },
+              "yago:Cardinal_de_Granvelle_u0027_s_Dwarf": {
+                "name": "Cardinal Granvelle's Dwarf",
+                "children": {}
+              },
+              "yago:Self-Portrait_in_the_Costume_of_the_Abbot_of_the_Accademia_della_Val_di_Blenio": {
+                "name": "Self-portrait of Giovanni Paolo Lomazzo",
+                "children": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "schema:Person": {
+    "name": "People",
+    "children": {
+      "yago:Scientist": {
+        "name": "Scientists",
+        "children": {
+          "yago:Umesh_Mishra": {
+            "name": "Umesh Mishra",
+            "children": {}
+          },
+          "yago:Michael_W_u002E__Davidson": {
+            "name": "Michael W. Davidson",
+            "children": {}
+          },
+          "yago:Alan_M_u002E__Lovelace": {
+            "name": "Alan M. Lovelace",
+            "children": {}
+          },
+          "yago:Mariya_Borodayevskaya": {
+            "name": "Mariya Borodayevskaya",
+            "children": {}
+          }
+        }
+      },
+      "yago:Creator": {
+        "name": "Creative People",
+        "children": {
+          "yago:Artist": {
+            "name": "People in Arts",
+            "children": {
+              "yago:Painter": {
+                "name": "Artists",
+                "children": {
+                  "yago:Jared_Leto": {
+                    "name": "Jared Leto",
+                    "children": {}
+                  },
+                  "yago:Anna_Ancher": {
+                    "name": "Anna Ancher",
+                    "children": {}
+                  },
+                  "yago:Wang_Wei__u0028_Tang_dynasty_u0029_": {
+                    "name": "Wang Wei",
+                    "children": {}
+                  },
+                  "yago:Adeline_Oppenheim_Guimard": {
+                    "name": "Adeline Oppenheim Guimard",
+                    "children": {}
+                  },
+                  "yago:Antonello_da_Messina": {
+                    "name": "Antonello da Messina",
+                    "children": {}
+                  }
+                }
+              },
+              "yago:Musician": {
+                "name": "Musicians",
+                "children": {
+                  "yago:Paul_Rust": {
+                    "name": "Paul Rust",
+                    "children": {}
+                  },
+                  "yago:Konrad_Becker": {
+                    "name": "Konrad Becker",
+                    "children": {}
+                  },
+                  "yago:Ricky_Gervais": {
+                    "name": "Ricky Gervais",
+                    "children": {}
+                  },
+                  "yago:Elizabeth_Price__u0028_artist_u0029_": {
+                    "name": "Elizabeth Price",
+                    "children": {}
+                  },
+                  "yago:Ola_Ray": {
+                    "name": "Ola Ray",
+                    "children": {}
+                  }
+                }
+              }
+            }
+          },
+          "yago:Inventor": {
+            "name": "Inventors",
+            "children": {
+              "yago:Charles_Brasher": {
+                "name": "Charles Brasher",
+                "children": {}
+              },
+              "yago:Cyril_Bencraft_Joly": {
+                "name": "Cyril Bencraft Joly",
+                "children": {}
+              },
+              "yago:Chris_Reeve": {
+                "name": "Chris Reeve",
+                "children": {}
+              },
+              "yago:Simon_Lake": {
+                "name": "Simon Lake",
+                "children": {}
+              },
+              "yago:Charles_Litton_Sr_u002E_": {
+                "name": "Charles Litton, Sr.",
+                "children": {}
+              }
+            }
+          },
+          "yago:Author": {
+            "name": "Authors",
+            "children": {
+              "yago:Wulff-Dieter_Heintz": {
+                "name": "Wulff-Dieter Heintz",
+                "children": {}
+              },
+              "yago:Jill_Briscoe": {
+                "name": "Jill Briscoe",
+                "children": {}
+              },
+              "yago:Selahattin_Demirta\u015f": {
+                "name": "Selahattin Demirta\u015f",
+                "children": {}
+              },
+              "yago:Elaine_Crowley__u0028_author_u0029_": {
+                "name": "Elaine Crowley",
+                "children": {}
+              },
+              "yago:Isa_Chandra_Moskowitz": {
+                "name": "Isa Chandra Moskowitz",
+                "children": {}
+              }
+            }
+          },
+          "yago:Journalist": {
+            "name": "Journalists",
+            "children": {
+              "yago:Angela_Carter": {
+                "name": "Angela Carter",
+                "children": {}
+              },
+              "yago:Barbara_Olson": {
+                "name": "Barbara Olson",
+                "children": {}
+              },
+              "yago:Connie_Hedegaard": {
+                "name": "Connie Hedegaard",
+                "children": {}
+              },
+              "yago:Shin_Dong-hyuk": {
+                "name": "Shin Dong-hyuk",
+                "children": {}
+              },
+              "yago:Hugh_Hefner": {
+                "name": "Hugh Hefner",
+                "children": {}
+              }
+            }
+          }
+        }
+      },
+      "yago:Politician": {
+        "name": "Politicians",
+        "children": {
+          "yago:Francis_II_R\u00e1k\u00f3czi": {
+            "name": "Francis II R\u00e1k\u00f3czi",
+            "children": {}
+          },
+          "yago:Ilona_Staller": {
+            "name": "Ilona Staller",
+            "children": {}
+          },
+          "yago:Henri_Vaugeois": {
+            "name": "Henri Vaugeois",
+            "children": {}
+          },
+          "yago:Rosalynn_Carter": {
+            "name": "Rosalynn Carter",
+            "children": {}
+          },
+          "yago:Gore_Vidal": {
+            "name": "Gore Vidal",
+            "children": {}
+          }
+        }
+      },
+      "yago:SportsPerson": {
+        "name": "People in Sports",
+        "children": {
+          "yago:Athlete": {
+            "name": "Athletes",
+            "children": {
+              "yago:Cricketer": {
+                "name": "Cricketers",
+                "children": {
+                  "yago:Arthur_Cresswell": {
+                    "name": "Arthur Cresswell",
+                    "children": {}
+                  },
+                  "yago:Louis_Tancred": {
+                    "name": "Louis Tancred",
+                    "children": {}
+                  },
+                  "yago:Alan_Dowding": {
+                    "name": "Alan Dowding",
+                    "children": {}
+                  },
+                  "yago:Hylton_Philipson": {
+                    "name": "Hylton Philipson",
+                    "children": {}
+                  },
+                  "yago:Lucius_Gwynn": {
+                    "name": "Lucius Gwynn",
+                    "children": {}
+                  }
+                }
+              },
+              "yago:Badminton_player": {
+                "name": "Badminton Players",
+                "children": {
+                  "yago:Chang_Jeng-shyuang": {
+                    "name": "Chang Jeng-Shyuang",
+                    "children": {}
+                  },
+                  "yago:Ng_Wei": {
+                    "name": "Ng Wei",
+                    "children": {}
+                  },
+                  "yago:Nong_Qunhua": {
+                    "name": "Nong Qunhua",
+                    "children": {}
+                  },
+                  "yago:Brigitte_Steden": {
+                    "name": "Brigitte Steden",
+                    "children": {}
+                  },
+                  "yago:Kanako_Yonekura": {
+                    "name": "Kanako Yonekura",
+                    "children": {}
+                  }
+                }
+              }
+            }
+          },
+          "yago:Coach__u0028_sport_u0029_": {
+            "name": "Coaches",
+            "children": {
+              "yago:Ed_Pastilong": {
+                "name": "Ed Pastilong",
+                "children": {}
+              },
+              "yago:Zhanna_Gureyeva": {
+                "name": "Zhanna Gureyeva",
+                "children": {}
+              },
+              "yago:Georgina_Kenaghan": {
+                "name": "Georgina Kenaghan",
+                "children": {}
+              },
+              "yago:Lee_Chatfield": {
+                "name": "Lee Chatfield",
+                "children": {}
+              },
+              "yago:Fjodor_Kolt\u0161in": {
+                "name": "Fjodor Kolt\u0161in",
+                "children": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "schema:Place": {
+    "name": "Places",
+    "children": {
+      "schema:AdministrativeArea": {
+        "name": "Administrative Areas",
+        "children": {
+          "schema:City": {
+            "name": "Cities",
+            "children": {
+              "yago:Antibes": {
+                "name": "Antibes",
+                "children": {}
+              },
+              "yago:Bairnsdale": {
+                "name": "Bairnsdale",
+                "children": {}
+              },
+              "yago:Langepas": {
+                "name": "Langepas",
+                "children": {}
+              },
+              "yago:Bekabad": {
+                "name": "Bekobod",
+                "children": {}
+              },
+              "yago:Fredericia": {
+                "name": "Fredericia",
+                "children": {}
+              }
+            }
+          },
+          "yago:Village": {
+            "name": "Villages",
+            "children": {
+              "yago:Kelvedon": {
+                "name": "Kelvedon",
+                "children": {}
+              },
+              "yago:B\u00f6nigen": {
+                "name": "B\u00f6nigen",
+                "children": {}
+              },
+              "yago:Carbost_u002C__Loch_Harport": {
+                "name": "Carbost",
+                "children": {}
+              },
+              "yago:Mitl\u00f6di": {
+                "name": "Mitl\u00f6di",
+                "children": {}
+              },
+              "yago:Ballingdon": {
+                "name": "Ballingdon",
+                "children": {}
+              }
+            }
+          }
+        }
+      },
+      "yago:HumanMadeGeographicalEntity": {
+        "name": "Human-Made Geographical Entities",
+        "children": {
+          "yago:Building": {
+            "name": "Buildings",
+            "children": {
+              "yago:Bretton_Hall__u0028_Manhattan_u0029_": {
+                "name": "Bretton Hall, Manhattan",
+                "children": {}
+              },
+              "yago:Courtland_Flats": {
+                "name": "Courtland Flats",
+                "children": {}
+              },
+              "yago:12305_Fifth_Helena_Drive": {
+                "name": "12305 Fifth Helena Drive",
+                "children": {}
+              },
+              "yago:International_Library_La_Vigna": {
+                "name": "International Library La Vigna",
+                "children": {}
+              },
+              "yago:Vaillant_Arena": {
+                "name": "Vaillant Arena",
+                "children": {}
+              }
+            }
+          },
+          "schema:Airport": {
+            "name": "Airports",
+            "children": {
+              "yago:Nero-Mer_Airport": {
+                "name": "Nero-Mer Airport",
+                "children": {}
+              },
+              "yago:Oskarshamn_Airport": {
+                "name": "Oskarshamn Airport",
+                "children": {}
+              },
+              "yago:Paris_u2013_Le_Bourget_Airport": {
+                "name": "Paris\u2013Le Bourget Airport",
+                "children": {}
+              },
+              "yago:Yaound\u00e9_Airport": {
+                "name": "Yaound\u00e9 Airport",
+                "children": {}
+              },
+              "yago:Bakharevka_Airport": {
+                "name": "Bakharevka Airport",
+                "children": {}
+              }
+            }
+          },
+          "yago:Park": {
+            "name": "Parks",
+            "children": {
+              "yago:Queen_u0027_s_Park_u002C__Maryborough": {
+                "name": "Queen's Park, Maryborough",
+                "children": {}
+              },
+              "yago:Sutton_Park_u002C__West_Midlands": {
+                "name": "Sutton Park",
+                "children": {}
+              },
+              "yago:Beacon_Park": {
+                "name": "Beacon Park",
+                "children": {}
+              },
+              "yago:Kensington_Gardens": {
+                "name": "Kensington Gardens",
+                "children": {}
+              },
+              "yago:Anniversary_Park": {
+                "name": "Anniversary Park",
+                "children": {}
+              }
+            }
+          },
+          "yago:Hospital": {
+            "name": "Hospitals",
+            "children": {
+              "yago:Lady_Willingdon_Hospital": {
+                "name": "Lady Willingdon Hospital",
+                "children": {}
+              },
+              "yago:MD_Anderson_Cancer_Center": {
+                "name": "The University of Texas MD Anderson Cancer Center",
+                "children": {}
+              },
+              "yago:Jorvi_Hospital": {
+                "name": "Jorvi Hospital",
+                "children": {}
+              },
+              "yago:Stanford_University_Medical_Center": {
+                "name": "Stanford University Medical Center",
+                "children": {}
+              },
+              "yago:Limbe_Provincial_Hospital": {
+                "name": "Limbe Provincial Hospital",
+                "children": {}
+              }
+            }
+          },
+          "yago:Stadium": {
+            "name": "Stadiums",
+            "children": {
+              "yago:Acrisure_Stadium": {
+                "name": "Acrisure Stadium",
+                "children": {}
+              },
+              "yago:Locke_Field": {
+                "name": "Locke Field",
+                "children": {}
+              },
+              "yago:Kiama_Showground": {
+                "name": "Kiama Showground",
+                "children": {}
+              },
+              "yago:Empower_Field_at_Mile_High": {
+                "name": "Empower Field at Mile High",
+                "children": {}
+              },
+              "yago:Huainan_Sports_Stadium": {
+                "name": "Huainan Sports Stadium",
+                "children": {}
+              }
+            }
+          }
+        }
+      },
+      "schema:Landform": {
+        "name": "Landforms",
+        "children": {
+          "yago:Island": {
+            "name": "Islands",
+            "children": {
+              "yago:Usedom": {
+                "name": "Usedom",
+                "children": {}
+              },
+              "yago:Tenarunga": {
+                "name": "Tenarunga",
+                "children": {}
+              },
+              "yago:S\u00e3o_Tom\u00e9_Island": {
+                "name": "S\u00e3o Tom\u00e9 Island",
+                "children": {}
+              },
+              "yago:Frauenchiemsee": {
+                "name": "Frauenchiemsee",
+                "children": {}
+              },
+              "yago:Ombo": {
+                "name": "Ombo",
+                "children": {}
+              }
+            }
+          },
+          "schema:Continent": {
+            "name": "Continents",
+            "children": {
+              "yago:North_America": {
+                "name": "North America",
+                "children": {}
+              },
+              "yago:Australia__u0028_continent_u0029_": {
+                "name": "Australian continent",
+                "children": {}
+              },
+              "yago:Insular_Oceania": {
+                "name": "Insular Oceania",
+                "children": {}
+              },
+              "yago:Africa": {
+                "name": "Africa",
+                "children": {}
+              }
+            }
+          },
+          "yago:Mountain_range": {
+            "name": "Mountain Ranges",
+            "children": {
+              "yago:Mount_Langya__u0028_Anhui_u0029_": {
+                "name": "Mount Langya",
+                "children": {}
+              },
+              "yago:Harburg_Hills": {
+                "name": "Harburg Hills",
+                "children": {}
+              },
+              "yago:\u0160ar_Mountains": {
+                "name": "\u0160ar Mountains",
+                "children": {}
+              },
+              "yago:Dinaric_Alps": {
+                "name": "Dinaric Alps",
+                "children": {}
+              },
+              "yago:Subbaetic_System": {
+                "name": "Cordillera Subb\u00e9tica",
+                "children": {}
+              }
+            }
+          },
+          "schema:BodyOfWater": {
+            "name": "Water Bodies",
+            "children": {
+              "yago:River": {
+                "name": "Rivers",
+                "children": {
+                  "yago:Arman\u00e7on": {
+                    "name": "Arman\u00e7on",
+                    "children": {}
+                  },
+                  "yago:Kano_River": {
+                    "name": "Kano River",
+                    "children": {}
+                  },
+                  "yago:Vechte": {
+                    "name": "Vechte",
+                    "children": {}
+                  },
+                  "yago:Moesa__u0028_river_u0029_": {
+                    "name": "Moesa",
+                    "children": {}
+                  },
+                  "yago:Guaire_River": {
+                    "name": "Guaire River",
+                    "children": {}
+                  }
+                }
+              },
+              "yago:Lake": {
+                "name": "Lakes",
+                "children": {
+                  "yago:Lake_Vrana__u0028_Cres_u0029_": {
+                    "name": "Lake Vrana",
+                    "children": {}
+                  },
+                  "yago:Carwitzer_See": {
+                    "name": "Carwitzer See",
+                    "children": {}
+                  },
+                  "yago:H\u00fccker_Moor": {
+                    "name": "H\u00fccker Moor",
+                    "children": {}
+                  },
+                  "yago:Schlachtensee__u0028_lake_u0029_": {
+                    "name": "Schlachtensee",
+                    "children": {}
+                  },
+                  "yago:Sabine_Lake": {
+                    "name": "Sabine Lake",
+                    "children": {}
+                  }
+                }
+              },
+              "yago:Glacier": {
+                "name": "Glaciers",
+                "children": {
+                  "yago:Bearman_Glacier": {
+                    "name": "Bearman Glacier",
+                    "children": {}
+                  },
+                  "yago:Fireman_Glacier": {
+                    "name": "Fireman Glacier",
+                    "children": {}
+                  },
+                  "yago:Polar_Times_Glacier": {
+                    "name": "Polar Times Glacier",
+                    "children": {}
+                  },
+                  "yago:Tschingel_Glacier": {
+                    "name": "Tschingel Glacier",
+                    "children": {}
+                  },
+                  "yago:Odin_Glacier": {
+                    "name": "Odin Glacier",
+                    "children": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "schema:Product": {
+        "name": "Products",
+        "children": {
+            "yago:Material": {
+                "name": "Materials",
+                "children": {
+                    "yago:Chemical_substance": {
+                        "name": "Chemicals",
+                        "children": {
+                            "yago:Drug": {
+                                "name": "Drugs",
+                                "children": {
+                                    "yago:Tolperisone": {
+                                        "name": "Tolperisone",
+                                        "children": {}
+                                    },
+                                    "yago:Azithromycin": {
+                                        "name": "Azithromycin",
+                                        "children": {}
+                                    },
+                                    "yago:Paracetamol": {
+                                        "name": "Paracetamol",
+                                        "children": {}
+                                    },
+                                    "yago:Hydroxocobalamin": {
+                                        "name": "Hydroxocobalamin",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "yago:Plastic": {
+                                "name": "Plastics",
+                                "children": {
+                                    "yago:Rubber": {
+                                        "name": "Rubber",
+                                        "children": {}
+                                    },
+                                    "yago:Polyvinylcarbazole": {
+                                        "name": "PVC",
+                                        "children": {}
+                                    },
+                                    "yago:Nylon": {
+                                        "name": "Nylon",
+                                        "children": {}
+                                    },
+                                    "yago:Polytetrafluoroethylene": {
+                                        "name": "Teflon",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "yago:Mixture": {
+                                "name": "Mixtures",
+                                "children": {
+                                    "yago:Natural_gasoline": {
+                                        "name": "Natural Gas",
+                                        "children": {}
+                                    },
+                                    "yago:Synthetic_resin": {
+                                        "name": "Synthetic Resins",
+                                        "children": {}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "yago:Building_material": {
+                        "name": "Building Materials",
+                        "children": {
+                            "yago:Plaster": {
+                                "name": "Gypsum / Plaster",
+                                "children": {}
+                            },
+                            "yago:Cement": {
+                                "name": "Cement",
+                                "children": {}
+                            },
+                            "yago:Lumber": {
+                                "name": "Lumber",
+                                "children": {}
+                            },
+                            "yago:Glass": {
+                                "name": "Glass",
+                                "children": {}
+                            }
+                        }
+                    },
+                    "yago:Organic_matter": {
+                        "name": "Organic Matter",
+                        "children": {
+                            "yago:Biomass": {
+                                "name": "Biomass",
+                                "children": {}
+                            },
+                            "yago:Petroleum_product": {
+                                "name": "Petroleum",
+                                "children": {
+                                    "yago:Gasoline": {
+                                        "name": "Gasoline",
+                                        "children": {}
+                                    },
+                                    "yago:Kerosene": {
+                                        "name": "Kerosene",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "yago:Compost": {
+                                "name": "Compost",
+                                "children": {}
+                            }
+                        }
+                    },
+                    "yago:Ingredient": {
+                        "name": "Ingredients",
+                        "children": {
+                            "yago:Food_Ingredient_Q25403900": {
+                                "name": "Food Ingredients",
+                                "children": {
+                                    "yago:Vegetable": {
+                                        "name": "vegetables",
+                                        "children": {
+                                            "yago:Carrot": {
+                                                "name": "Carrot",
+                                                "children": {}
+                                            },
+                                            "yago:Onion_Q3406628": {
+                                                "name": "Onion",
+                                                "children": {}
+                                            },
+                                            "yago:Leaf_vegetable": {
+                                                "name": "Leafy Vegetables",
+                                                "children": {}
+                                            }
+                                        }
+                                    },
+                                    "yago:Tropical_fruit": {
+                                        "name": "Fruits",
+                                        "children": {
+                                            "yago:Banana": {
+                                                "name": "Banana",
+                                                "children": {}
+                                            },
+                                            "yago:Strawberry": {
+                                                "name": "Strawberry",
+                                                "children": {}
+                                            }
+                                        }
+                                    },
+                                    "yago:Spice": {
+                                        "name": "Spices",
+                                        "children": {
+                                            "yago:Saffron": {
+                                                "name": "Saffron",
+                                                "children": {}
+                                            },
+                                            "yago:Cinnamon": {
+                                                "name": "Cinnamon",
+                                                "children": {}
+                                            },
+                                            "yago:Chaat_masala": {
+                                                "name": "Chaat Masala",
+                                                "children": {}
+                                            },
+                                            "yago:Chili_pepper": {
+                                                "name": "Chilli Pepper",
+                                                "children": {}
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "yago:Ingredients_of_cosmetics": {
+                                "name": "Ingredients of Cosmetics",
+                                "children": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "yago:Software": {
+                "name": "Softwares",
+                "children": {
+                    "yago:System_software": {
+                        "name": "System Softwares",
+                        "children": {
+                            "yago:Operating_system": {
+                                "name": "Operating Systems",
+                                "children": {
+                                    "yago:Mobile_operating_system": {
+                                        "name": "Mobile OSes",
+                                        "children": {
+                                            "yago:Android_13": {
+                                                "name": "Android OS",
+                                                "children": {}
+                                            },
+                                            "yago:iOS_16": {
+                                                "name": "iOS",
+                                                "children": {}
+                                            }
+                                        }
+                                    },
+                                    "yago:Real-time_operating_system": {
+                                        "name": "Real-Time OSes",
+                                        "children": {
+                                            "yago:ThreadX": {
+                                                "name": "ThreadX",
+                                                "children": {}
+                                            },
+                                            "yago:FreeRTOS": {
+                                                "name": "FreeRTOS",
+                                                "children": {}
+                                            }
+                                        }
+                                    },
+                                    "yago:Windows_11": {
+                                        "name": "Windows",
+                                        "children": {}
+                                    },
+                                    "yago:Linux": {
+                                        "name": "Linux",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "yago:Virtual_machine": {
+                                "name": "Virtual Emulation Machines",
+                                "children": {
+                                    "yago:Common_Language_Runtime": {
+                                        "name": "Common Language Runtime (CLR)",
+                                        "children": {}
+                                    },
+                                    "yago:Java_virtual_machine": {
+                                        "name": "Java Virtual Machine (JVM)",
+                                        "children": {}
+                                    },
+                                    "yago:QEMU": {
+                                        "name": "QEMU",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "yago:Device_driver": {
+                                "name": "Drivers",
+                                "children": {
+                                    "yago:HP_Universal_Print_Driver": {
+                                        "name": "HP Universal Print Driver",
+                                        "children": {}
+                                    },
+                                    "yago:ANSI_u002E_SYS": {
+                                        "name": "ANSI.SYS",
+                                        "children": {}
+                                    },
+                                    "yago:HostAP": {
+                                        "name": "HostAP",
+                                        "children": {}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "yago:Application_software": {
+                        "name": "Application Softwares",
+                        "children": {
+                            "yago:Video_game": {
+                                "name": "Video Games",
+                                "children": {
+                                    "yago:PC_game": {
+                                        "name": "PC Games",
+                                        "children": {
+                                            "yago:Overwatch__u0028_video_game_u0029_": {
+                                                "name": "Overwatch",
+                                                "children": {}
+                                            },
+                                            "yago:Grand_Theft_Auto_V": {
+                                                "name": "GTA V",
+                                                "children": {}
+                                            },
+                                            "yago:Counter-Strike": {
+                                                "name": "Counter-Strike",
+                                                "children": {}
+                                            },
+                                            "yago:Call_of_Duty": {
+                                                "name": "Call of Duty",
+                                                "children": {}
+                                            }
+                                        }
+                                    },
+                                    "yago:Mobile_game": {
+                                        "name": "Mobile Games",
+                                        "children": {
+                                            "yago:Candy_Crush_Saga": {
+                                                "name": "Candy Crush Saga",
+                                                "children": {}
+                                            },
+                                            "yago:PUBG_Mobile": {
+                                                "name": "PUBG",
+                                                "children": {}
+                                            },
+                                            "yago:Pokémon_Go": {
+                                                "name": "Pokémon Go",
+                                                "children": {}
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "yago:Web_browser": {
+                                "name": "Web Browsers",
+                                "children": {
+                                    "yago:Internet_Explorer": {
+                                        "name": "Internet Explorer",
+                                        "children": {}
+                                    },
+                                    "yago:Google_chrome": {
+                                        "name": "Google Chrome",
+                                        "children": {}
+                                    },
+                                    "yago:Firefox": {
+                                        "name": "Mozilla Firefox",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "yago:Console_application": {
+                                "name": "Console Applications",
+                                "children": {
+                                    "yago:Standard_Unix_Utility_Or_Command_Q18343316": {
+                                        "name": "Commands or Utilities",
+                                        "children": {
+                                            "yago:Ps__u0028_Unix_u0029_": {
+                                                "name": "ps",
+                                                "children": {}
+                                            },
+                                            "yago:CURL": {
+                                                "name": "cURL",
+                                                "children": {}
+                                            },
+                                            "yago:Grep": {
+                                                "name": "grep",
+                                                "children": {}
+                                            }
+                                        }
+                                    },
+                                    "yago:Command-Line_Tool_Q115214659": {
+                                        "name": "TUI Tools",
+                                        "children": {
+                                            "yago:Midnight_Commander": {
+                                                "name": "mc (Midnight Commander)",
+                                                "children": {}
+                                            },
+                                            "yago:GNU_nano": {
+                                                "name": "GNU nano",
+                                                "children": {}
+                                            },
+                                            "yago:Vim__u0028_text_editor_u0029_": {
+                                                "name": "vim (vi Improved)",
+                                                "children": {}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "yago:Food": {
+                "name": "Food",
+                "children": {
+                    "yago:Drink": {
+                        "name": "Drinks",
+                        "children": {
+                            "yago:Drinking_water": {
+                                "name": "Drinking Water",
+                                "children": {
+                                    "yago:Bottled_water": {
+                                        "name": "Bottled Water",
+                                        "children": {}
+                                    },
+                                    "yago:Ice_cube": {
+                                        "name": "Ice Cubes",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "yago:Alcoholic_beverage": {
+                                "name": "Alcoholic Beverages",
+                                "children": {
+                                    "yago:Cocktail": {
+                                        "name": "Cocktails",
+                                        "children": {
+                                            "yago:Highball": {
+                                                "name": "Highball",
+                                                "children": {}
+                                            },
+                                            "yago:Old_Cuban": {
+                                                "name": "Old Cuban",
+                                                "children": {}
+                                            },
+                                            "yago:Bloody_Margaret": {
+                                                "name": "Bloody Margaret",
+                                                "children": {}
+                                            }
+                                        }
+                                    },
+                                    "yago:Liquor": {
+                                        "name": "Liquor",
+                                        "children": {
+                                            "yago:Rum": {
+                                                "name": "Rum",
+                                                "children": {}
+                                            },
+                                            "yago:Gin": {
+                                                "name": "Gin",
+                                                "children": {}
+                                            },
+                                            "yago:Whisky": {
+                                                "name": "Whisky",
+                                                "children": {}
+                                            }
+                                        }
+                                    },
+                                    "yago:Fermented_Beverage_Q26343751": {
+                                        "name": "Fermented Beverages",
+                                        "children": {
+                                            "yago:Beer": {
+                                                "name": "Beer",
+                                                "children": {}
+                                            },
+                                            "yago:Sake": {
+                                                "name": "Sake",
+                                                "children": {}
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "yago:Non-alcoholic_drink": {
+                                "name": "Non-alcoholic Beverages",
+                                "children": {
+                                    "yago:Milk": {
+                                        "name": "Milk",
+                                        "children": {}
+                                    },
+                                    "yago:Juice": {
+                                        "name": "Juice",
+                                        "children": {}
+                                    },
+                                    "yago:Soft_drink": {
+                                        "name": "Soft Drinks",
+                                        "children": {
+                                            "yago:Cola": {
+                                                "name": "Cola",
+                                                "children": {}
+                                            },
+                                            "yago:Coffee": {
+                                                "name": "Coffee",
+                                                "children": {}
+                                            },
+                                            "yago:Hot_chocolate": {
+                                                "name": "Hot Chocolate",
+                                                "children": {}
+                                            },
+                                            "yago:Carbonated_water": {
+                                                "name": "Carbonated / Sparkling Water",
+                                                "children": {}
+                                            }
+                                        }
+                                    },
+                                    "yago:Tea": {
+                                        "name": "Tea",
+                                        "children": {
+                                            "yago:Black_tea": {
+                                                "name": "Black Tea",
+                                                "children": {}
+                                            },
+                                            "yago:Green_tea": {
+                                                "name": "Green Tea",
+                                                "children": {}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "yago:Snack": {
+                        "name": "Snacks",
+                        "children": {
+                            "yago:Chaat": {
+                                "name": "Chaat",
+                                "children": {}
+                            },
+                            "yago:Fritter": {
+                                "name": "Fritters",
+                                "children": {}
+                            },
+                            "yago:Popcorn": {
+                                "name": "Popcorn",
+                                "children": {}
+                            },
+                            "yago:Chip__u0028_snack_u0029_": {
+                                "name": "Chips",
+                                "children": {}
+                            }
+                        }
+                    },
+                    "yago:Delicacy": {
+                        "name": "Delicacies",
+                        "children": {
+                            "yago:Dessert": {
+                                "name": "Desserts",
+                                "children": {
+                                    "yago:Halva": {
+                                        "name": "Halva",
+                                        "children": {}
+                                    },
+                                    "yago:Small_Pastry_Q1746803": {
+                                        "name": "Small Pastries",
+                                        "children": {}
+                                    },
+                                    "yago:Tart": {
+                                        "name": "Tarts",
+                                        "children": {}
+                                    },
+                                    "yago:Biscuit_cake": {
+                                        "name": "Biscuit Cake",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "yago:Non-Vegetarian_Food_Q12973313": {
+                                "name": "Non-Vegetarian Food",
+                                "children": {
+                                    "yago:Kebab": {
+                                        "name": "Kebabs",
+                                        "children": {}
+                                    },
+                                    "yago:Kerala_beef_fry": {
+                                        "name": "Kerala's Beef Fry",
+                                        "children": {}
+                                    },
+                                    "yago:Sushi": {
+                                        "name": "Sushi",
+                                        "children": {}
+                                    },
+                                    "yago:Foie_gras": {
+                                        "name": "Foie Gras",
+                                        "children": {}
+                                    }
+                                }
+                            },
+                            "yago:Vegetarian_food": {
+                                "name": "Vegetarian Food",
+                                "children": {
+                                    "yago:Kofta": {
+                                        "name": "Kofta",
+                                        "children": {}
+                                    },
+                                    "yago:Dahi_baigana": {
+                                        "name": "Dahi Baigana",
+                                        "children": {}
+                                    },
+                                    "yago:Ramen": {
+                                        "name": "Ramen",
+                                        "children": {}
+                                    },
+                                    "yago:Dal_bhat": {
+                                        "name": "Dal Bhat",
+                                        "children": {}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "yago:Staple_food": {
+                        "name": "Staple Foods",
+                        "children": {
+                            "yago:Flour": {
+                                "name": "Pastas",
+                                "children": {}
+                            },
+                            "yago:Bread": {
+                                "name": "Breads",
+                                "children": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

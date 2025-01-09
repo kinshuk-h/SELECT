@@ -1,0 +1,256 @@
+{
+    "schema:Organization": {
+        "name": "Organizations",
+        "children": {
+            "schema:Corporation": {
+                "name": "Corporations",
+                "children": {
+                    "schema:Airline": {
+                        "name": "Airlines",
+                        "children": {}
+                    },
+                    "yago:Factory": {
+                        "name": "Factories",
+                        "children": {}
+                    },
+                    "yago:Business_enterprise": {
+                        "name": "Enterprises",
+                        "children": {}
+                    },
+                    "yago:Law_firm": {
+                        "name": "Law Firms",
+                        "children": {}
+                    }
+                }
+            },
+            "yago:Financial_institution": {
+                "name": "Financial Institutions",
+                "children": {
+                    "yago:Bank": {
+                        "name": "Banks",
+                        "children": {}
+                    },
+                    "yago:International_financial_institutions": {
+                        "name": "International Financial Institutions",
+                        "children": {}
+                    }
+                }
+            },
+            "yago:Educational_institution": {
+                "name": "Educational Institution",
+                "children": {
+                    "yago:University": {
+                        "name": "Universities",
+                        "children": {}
+                    },
+                    "yago:School": {
+                        "name": "Schools",
+                        "children": {}
+                    },
+                    "yago:College": {
+                        "name": "Colleges",
+                        "children": {}
+                    }
+                }
+            }
+        }
+    },
+    "schema:CreativeWork": {
+        "name": "Creative Works",
+        "children": {
+            "schema:Book": {
+                "name": "Books",
+                "children": {
+                    "yago:Novel": {
+                        "name": "Novels",
+                        "children": {}
+                    },
+                    "yago:Biography": {
+                        "name": "Biographies",
+                        "children": {}
+                    },
+                    "yago:Diary": {
+                        "name": "Diaries",
+                        "children": {}
+                    },
+                    "yago:Encyclopedia": {
+                        "name": "Encyclopedias",
+                        "children": {}
+                    }
+                }
+            },
+            "schema:Movie": {
+                "name": "Movies",
+                "children": {
+                    "yago:Short_film": {
+                        "name": "Short Films",
+                        "children": {}
+                    },
+                    "yago:Narrative_film": {
+                        "name": "Narrative Films",
+                        "children": {}
+                    }
+                }
+            },
+            "yago:Work_of_art": {
+                "name": "Works of Art",
+                "children": {
+                    "yago:Song": {
+                        "name": "Songs",
+                        "children": {}
+                    },
+                    "yago:Television_show": {
+                        "name": "TV Shows",
+                        "children": {}
+                    },
+                    "yago:Painting__u0028_object_u0029_": {
+                        "name": "Paintings",
+                        "children": {}
+                    }
+                }
+            }
+        }
+    },
+    "schema:Person": {
+        "name": "People",
+        "children": {
+            "yago:Scientist": {
+                "name": "Scientists",
+                "children": {}
+            },
+            "yago:Creator": {
+                "name": "Creative People",
+                "children": {
+                    "yago:Artist": {
+                        "name": "People in Arts",
+                        "children": {
+                            "yago:Painter": {
+                                "name": "Artists",
+                                "children": {}
+                            },
+                            "yago:Musician": {
+                                "name": "Musicians",
+                                "children": {}
+                            }
+                        }
+                    },
+                    "yago:Inventor": {
+                        "name": "Inventors",
+                        "children": {}
+                    },
+                    "yago:Author": {
+                        "name": "Authors",
+                        "children": {}
+                    },
+                    "yago:Journalist": {
+                        "name": "Journalists",
+                        "children": {}
+                    }
+                }
+            },
+            "yago:Politician": {
+                "name": "Politicians",
+                "children": {}
+            },
+            "yago:SportsPerson": {
+                "name": "People in Sports",
+                "children": {
+                    "yago:Athlete": {
+                        "name": "Athletes",
+                        "children": {
+                            "yago:Cricketer": {
+                                "name": "Cricketers",
+                                "children": {}
+                            },
+                            "yago:Badminton_player": {
+                                "name": "Badminton Players",
+                                "children": {}
+                            }
+                        }
+                    },
+                    "yago:Coach__u0028_sport_u0029_": {
+                        "name": "Coaches",
+                        "children": {}
+                    }
+                }
+            }
+        }
+    },
+    "schema:Place": {
+        "name": "Places",
+        "children": {
+            "schema:AdministrativeArea": {
+                "name": "Administrative Areas",
+                "children": {
+                    "schema:City": {
+                        "name": "Cities",
+                        "children": {}
+                    },
+                    "yago:Village": {
+                        "name": "Villages",
+                        "children": {}
+                    }
+                }
+            },
+            "yago:HumanMadeGeographicalEntity": {
+                "name": "Human-Made Geographical Entities",
+                "children": {
+                    "yago:Building": {
+                        "name": "Buildings",
+                        "children": {}
+                    },
+                    "schema:Airport": {
+                        "name": "Airports",
+                        "children": {}
+                    },
+                    "yago:Park": {
+                        "name": "Parks",
+                        "children": {}
+                    },
+                    "yago:Hospital": {
+                        "name": "Hospitals",
+                        "children": {}
+                    },
+                    "yago:Stadium": {
+                        "name": "Stadiums",
+                        "children": {}
+                    }
+                }
+            },
+            "schema:Landform": {
+                "name": "Landforms",
+                "children": {
+                    "yago:Island": {
+                        "name": "Islands",
+                        "children": {}
+                    },
+                    "schema:Continent": {
+                        "name": "Continents",
+                        "children": {}
+                    },
+                    "yago:Mountain_range": {
+                        "name": "Mountain Ranges",
+                        "children": {}
+                    },
+                    "schema:BodyOfWater": {
+                        "name": "Water Bodies",
+                        "children": {
+                            "yago:River": {
+                                "name": "Rivers",
+                                "children": {}
+                            },
+                            "yago:Lake": {
+                                "name": "Lakes",
+                                "children": {}
+                            },
+                            "yago:Glacier": {
+                                "name": "Glaciers",
+                                "children": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,1954 @@
+{
+    "Consuming {} at {}": {
+        "yago:Alcoholic_beverage#yago:Park": {
+            "name": "Consuming Alcoholic Beverages at Parks",
+            "names": [
+                "Alcoholic Beverages",
+                "Parks"
+            ],
+            "ids": [
+                "yago:Alcoholic_beverage",
+                "yago:Park"
+            ],
+            "children": {
+                "yago:Alcoholic_beverage#yago:Sutton_Park_u002C__West_Midlands": {
+                    "name": "Consuming Alcoholic Beverages at Sutton Park",
+                    "names": [
+                        "Alcoholic Beverages",
+                        "Sutton Park"
+                    ],
+                    "ids": [
+                        "yago:Alcoholic_beverage",
+                        "yago:Sutton_Park_u002C__West_Midlands"
+                    ],
+                    "children": {
+                        "yago:Liquor#yago:Sutton_Park_u002C__West_Midlands": {
+                            "name": "Consuming Liquor at Sutton Park",
+                            "names": [
+                                "Liquor",
+                                "Sutton Park"
+                            ],
+                            "ids": [
+                                "yago:Liquor",
+                                "yago:Sutton_Park_u002C__West_Midlands"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Cocktail#yago:Sutton_Park_u002C__West_Midlands": {
+                            "name": "Consuming Cocktails at Sutton Park",
+                            "names": [
+                                "Cocktails",
+                                "Sutton Park"
+                            ],
+                            "ids": [
+                                "yago:Cocktail",
+                                "yago:Sutton_Park_u002C__West_Midlands"
+                            ],
+                            "children": {}
+                        }
+                    }
+                },
+                "yago:Alcoholic_beverage#yago:Anniversary_Park": {
+                    "name": "Consuming Alcoholic Beverages at Anniversary Park",
+                    "names": [
+                        "Alcoholic Beverages",
+                        "Anniversary Park"
+                    ],
+                    "ids": [
+                        "yago:Alcoholic_beverage",
+                        "yago:Anniversary_Park"
+                    ],
+                    "children": {
+                        "yago:Liquor#yago:Anniversary_Park": {
+                            "name": "Consuming Liquor at Anniversary Park",
+                            "names": [
+                                "Liquor",
+                                "Anniversary Park"
+                            ],
+                            "ids": [
+                                "yago:Liquor",
+                                "yago:Anniversary_Park"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Cocktail#yago:Anniversary_Park": {
+                            "name": "Consuming Cocktails at Anniversary Park",
+                            "names": [
+                                "Cocktails",
+                                "Anniversary Park"
+                            ],
+                            "ids": [
+                                "yago:Cocktail",
+                                "yago:Anniversary_Park"
+                            ],
+                            "children": {}
+                        }
+                    }
+                }
+            }
+        },
+        "yago:Alcoholic_beverage#schema:Airport": {
+            "name": "Consuming Alcoholic Beverages at Airports",
+            "names": [
+                "Alcoholic Beverages",
+                "Airports"
+            ],
+            "ids": [
+                "yago:Alcoholic_beverage",
+                "schema:Airport"
+            ],
+            "children": {
+                "yago:Alcoholic_beverage#yago:Yaound\u00e9_Airport": {
+                    "name": "Consuming Alcoholic Beverages at Yaound\u00e9 Airport",
+                    "names": [
+                        "Alcoholic Beverages",
+                        "Yaound\u00e9 Airport"
+                    ],
+                    "ids": [
+                        "yago:Alcoholic_beverage",
+                        "yago:Yaound\u00e9_Airport"
+                    ],
+                    "children": {
+                        "yago:Liquor#yago:Yaound\u00e9_Airport": {
+                            "name": "Consuming Liquor at Yaound\u00e9 Airport",
+                            "names": [
+                                "Liquor",
+                                "Yaound\u00e9 Airport"
+                            ],
+                            "ids": [
+                                "yago:Liquor",
+                                "yago:Yaound\u00e9_Airport"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Cocktail#yago:Yaound\u00e9_Airport": {
+                            "name": "Consuming Cocktails at Yaound\u00e9 Airport",
+                            "names": [
+                                "Cocktails",
+                                "Yaound\u00e9 Airport"
+                            ],
+                            "ids": [
+                                "yago:Cocktail",
+                                "yago:Yaound\u00e9_Airport"
+                            ],
+                            "children": {}
+                        }
+                    }
+                },
+                "yago:Alcoholic_beverage#yago:Bakharevka_Airport": {
+                    "name": "Consuming Alcoholic Beverages at Bakharevka Airport",
+                    "names": [
+                        "Alcoholic Beverages",
+                        "Bakharevka Airport"
+                    ],
+                    "ids": [
+                        "yago:Alcoholic_beverage",
+                        "yago:Bakharevka_Airport"
+                    ],
+                    "children": {
+                        "yago:Liquor#yago:Bakharevka_Airport": {
+                            "name": "Consuming Liquor at Bakharevka Airport",
+                            "names": [
+                                "Liquor",
+                                "Bakharevka Airport"
+                            ],
+                            "ids": [
+                                "yago:Liquor",
+                                "yago:Bakharevka_Airport"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Cocktail#yago:Bakharevka_Airport": {
+                            "name": "Consuming Cocktails at Bakharevka Airport",
+                            "names": [
+                                "Cocktails",
+                                "Bakharevka Airport"
+                            ],
+                            "ids": [
+                                "yago:Cocktail",
+                                "yago:Bakharevka_Airport"
+                            ],
+                            "children": {}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Dumping {} in {}": {
+        "yago:Chemical_substance#yago:River": {
+            "name": "Dumping Chemicals in Rivers",
+            "names": [
+                "Chemicals",
+                "Rivers"
+            ],
+            "ids": [
+                "yago:Chemical_substance",
+                "yago:River"
+            ],
+            "children": {
+                "yago:Chemical_substance#yago:Arman\u00e7on": {
+                    "name": "Dumping Chemicals in Arman\u00e7on",
+                    "names": [
+                        "Chemicals",
+                        "Arman\u00e7on"
+                    ],
+                    "ids": [
+                        "yago:Chemical_substance",
+                        "yago:Arman\u00e7on"
+                    ],
+                    "children": {
+                        "yago:Plastic#yago:Arman\u00e7on": {
+                            "name": "Dumping Plastics in Arman\u00e7on",
+                            "names": [
+                                "Plastics",
+                                "Arman\u00e7on"
+                            ],
+                            "ids": [
+                                "yago:Plastic",
+                                "yago:Arman\u00e7on"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Mixture#yago:Arman\u00e7on": {
+                            "name": "Dumping Mixtures in Arman\u00e7on",
+                            "names": [
+                                "Mixtures",
+                                "Arman\u00e7on"
+                            ],
+                            "ids": [
+                                "yago:Mixture",
+                                "yago:Arman\u00e7on"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Drug#yago:Arman\u00e7on": {
+                            "name": "Dumping Drugs in Arman\u00e7on",
+                            "names": [
+                                "Drugs",
+                                "Arman\u00e7on"
+                            ],
+                            "ids": [
+                                "yago:Drug",
+                                "yago:Arman\u00e7on"
+                            ],
+                            "children": {}
+                        }
+                    }
+                },
+                "yago:Chemical_substance#yago:Moesa__u0028_river_u0029_": {
+                    "name": "Dumping Chemicals in Moesa",
+                    "names": [
+                        "Chemicals",
+                        "Moesa"
+                    ],
+                    "ids": [
+                        "yago:Chemical_substance",
+                        "yago:Moesa__u0028_river_u0029_"
+                    ],
+                    "children": {
+                        "yago:Plastic#yago:Moesa__u0028_river_u0029_": {
+                            "name": "Dumping Plastics in Moesa",
+                            "names": [
+                                "Plastics",
+                                "Moesa"
+                            ],
+                            "ids": [
+                                "yago:Plastic",
+                                "yago:Moesa__u0028_river_u0029_"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Mixture#yago:Moesa__u0028_river_u0029_": {
+                            "name": "Dumping Mixtures in Moesa",
+                            "names": [
+                                "Mixtures",
+                                "Moesa"
+                            ],
+                            "ids": [
+                                "yago:Mixture",
+                                "yago:Moesa__u0028_river_u0029_"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Drug#yago:Moesa__u0028_river_u0029_": {
+                            "name": "Dumping Drugs in Moesa",
+                            "names": [
+                                "Drugs",
+                                "Moesa"
+                            ],
+                            "ids": [
+                                "yago:Drug",
+                                "yago:Moesa__u0028_river_u0029_"
+                            ],
+                            "children": {}
+                        }
+                    }
+                },
+                "yago:Chemical_substance#yago:Vechte": {
+                    "name": "Dumping Chemicals in Vechte",
+                    "names": [
+                        "Chemicals",
+                        "Vechte"
+                    ],
+                    "ids": [
+                        "yago:Chemical_substance",
+                        "yago:Vechte"
+                    ],
+                    "children": {
+                        "yago:Plastic#yago:Vechte": {
+                            "name": "Dumping Plastics in Vechte",
+                            "names": [
+                                "Plastics",
+                                "Vechte"
+                            ],
+                            "ids": [
+                                "yago:Plastic",
+                                "yago:Vechte"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Mixture#yago:Vechte": {
+                            "name": "Dumping Mixtures in Vechte",
+                            "names": [
+                                "Mixtures",
+                                "Vechte"
+                            ],
+                            "ids": [
+                                "yago:Mixture",
+                                "yago:Vechte"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Drug#yago:Vechte": {
+                            "name": "Dumping Drugs in Vechte",
+                            "names": [
+                                "Drugs",
+                                "Vechte"
+                            ],
+                            "ids": [
+                                "yago:Drug",
+                                "yago:Vechte"
+                            ],
+                            "children": {}
+                        }
+                    }
+                }
+            }
+        },
+        "yago:Chemical_substance#yago:Lake": {
+            "name": "Dumping Chemicals in Lakes",
+            "names": [
+                "Chemicals",
+                "Lakes"
+            ],
+            "ids": [
+                "yago:Chemical_substance",
+                "yago:Lake"
+            ],
+            "children": {
+                "yago:Chemical_substance#yago:Carwitzer_See": {
+                    "name": "Dumping Chemicals in Carwitzer See",
+                    "names": [
+                        "Chemicals",
+                        "Carwitzer See"
+                    ],
+                    "ids": [
+                        "yago:Chemical_substance",
+                        "yago:Carwitzer_See"
+                    ],
+                    "children": {
+                        "yago:Plastic#yago:Carwitzer_See": {
+                            "name": "Dumping Plastics in Carwitzer See",
+                            "names": [
+                                "Plastics",
+                                "Carwitzer See"
+                            ],
+                            "ids": [
+                                "yago:Plastic",
+                                "yago:Carwitzer_See"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Mixture#yago:Carwitzer_See": {
+                            "name": "Dumping Mixtures in Carwitzer See",
+                            "names": [
+                                "Mixtures",
+                                "Carwitzer See"
+                            ],
+                            "ids": [
+                                "yago:Mixture",
+                                "yago:Carwitzer_See"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Drug#yago:Carwitzer_See": {
+                            "name": "Dumping Drugs in Carwitzer See",
+                            "names": [
+                                "Drugs",
+                                "Carwitzer See"
+                            ],
+                            "ids": [
+                                "yago:Drug",
+                                "yago:Carwitzer_See"
+                            ],
+                            "children": {}
+                        }
+                    }
+                },
+                "yago:Chemical_substance#yago:Sabine_Lake": {
+                    "name": "Dumping Chemicals in Sabine Lake",
+                    "names": [
+                        "Chemicals",
+                        "Sabine Lake"
+                    ],
+                    "ids": [
+                        "yago:Chemical_substance",
+                        "yago:Sabine_Lake"
+                    ],
+                    "children": {
+                        "yago:Plastic#yago:Sabine_Lake": {
+                            "name": "Dumping Plastics in Sabine Lake",
+                            "names": [
+                                "Plastics",
+                                "Sabine Lake"
+                            ],
+                            "ids": [
+                                "yago:Plastic",
+                                "yago:Sabine_Lake"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Mixture#yago:Sabine_Lake": {
+                            "name": "Dumping Mixtures in Sabine Lake",
+                            "names": [
+                                "Mixtures",
+                                "Sabine Lake"
+                            ],
+                            "ids": [
+                                "yago:Mixture",
+                                "yago:Sabine_Lake"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Drug#yago:Sabine_Lake": {
+                            "name": "Dumping Drugs in Sabine Lake",
+                            "names": [
+                                "Drugs",
+                                "Sabine Lake"
+                            ],
+                            "ids": [
+                                "yago:Drug",
+                                "yago:Sabine_Lake"
+                            ],
+                            "children": {}
+                        }
+                    }
+                },
+                "yago:Chemical_substance#yago:Schlachtensee__u0028_lake_u0029_": {
+                    "name": "Dumping Chemicals in Schlachtensee",
+                    "names": [
+                        "Chemicals",
+                        "Schlachtensee"
+                    ],
+                    "ids": [
+                        "yago:Chemical_substance",
+                        "yago:Schlachtensee__u0028_lake_u0029_"
+                    ],
+                    "children": {
+                        "yago:Plastic#yago:Schlachtensee__u0028_lake_u0029_": {
+                            "name": "Dumping Plastics in Schlachtensee",
+                            "names": [
+                                "Plastics",
+                                "Schlachtensee"
+                            ],
+                            "ids": [
+                                "yago:Plastic",
+                                "yago:Schlachtensee__u0028_lake_u0029_"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Mixture#yago:Schlachtensee__u0028_lake_u0029_": {
+                            "name": "Dumping Mixtures in Schlachtensee",
+                            "names": [
+                                "Mixtures",
+                                "Schlachtensee"
+                            ],
+                            "ids": [
+                                "yago:Mixture",
+                                "yago:Schlachtensee__u0028_lake_u0029_"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Drug#yago:Schlachtensee__u0028_lake_u0029_": {
+                            "name": "Dumping Drugs in Schlachtensee",
+                            "names": [
+                                "Drugs",
+                                "Schlachtensee"
+                            ],
+                            "ids": [
+                                "yago:Drug",
+                                "yago:Schlachtensee__u0028_lake_u0029_"
+                            ],
+                            "children": {}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "{} about {}": {
+        "schema:CreativeWork#schema:Person": {
+            "name": "Creative Works about People",
+            "names": [
+                "Creative Works",
+                "People"
+            ],
+            "ids": [
+                "schema:CreativeWork",
+                "schema:Person"
+            ],
+            "children": {
+                "yago:Work_of_art#schema:Person": {
+                    "name": "Works of Art about People",
+                    "names": [
+                        "Works of Art",
+                        "People"
+                    ],
+                    "ids": [
+                        "yago:Work_of_art",
+                        "schema:Person"
+                    ],
+                    "children": {
+                        "yago:Television_show#schema:Person": {
+                            "name": "TV Shows about People",
+                            "names": [
+                                "TV Shows",
+                                "People"
+                            ],
+                            "ids": [
+                                "yago:Television_show",
+                                "schema:Person"
+                            ],
+                            "children": {
+                                "yago:Television_show#yago:SportsPerson": {
+                                    "name": "TV Shows about People in Sports",
+                                    "names": [
+                                        "TV Shows",
+                                        "People in Sports"
+                                    ],
+                                    "ids": [
+                                        "yago:Television_show",
+                                        "yago:SportsPerson"
+                                    ],
+                                    "children": {}
+                                },
+                                "yago:Television_show#yago:Creator": {
+                                    "name": "TV Shows about Creative People",
+                                    "names": [
+                                        "TV Shows",
+                                        "Creative People"
+                                    ],
+                                    "ids": [
+                                        "yago:Television_show",
+                                        "yago:Creator"
+                                    ],
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "yago:Painting__u0028_object_u0029_#schema:Person": {
+                            "name": "Paintings about People",
+                            "names": [
+                                "Paintings",
+                                "People"
+                            ],
+                            "ids": [
+                                "yago:Painting__u0028_object_u0029_",
+                                "schema:Person"
+                            ],
+                            "children": {
+                                "yago:Painting__u0028_object_u0029_#yago:SportsPerson": {
+                                    "name": "Paintings about People in Sports",
+                                    "names": [
+                                        "Paintings",
+                                        "People in Sports"
+                                    ],
+                                    "ids": [
+                                        "yago:Painting__u0028_object_u0029_",
+                                        "yago:SportsPerson"
+                                    ],
+                                    "children": {}
+                                },
+                                "yago:Painting__u0028_object_u0029_#yago:Creator": {
+                                    "name": "Paintings about Creative People",
+                                    "names": [
+                                        "Paintings",
+                                        "Creative People"
+                                    ],
+                                    "ids": [
+                                        "yago:Painting__u0028_object_u0029_",
+                                        "yago:Creator"
+                                    ],
+                                    "children": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "schema:Book#schema:Person": {
+                    "name": "Books about People",
+                    "names": [
+                        "Books",
+                        "People"
+                    ],
+                    "ids": [
+                        "schema:Book",
+                        "schema:Person"
+                    ],
+                    "children": {
+                        "yago:Novel#schema:Person": {
+                            "name": "Novels about People",
+                            "names": [
+                                "Novels",
+                                "People"
+                            ],
+                            "ids": [
+                                "yago:Novel",
+                                "schema:Person"
+                            ],
+                            "children": {
+                                "yago:Novel#yago:SportsPerson": {
+                                    "name": "Novels about People in Sports",
+                                    "names": [
+                                        "Novels",
+                                        "People in Sports"
+                                    ],
+                                    "ids": [
+                                        "yago:Novel",
+                                        "yago:SportsPerson"
+                                    ],
+                                    "children": {}
+                                },
+                                "yago:Novel#yago:Creator": {
+                                    "name": "Novels about Creative People",
+                                    "names": [
+                                        "Novels",
+                                        "Creative People"
+                                    ],
+                                    "ids": [
+                                        "yago:Novel",
+                                        "yago:Creator"
+                                    ],
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "yago:Biography#schema:Person": {
+                            "name": "Biographies about People",
+                            "names": [
+                                "Biographies",
+                                "People"
+                            ],
+                            "ids": [
+                                "yago:Biography",
+                                "schema:Person"
+                            ],
+                            "children": {
+                                "yago:Biography#yago:SportsPerson": {
+                                    "name": "Biographies about People in Sports",
+                                    "names": [
+                                        "Biographies",
+                                        "People in Sports"
+                                    ],
+                                    "ids": [
+                                        "yago:Biography",
+                                        "yago:SportsPerson"
+                                    ],
+                                    "children": {}
+                                },
+                                "yago:Biography#yago:Creator": {
+                                    "name": "Biographies about Creative People",
+                                    "names": [
+                                        "Biographies",
+                                        "Creative People"
+                                    ],
+                                    "ids": [
+                                        "yago:Biography",
+                                        "yago:Creator"
+                                    ],
+                                    "children": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "{} working in {}": {
+        "schema:Person#schema:Corporation": {
+            "name": "People working in Corporations",
+            "names": [
+                "People",
+                "Corporations"
+            ],
+            "ids": [
+                "schema:Person",
+                "schema:Corporation"
+            ],
+            "children": {
+                "schema:Person#schema:Airline": {
+                    "name": "People working in Airlines",
+                    "names": [
+                        "People",
+                        "Airlines"
+                    ],
+                    "ids": [
+                        "schema:Person",
+                        "schema:Airline"
+                    ],
+                    "children": {
+                        "schema:Person#yago:Alada": {
+                            "name": "People working in Alada",
+                            "names": [
+                                "People",
+                                "Alada"
+                            ],
+                            "ids": [
+                                "schema:Person",
+                                "yago:Alada"
+                            ],
+                            "children": {}
+                        },
+                        "schema:Person#yago:Hewa_Bora_Airways": {
+                            "name": "People working in Hewa Bora Airways",
+                            "names": [
+                                "People",
+                                "Hewa Bora Airways"
+                            ],
+                            "ids": [
+                                "schema:Person",
+                                "yago:Hewa_Bora_Airways"
+                            ],
+                            "children": {}
+                        },
+                        "schema:Person#yago:Amerijet_International": {
+                            "name": "People working in Amerijet International",
+                            "names": [
+                                "People",
+                                "Amerijet International"
+                            ],
+                            "ids": [
+                                "schema:Person",
+                                "yago:Amerijet_International"
+                            ],
+                            "children": {}
+                        }
+                    }
+                },
+                "schema:Person#yago:Business_enterprise": {
+                    "name": "People working in Enterprises",
+                    "names": [
+                        "People",
+                        "Enterprises"
+                    ],
+                    "ids": [
+                        "schema:Person",
+                        "yago:Business_enterprise"
+                    ],
+                    "children": {
+                        "schema:Person#yago:ALcot": {
+                            "name": "People working in ALcot",
+                            "names": [
+                                "People",
+                                "ALcot"
+                            ],
+                            "ids": [
+                                "schema:Person",
+                                "yago:ALcot"
+                            ],
+                            "children": {}
+                        },
+                        "schema:Person#yago:Intourist": {
+                            "name": "People working in Intourist",
+                            "names": [
+                                "People",
+                                "Intourist"
+                            ],
+                            "ids": [
+                                "schema:Person",
+                                "yago:Intourist"
+                            ],
+                            "children": {}
+                        },
+                        "schema:Person#yago:Dinamic_Software": {
+                            "name": "People working in Dinamic Software",
+                            "names": [
+                                "People",
+                                "Dinamic Software"
+                            ],
+                            "ids": [
+                                "schema:Person",
+                                "yago:Dinamic_Software"
+                            ],
+                            "children": {}
+                        }
+                    }
+                },
+                "schema:Person#yago:Law_firm": {
+                    "name": "People working in Law Firms",
+                    "names": [
+                        "People",
+                        "Law Firms"
+                    ],
+                    "ids": [
+                        "schema:Person",
+                        "yago:Law_firm"
+                    ],
+                    "children": {
+                        "schema:Person#yago:Ashurst_LLP": {
+                            "name": "People working in Ashurst LLP",
+                            "names": [
+                                "People",
+                                "Ashurst LLP"
+                            ],
+                            "ids": [
+                                "schema:Person",
+                                "yago:Ashurst_LLP"
+                            ],
+                            "children": {}
+                        },
+                        "schema:Person#yago:Tonkon_Torp": {
+                            "name": "People working in Tonkon Torp",
+                            "names": [
+                                "People",
+                                "Tonkon Torp"
+                            ],
+                            "ids": [
+                                "schema:Person",
+                                "yago:Tonkon_Torp"
+                            ],
+                            "children": {}
+                        },
+                        "schema:Person#yago:Keker_u002C__Van_Nest__u0026__Peters_LLP": {
+                            "name": "People working in Keker & Van Nest LLP",
+                            "names": [
+                                "People",
+                                "Keker & Van Nest LLP"
+                            ],
+                            "ids": [
+                                "schema:Person",
+                                "yago:Keker_u002C__Van_Nest__u0026__Peters_LLP"
+                            ],
+                            "children": {}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "{} of {}": {
+        "yago:Food_Ingredient_Q25403900#yago:Staple_food": {
+            "name": "Food Ingredients of Staple Foods",
+            "names": [
+                "Food Ingredients",
+                "Staple Foods"
+            ],
+            "ids": [
+                "yago:Food_Ingredient_Q25403900",
+                "yago:Staple_food"
+            ],
+            "children": {
+                "yago:Food_Ingredient_Q25403900#yago:Flour": {
+                    "name": "Food Ingredients of Pastas",
+                    "names": [
+                        "Food Ingredients",
+                        "Pastas"
+                    ],
+                    "ids": [
+                        "yago:Food_Ingredient_Q25403900",
+                        "yago:Flour"
+                    ],
+                    "children": {}
+                },
+                "yago:Food_Ingredient_Q25403900#yago:Bread": {
+                    "name": "Food Ingredients of Breads",
+                    "names": [
+                        "Food Ingredients",
+                        "Breads"
+                    ],
+                    "ids": [
+                        "yago:Food_Ingredient_Q25403900",
+                        "yago:Bread"
+                    ],
+                    "children": {}
+                }
+            }
+        },
+        "yago:Food_Ingredient_Q25403900#yago:Delicacy": {
+            "name": "Food Ingredients of Delicacies",
+            "names": [
+                "Food Ingredients",
+                "Delicacies"
+            ],
+            "ids": [
+                "yago:Food_Ingredient_Q25403900",
+                "yago:Delicacy"
+            ],
+            "children": {
+                "yago:Food_Ingredient_Q25403900#yago:Vegetarian_food": {
+                    "name": "Food Ingredients of Vegetarian Food",
+                    "names": [
+                        "Food Ingredients",
+                        "Vegetarian Food"
+                    ],
+                    "ids": [
+                        "yago:Food_Ingredient_Q25403900",
+                        "yago:Vegetarian_food"
+                    ],
+                    "children": {
+                        "yago:Food_Ingredient_Q25403900#yago:Ramen": {
+                            "name": "Food Ingredients of Ramen",
+                            "names": [
+                                "Food Ingredients",
+                                "Ramen"
+                            ],
+                            "ids": [
+                                "yago:Food_Ingredient_Q25403900",
+                                "yago:Ramen"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Food_Ingredient_Q25403900#yago:Dahi_baigana": {
+                            "name": "Food Ingredients of Dahi Baigana",
+                            "names": [
+                                "Food Ingredients",
+                                "Dahi Baigana"
+                            ],
+                            "ids": [
+                                "yago:Food_Ingredient_Q25403900",
+                                "yago:Dahi_baigana"
+                            ],
+                            "children": {}
+                        }
+                    }
+                },
+                "yago:Food_Ingredient_Q25403900#yago:Dessert": {
+                    "name": "Food Ingredients of Desserts",
+                    "names": [
+                        "Food Ingredients",
+                        "Desserts"
+                    ],
+                    "ids": [
+                        "yago:Food_Ingredient_Q25403900",
+                        "yago:Dessert"
+                    ],
+                    "children": {
+                        "yago:Food_Ingredient_Q25403900#yago:Tart": {
+                            "name": "Food Ingredients of Tarts",
+                            "names": [
+                                "Food Ingredients",
+                                "Tarts"
+                            ],
+                            "ids": [
+                                "yago:Food_Ingredient_Q25403900",
+                                "yago:Tart"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Food_Ingredient_Q25403900#yago:Biscuit_cake": {
+                            "name": "Food Ingredients of Biscuit Cake",
+                            "names": [
+                                "Food Ingredients",
+                                "Biscuit Cake"
+                            ],
+                            "ids": [
+                                "yago:Food_Ingredient_Q25403900",
+                                "yago:Biscuit_cake"
+                            ],
+                            "children": {}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Damage from production of {} to {}": {
+        "yago:Chemical_substance#yago:Mountain_range": {
+            "name": "Damage from production of Chemicals to Mountain Ranges",
+            "names": [
+                "Chemicals",
+                "Mountain Ranges"
+            ],
+            "ids": [
+                "yago:Chemical_substance",
+                "yago:Mountain_range"
+            ],
+            "children": {
+                "yago:Chemical_substance#yago:\u0160ar_Mountains": {
+                    "name": "Damage from production of Chemicals to \u0160ar Mountains",
+                    "names": [
+                        "Chemicals",
+                        "\u0160ar Mountains"
+                    ],
+                    "ids": [
+                        "yago:Chemical_substance",
+                        "yago:\u0160ar_Mountains"
+                    ],
+                    "children": {
+                        "yago:Plastic#yago:\u0160ar_Mountains": {
+                            "name": "Damage from production of Plastics to \u0160ar Mountains",
+                            "names": [
+                                "Plastics",
+                                "\u0160ar Mountains"
+                            ],
+                            "ids": [
+                                "yago:Plastic",
+                                "yago:\u0160ar_Mountains"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Drug#yago:\u0160ar_Mountains": {
+                            "name": "Damage from production of Drugs to \u0160ar Mountains",
+                            "names": [
+                                "Drugs",
+                                "\u0160ar Mountains"
+                            ],
+                            "ids": [
+                                "yago:Drug",
+                                "yago:\u0160ar_Mountains"
+                            ],
+                            "children": {}
+                        }
+                    }
+                },
+                "yago:Chemical_substance#yago:Dinaric_Alps": {
+                    "name": "Damage from production of Chemicals to Dinaric Alps",
+                    "names": [
+                        "Chemicals",
+                        "Dinaric Alps"
+                    ],
+                    "ids": [
+                        "yago:Chemical_substance",
+                        "yago:Dinaric_Alps"
+                    ],
+                    "children": {
+                        "yago:Plastic#yago:Dinaric_Alps": {
+                            "name": "Damage from production of Plastics to Dinaric Alps",
+                            "names": [
+                                "Plastics",
+                                "Dinaric Alps"
+                            ],
+                            "ids": [
+                                "yago:Plastic",
+                                "yago:Dinaric_Alps"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Drug#yago:Dinaric_Alps": {
+                            "name": "Damage from production of Drugs to Dinaric Alps",
+                            "names": [
+                                "Drugs",
+                                "Dinaric Alps"
+                            ],
+                            "ids": [
+                                "yago:Drug",
+                                "yago:Dinaric_Alps"
+                            ],
+                            "children": {}
+                        }
+                    }
+                }
+            }
+        },
+        "yago:Chemical_substance#schema:BodyOfWater": {
+            "name": "Damage from production of Chemicals to Water Bodies",
+            "names": [
+                "Chemicals",
+                "Water Bodies"
+            ],
+            "ids": [
+                "yago:Chemical_substance",
+                "schema:BodyOfWater"
+            ],
+            "children": {
+                "yago:Plastic#schema:BodyOfWater": {
+                    "name": "Damage from production of Plastics to Water Bodies",
+                    "names": [
+                        "Plastics",
+                        "Water Bodies"
+                    ],
+                    "ids": [
+                        "yago:Plastic",
+                        "schema:BodyOfWater"
+                    ],
+                    "children": {
+                        "yago:Rubber#schema:BodyOfWater": {
+                            "name": "Damage from production of Rubber to Water Bodies",
+                            "names": [
+                                "Rubber",
+                                "Water Bodies"
+                            ],
+                            "ids": [
+                                "yago:Rubber",
+                                "schema:BodyOfWater"
+                            ],
+                            "children": {
+                                "yago:Rubber#yago:River": {
+                                    "name": "Damage from production of Rubber to Rivers",
+                                    "names": [
+                                        "Rubber",
+                                        "Rivers"
+                                    ],
+                                    "ids": [
+                                        "yago:Rubber",
+                                        "yago:River"
+                                    ],
+                                    "children": {}
+                                },
+                                "yago:Rubber#yago:Glacier": {
+                                    "name": "Damage from production of Rubber to Glaciers",
+                                    "names": [
+                                        "Rubber",
+                                        "Glaciers"
+                                    ],
+                                    "ids": [
+                                        "yago:Rubber",
+                                        "yago:Glacier"
+                                    ],
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "yago:Nylon#schema:BodyOfWater": {
+                            "name": "Damage from production of Nylon to Water Bodies",
+                            "names": [
+                                "Nylon",
+                                "Water Bodies"
+                            ],
+                            "ids": [
+                                "yago:Nylon",
+                                "schema:BodyOfWater"
+                            ],
+                            "children": {
+                                "yago:Nylon#yago:River": {
+                                    "name": "Damage from production of Nylon to Rivers",
+                                    "names": [
+                                        "Nylon",
+                                        "Rivers"
+                                    ],
+                                    "ids": [
+                                        "yago:Nylon",
+                                        "yago:River"
+                                    ],
+                                    "children": {}
+                                },
+                                "yago:Nylon#yago:Glacier": {
+                                    "name": "Damage from production of Nylon to Glaciers",
+                                    "names": [
+                                        "Nylon",
+                                        "Glaciers"
+                                    ],
+                                    "ids": [
+                                        "yago:Nylon",
+                                        "yago:Glacier"
+                                    ],
+                                    "children": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "yago:Chemical_substance#yago:Glacier": {
+                    "name": "Damage from production of Chemicals to Glaciers",
+                    "names": [
+                        "Chemicals",
+                        "Glaciers"
+                    ],
+                    "ids": [
+                        "yago:Chemical_substance",
+                        "yago:Glacier"
+                    ],
+                    "children": {
+                        "yago:Chemical_substance#yago:Tschingel_Glacier": {
+                            "name": "Damage from production of Chemicals to Tschingel Glacier",
+                            "names": [
+                                "Chemicals",
+                                "Tschingel Glacier"
+                            ],
+                            "ids": [
+                                "yago:Chemical_substance",
+                                "yago:Tschingel_Glacier"
+                            ],
+                            "children": {
+                                "yago:Plastic#yago:Tschingel_Glacier": {
+                                    "name": "Damage from production of Plastics to Tschingel Glacier",
+                                    "names": [
+                                        "Plastics",
+                                        "Tschingel Glacier"
+                                    ],
+                                    "ids": [
+                                        "yago:Plastic",
+                                        "yago:Tschingel_Glacier"
+                                    ],
+                                    "children": {
+                                        "yago:Rubber#yago:Tschingel_Glacier": {
+                                            "name": "Damage from production of Rubber to Tschingel Glacier",
+                                            "names": [
+                                                "Rubber",
+                                                "Tschingel Glacier"
+                                            ],
+                                            "ids": [
+                                                "yago:Rubber",
+                                                "yago:Tschingel_Glacier"
+                                            ],
+                                            "children": {}
+                                        },
+                                        "yago:Nylon#yago:Tschingel_Glacier": {
+                                            "name": "Damage from production of Nylon to Tschingel Glacier",
+                                            "names": [
+                                                "Nylon",
+                                                "Tschingel Glacier"
+                                            ],
+                                            "ids": [
+                                                "yago:Nylon",
+                                                "yago:Tschingel_Glacier"
+                                            ],
+                                            "children": {}
+                                        }
+                                    }
+                                },
+                                "yago:Drug#yago:Tschingel_Glacier": {
+                                    "name": "Damage from production of Drugs to Tschingel Glacier",
+                                    "names": [
+                                        "Drugs",
+                                        "Tschingel Glacier"
+                                    ],
+                                    "ids": [
+                                        "yago:Drug",
+                                        "yago:Tschingel_Glacier"
+                                    ],
+                                    "children": {
+                                        "yago:Tolperisone#yago:Tschingel_Glacier": {
+                                            "name": "Damage from production of Tolperisone to Tschingel Glacier",
+                                            "names": [
+                                                "Tolperisone",
+                                                "Tschingel Glacier"
+                                            ],
+                                            "ids": [
+                                                "yago:Tolperisone",
+                                                "yago:Tschingel_Glacier"
+                                            ],
+                                            "children": {}
+                                        },
+                                        "yago:Azithromycin#yago:Tschingel_Glacier": {
+                                            "name": "Damage from production of Azithromycin to Tschingel Glacier",
+                                            "names": [
+                                                "Azithromycin",
+                                                "Tschingel Glacier"
+                                            ],
+                                            "ids": [
+                                                "yago:Azithromycin",
+                                                "yago:Tschingel_Glacier"
+                                            ],
+                                            "children": {}
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "yago:Chemical_substance#yago:Bearman_Glacier": {
+                            "name": "Damage from production of Chemicals to Bearman Glacier",
+                            "names": [
+                                "Chemicals",
+                                "Bearman Glacier"
+                            ],
+                            "ids": [
+                                "yago:Chemical_substance",
+                                "yago:Bearman_Glacier"
+                            ],
+                            "children": {
+                                "yago:Plastic#yago:Bearman_Glacier": {
+                                    "name": "Damage from production of Plastics to Bearman Glacier",
+                                    "names": [
+                                        "Plastics",
+                                        "Bearman Glacier"
+                                    ],
+                                    "ids": [
+                                        "yago:Plastic",
+                                        "yago:Bearman_Glacier"
+                                    ],
+                                    "children": {
+                                        "yago:Rubber#yago:Bearman_Glacier": {
+                                            "name": "Damage from production of Rubber to Bearman Glacier",
+                                            "names": [
+                                                "Rubber",
+                                                "Bearman Glacier"
+                                            ],
+                                            "ids": [
+                                                "yago:Rubber",
+                                                "yago:Bearman_Glacier"
+                                            ],
+                                            "children": {}
+                                        },
+                                        "yago:Nylon#yago:Bearman_Glacier": {
+                                            "name": "Damage from production of Nylon to Bearman Glacier",
+                                            "names": [
+                                                "Nylon",
+                                                "Bearman Glacier"
+                                            ],
+                                            "ids": [
+                                                "yago:Nylon",
+                                                "yago:Bearman_Glacier"
+                                            ],
+                                            "children": {}
+                                        }
+                                    }
+                                },
+                                "yago:Drug#yago:Bearman_Glacier": {
+                                    "name": "Damage from production of Drugs to Bearman Glacier",
+                                    "names": [
+                                        "Drugs",
+                                        "Bearman Glacier"
+                                    ],
+                                    "ids": [
+                                        "yago:Drug",
+                                        "yago:Bearman_Glacier"
+                                    ],
+                                    "children": {
+                                        "yago:Tolperisone#yago:Bearman_Glacier": {
+                                            "name": "Damage from production of Tolperisone to Bearman Glacier",
+                                            "names": [
+                                                "Tolperisone",
+                                                "Bearman Glacier"
+                                            ],
+                                            "ids": [
+                                                "yago:Tolperisone",
+                                                "yago:Bearman_Glacier"
+                                            ],
+                                            "children": {}
+                                        },
+                                        "yago:Azithromycin#yago:Bearman_Glacier": {
+                                            "name": "Damage from production of Azithromycin to Bearman Glacier",
+                                            "names": [
+                                                "Azithromycin",
+                                                "Bearman Glacier"
+                                            ],
+                                            "ids": [
+                                                "yago:Azithromycin",
+                                                "yago:Bearman_Glacier"
+                                            ],
+                                            "children": {}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "{} mass-producing {}": {
+        "yago:Factory#yago:Chemical_substance": {
+            "name": "Factories mass-producing Chemicals",
+            "names": [
+                "Factories",
+                "Chemicals"
+            ],
+            "ids": [
+                "yago:Factory",
+                "yago:Chemical_substance"
+            ],
+            "children": {
+                "yago:Factory#yago:Plastic": {
+                    "name": "Factories mass-producing Plastics",
+                    "names": [
+                        "Factories",
+                        "Plastics"
+                    ],
+                    "ids": [
+                        "yago:Factory",
+                        "yago:Plastic"
+                    ],
+                    "children": {
+                        "yago:Factory#yago:Nylon": {
+                            "name": "Factories mass-producing Nylon",
+                            "names": [
+                                "Factories",
+                                "Nylon"
+                            ],
+                            "ids": [
+                                "yago:Factory",
+                                "yago:Nylon"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Factory#yago:Polytetrafluoroethylene": {
+                            "name": "Factories mass-producing Teflon",
+                            "names": [
+                                "Factories",
+                                "Teflon"
+                            ],
+                            "ids": [
+                                "yago:Factory",
+                                "yago:Polytetrafluoroethylene"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Factory#yago:Rubber": {
+                            "name": "Factories mass-producing Rubber",
+                            "names": [
+                                "Factories",
+                                "Rubber"
+                            ],
+                            "ids": [
+                                "yago:Factory",
+                                "yago:Rubber"
+                            ],
+                            "children": {}
+                        }
+                    }
+                },
+                "yago:Factory#yago:Drug": {
+                    "name": "Factories mass-producing Drugs",
+                    "names": [
+                        "Factories",
+                        "Drugs"
+                    ],
+                    "ids": [
+                        "yago:Factory",
+                        "yago:Drug"
+                    ],
+                    "children": {
+                        "yago:Factory#yago:Azithromycin": {
+                            "name": "Factories mass-producing Azithromycin",
+                            "names": [
+                                "Factories",
+                                "Azithromycin"
+                            ],
+                            "ids": [
+                                "yago:Factory",
+                                "yago:Azithromycin"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Factory#yago:Hydroxocobalamin": {
+                            "name": "Factories mass-producing Hydroxocobalamin",
+                            "names": [
+                                "Factories",
+                                "Hydroxocobalamin"
+                            ],
+                            "ids": [
+                                "yago:Factory",
+                                "yago:Hydroxocobalamin"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Factory#yago:Tolperisone": {
+                            "name": "Factories mass-producing Tolperisone",
+                            "names": [
+                                "Factories",
+                                "Tolperisone"
+                            ],
+                            "ids": [
+                                "yago:Factory",
+                                "yago:Tolperisone"
+                            ],
+                            "children": {}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Aid to {} by {}": {
+        "schema:Continent#yago:International_financial_institutions": {
+            "name": "Aid to Continents by International Financial Institutions",
+            "names": [
+                "Continents",
+                "International Financial Institutions"
+            ],
+            "ids": [
+                "schema:Continent",
+                "yago:International_financial_institutions"
+            ],
+            "children": {
+                "yago:Africa#yago:International_financial_institutions": {
+                    "name": "Aid to Africa by International Financial Institutions",
+                    "names": [
+                        "Africa",
+                        "International Financial Institutions"
+                    ],
+                    "ids": [
+                        "yago:Africa",
+                        "yago:International_financial_institutions"
+                    ],
+                    "children": {}
+                },
+                "yago:Australia__u0028_continent_u0029_#yago:International_financial_institutions": {
+                    "name": "Aid to Australian continent by International Financial Institutions",
+                    "names": [
+                        "Australian continent",
+                        "International Financial Institutions"
+                    ],
+                    "ids": [
+                        "yago:Australia__u0028_continent_u0029_",
+                        "yago:International_financial_institutions"
+                    ],
+                    "children": {}
+                },
+                "yago:North_America#yago:International_financial_institutions": {
+                    "name": "Aid to North America by International Financial Institutions",
+                    "names": [
+                        "North America",
+                        "International Financial Institutions"
+                    ],
+                    "ids": [
+                        "yago:North_America",
+                        "yago:International_financial_institutions"
+                    ],
+                    "children": {}
+                }
+            }
+        }
+    },
+    "Effect of {} on {}": {
+        "yago:Chemical_substance#schema:Person": {
+            "name": "Effect of Chemicals on People",
+            "names": [
+                "Chemicals",
+                "People"
+            ],
+            "ids": [
+                "yago:Chemical_substance",
+                "schema:Person"
+            ],
+            "children": {
+                "yago:Drug#schema:Person": {
+                    "name": "Effect of Drugs on People",
+                    "names": [
+                        "Drugs",
+                        "People"
+                    ],
+                    "ids": [
+                        "yago:Drug",
+                        "schema:Person"
+                    ],
+                    "children": {
+                        "yago:Paracetamol#schema:Person": {
+                            "name": "Effect of Paracetamol on People",
+                            "names": [
+                                "Paracetamol",
+                                "People"
+                            ],
+                            "ids": [
+                                "yago:Paracetamol",
+                                "schema:Person"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Tolperisone#schema:Person": {
+                            "name": "Effect of Tolperisone on People",
+                            "names": [
+                                "Tolperisone",
+                                "People"
+                            ],
+                            "ids": [
+                                "yago:Tolperisone",
+                                "schema:Person"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Hydroxocobalamin#schema:Person": {
+                            "name": "Effect of Hydroxocobalamin on People",
+                            "names": [
+                                "Hydroxocobalamin",
+                                "People"
+                            ],
+                            "ids": [
+                                "yago:Hydroxocobalamin",
+                                "schema:Person"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Azithromycin#schema:Person": {
+                            "name": "Effect of Azithromycin on People",
+                            "names": [
+                                "Azithromycin",
+                                "People"
+                            ],
+                            "ids": [
+                                "yago:Azithromycin",
+                                "schema:Person"
+                            ],
+                            "children": {}
+                        }
+                    }
+                },
+                "yago:Plastic#schema:Person": {
+                    "name": "Effect of Plastics on People",
+                    "names": [
+                        "Plastics",
+                        "People"
+                    ],
+                    "ids": [
+                        "yago:Plastic",
+                        "schema:Person"
+                    ],
+                    "children": {
+                        "yago:Rubber#schema:Person": {
+                            "name": "Effect of Rubber on People",
+                            "names": [
+                                "Rubber",
+                                "People"
+                            ],
+                            "ids": [
+                                "yago:Rubber",
+                                "schema:Person"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Polytetrafluoroethylene#schema:Person": {
+                            "name": "Effect of Teflon on People",
+                            "names": [
+                                "Teflon",
+                                "People"
+                            ],
+                            "ids": [
+                                "yago:Polytetrafluoroethylene",
+                                "schema:Person"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Nylon#schema:Person": {
+                            "name": "Effect of Nylon on People",
+                            "names": [
+                                "Nylon",
+                                "People"
+                            ],
+                            "ids": [
+                                "yago:Nylon",
+                                "schema:Person"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Polyvinylcarbazole#schema:Person": {
+                            "name": "Effect of PVC on People",
+                            "names": [
+                                "PVC",
+                                "People"
+                            ],
+                            "ids": [
+                                "yago:Polyvinylcarbazole",
+                                "schema:Person"
+                            ],
+                            "children": {}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "{} culture in {}": {
+        "yago:Food#yago:Langepas": {
+            "name": "Food culture in Langepas",
+            "names": [
+                "Food",
+                "Langepas"
+            ],
+            "ids": [
+                "yago:Food",
+                "yago:Langepas"
+            ],
+            "children": {
+                "yago:Staple_food#yago:Langepas": {
+                    "name": "Staple Foods culture in Langepas",
+                    "names": [
+                        "Staple Foods",
+                        "Langepas"
+                    ],
+                    "ids": [
+                        "yago:Staple_food",
+                        "yago:Langepas"
+                    ],
+                    "children": {}
+                },
+                "yago:Delicacy#yago:Langepas": {
+                    "name": "Delicacies culture in Langepas",
+                    "names": [
+                        "Delicacies",
+                        "Langepas"
+                    ],
+                    "ids": [
+                        "yago:Delicacy",
+                        "yago:Langepas"
+                    ],
+                    "children": {
+                        "yago:Vegetarian_food#yago:Langepas": {
+                            "name": "Vegetarian Food culture in Langepas",
+                            "names": [
+                                "Vegetarian Food",
+                                "Langepas"
+                            ],
+                            "ids": [
+                                "yago:Vegetarian_food",
+                                "yago:Langepas"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Dessert#yago:Langepas": {
+                            "name": "Desserts culture in Langepas",
+                            "names": [
+                                "Desserts",
+                                "Langepas"
+                            ],
+                            "ids": [
+                                "yago:Dessert",
+                                "yago:Langepas"
+                            ],
+                            "children": {}
+                        }
+                    }
+                }
+            }
+        },
+        "yago:Food#yago:Antibes": {
+            "name": "Food culture in Antibes",
+            "names": [
+                "Food",
+                "Antibes"
+            ],
+            "ids": [
+                "yago:Food",
+                "yago:Antibes"
+            ],
+            "children": {
+                "yago:Staple_food#yago:Antibes": {
+                    "name": "Staple Foods culture in Antibes",
+                    "names": [
+                        "Staple Foods",
+                        "Antibes"
+                    ],
+                    "ids": [
+                        "yago:Staple_food",
+                        "yago:Antibes"
+                    ],
+                    "children": {}
+                },
+                "yago:Delicacy#yago:Antibes": {
+                    "name": "Delicacies culture in Antibes",
+                    "names": [
+                        "Delicacies",
+                        "Antibes"
+                    ],
+                    "ids": [
+                        "yago:Delicacy",
+                        "yago:Antibes"
+                    ],
+                    "children": {
+                        "yago:Vegetarian_food#yago:Antibes": {
+                            "name": "Vegetarian Food culture in Antibes",
+                            "names": [
+                                "Vegetarian Food",
+                                "Antibes"
+                            ],
+                            "ids": [
+                                "yago:Vegetarian_food",
+                                "yago:Antibes"
+                            ],
+                            "children": {}
+                        },
+                        "yago:Dessert#yago:Antibes": {
+                            "name": "Desserts culture in Antibes",
+                            "names": [
+                                "Desserts",
+                                "Antibes"
+                            ],
+                            "ids": [
+                                "yago:Dessert",
+                                "yago:Antibes"
+                            ],
+                            "children": {}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "{} published by {}": {
+        "schema:Book#yago:Scientist": {
+            "name": "Books published by Scientists",
+            "names": [
+                "Books",
+                "Scientists"
+            ],
+            "ids": [
+                "schema:Book",
+                "yago:Scientist"
+            ],
+            "children": {}
+        },
+        "schema:Book#yago:Creator": {
+            "name": "Books published by Creative People",
+            "names": [
+                "Books",
+                "Creative People"
+            ],
+            "ids": [
+                "schema:Book",
+                "yago:Creator"
+            ],
+            "children": {
+                "schema:Book#yago:Artist": {
+                    "name": "Books published by People in Arts",
+                    "names": [
+                        "Books",
+                        "People in Arts"
+                    ],
+                    "ids": [
+                        "schema:Book",
+                        "yago:Artist"
+                    ],
+                    "children": {
+                        "schema:Book#yago:Musician": {
+                            "name": "Books published by Musicians",
+                            "names": [
+                                "Books",
+                                "Musicians"
+                            ],
+                            "ids": [
+                                "schema:Book",
+                                "yago:Musician"
+                            ],
+                            "children": {}
+                        },
+                        "schema:Book#yago:Painter": {
+                            "name": "Books published by Artists",
+                            "names": [
+                                "Books",
+                                "Artists"
+                            ],
+                            "ids": [
+                                "schema:Book",
+                                "yago:Painter"
+                            ],
+                            "children": {}
+                        }
+                    }
+                },
+                "schema:Book#yago:Author": {
+                    "name": "Books published by Authors",
+                    "names": [
+                        "Books",
+                        "Authors"
+                    ],
+                    "ids": [
+                        "schema:Book",
+                        "yago:Author"
+                    ],
+                    "children": {}
+                },
+                "schema:Book#yago:Inventor": {
+                    "name": "Books published by Inventors",
+                    "names": [
+                        "Books",
+                        "Inventors"
+                    ],
+                    "ids": [
+                        "schema:Book",
+                        "yago:Inventor"
+                    ],
+                    "children": {}
+                },
+                "schema:Book#yago:Journalist": {
+                    "name": "Books published by Journalists",
+                    "names": [
+                        "Books",
+                        "Journalists"
+                    ],
+                    "ids": [
+                        "schema:Book",
+                        "yago:Journalist"
+                    ],
+                    "children": {}
+                }
+            }
+        },
+        "schema:Book#yago:Politician": {
+            "name": "Books published by Politicians",
+            "names": [
+                "Books",
+                "Politicians"
+            ],
+            "ids": [
+                "schema:Book",
+                "yago:Politician"
+            ],
+            "children": {}
+        },
+        "schema:Book#yago:SportsPerson": {
+            "name": "Books published by People in Sports",
+            "names": [
+                "Books",
+                "People in Sports"
+            ],
+            "ids": [
+                "schema:Book",
+                "yago:SportsPerson"
+            ],
+            "children": {
+                "schema:Book#yago:Coach__u0028_sport_u0029_": {
+                    "name": "Books published by Coaches",
+                    "names": [
+                        "Books",
+                        "Coaches"
+                    ],
+                    "ids": [
+                        "schema:Book",
+                        "yago:Coach__u0028_sport_u0029_"
+                    ],
+                    "children": {}
+                },
+                "schema:Book#yago:Athlete": {
+                    "name": "Books published by Athletes",
+                    "names": [
+                        "Books",
+                        "Athletes"
+                    ],
+                    "ids": [
+                        "schema:Book",
+                        "yago:Athlete"
+                    ],
+                    "children": {
+                        "schema:Book#yago:Cricketer": {
+                            "name": "Books published by Cricketers",
+                            "names": [
+                                "Books",
+                                "Cricketers"
+                            ],
+                            "ids": [
+                                "schema:Book",
+                                "yago:Cricketer"
+                            ],
+                            "children": {}
+                        },
+                        "schema:Book#yago:Badminton_player": {
+                            "name": "Books published by Badminton Players",
+                            "names": [
+                                "Books",
+                                "Badminton Players"
+                            ],
+                            "ids": [
+                                "schema:Book",
+                                "yago:Badminton_player"
+                            ],
+                            "children": {}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

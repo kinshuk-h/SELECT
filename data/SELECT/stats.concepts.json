@@ -1,0 +1,3154 @@
+{
+    "schema:Organization": {
+        "freq.ngram.raw": {
+            "Dolma": 96740103,
+            "C4": 30301580,
+            "The Pile": 3579482,
+            "OpenWebText": 267533
+        }
+    },
+    "schema:CreativeWork": {
+        "freq.ngram.raw": {
+            "Dolma": 433575,
+            "C4": 265650,
+            "The Pile": 19896,
+            "OpenWebText": 1174
+        }
+    },
+    "schema:Person": {
+        "freq.ngram.raw": {
+            "Dolma": 1060926645,
+            "C4": 222390901,
+            "The Pile": 38241891,
+            "OpenWebText": 3496074
+        }
+    },
+    "schema:Place": {
+        "freq.ngram.raw": {
+            "Dolma": 172828030,
+            "C4": 53263804,
+            "The Pile": 7658348,
+            "OpenWebText": 453633
+        }
+    },
+    "yago:Financial_institution": {
+        "freq.ngram.raw": {
+            "Dolma": 9626186,
+            "C4": 2413371,
+            "The Pile": 305923,
+            "OpenWebText": 28049
+        }
+    },
+    "yago:Educational_institution": {
+        "freq.ngram.raw": {
+            "Dolma": 1311850,
+            "C4": 462401,
+            "The Pile": 57228,
+            "OpenWebText": 2061
+        }
+    },
+    "schema:Corporation": {
+        "freq.ngram.raw": {
+            "Dolma": 24669096,
+            "C4": 6032053,
+            "The Pile": 1223745,
+            "OpenWebText": 123957
+        }
+    },
+    "schema:Movie": {
+        "freq.ngram.raw": {
+            "Dolma": 71066523,
+            "C4": 51625242,
+            "The Pile": 2398901,
+            "OpenWebText": 185510
+        }
+    },
+    "yago:Work_of_art": {
+        "freq.ngram.raw": {
+            "Dolma": 4297176,
+            "C4": 1357028,
+            "The Pile": 166116,
+            "OpenWebText": 8157
+        }
+    },
+    "schema:Book": {
+        "freq.ngram.raw": {
+            "Dolma": 149486848,
+            "C4": 111072452,
+            "The Pile": 5697558,
+            "OpenWebText": 360269
+        }
+    },
+    "yago:Scientist": {
+        "freq.ngram.raw": {
+            "Dolma": 43508639,
+            "C4": 11233358,
+            "The Pile": 2640986,
+            "OpenWebText": 277841
+        }
+    },
+    "yago:Creator": {
+        "freq.ngram.raw": {
+            "Dolma": 1165440,
+            "C4": 494542,
+            "The Pile": 50498,
+            "OpenWebText": 3796
+        }
+    },
+    "yago:SportsPerson": {
+        "freq.ngram.raw": {
+            "Dolma": 27348,
+            "C4": 9017,
+            "The Pile": 1726,
+            "OpenWebText": 186
+        }
+    },
+    "yago:Politician": {
+        "freq.ngram.raw": {
+            "Dolma": 25070167,
+            "C4": 5752555,
+            "The Pile": 2213925,
+            "OpenWebText": 254301
+        }
+    },
+    "schema:AdministrativeArea": {
+        "freq.ngram.raw": {
+            "Dolma": 110938,
+            "C4": 38483,
+            "The Pile": 7246,
+            "OpenWebText": 193
+        }
+    },
+    "yago:HumanMadeGeographicalEntity": {
+        "freq.ngram.raw": {
+            "Dolma": 8,
+            "The Pile": 2,
+            "OpenWebText": 0,
+            "C4": 0
+        }
+    },
+    "schema:Landform": {
+        "freq.ngram.raw": {
+            "Dolma": 390285,
+            "C4": 191159,
+            "The Pile": 18090,
+            "OpenWebText": 753
+        }
+    },
+    "yago:Factory": {
+        "freq.ngram.raw": {
+            "Dolma": 14462213,
+            "C4": 2698518,
+            "The Pile": 608599,
+            "OpenWebText": 49259
+        }
+    },
+    "yago:Law_firm": {
+        "freq.ngram.raw": {
+            "Dolma": 3901894,
+            "C4": 2017219,
+            "The Pile": 113693,
+            "OpenWebText": 7024
+        }
+    },
+    "yago:Business_enterprise": {
+        "freq.ngram.raw": {
+            "Dolma": 24473452,
+            "C4": 11737603,
+            "The Pile": 852149,
+            "OpenWebText": 42208
+        }
+    },
+    "schema:Airline": {
+        "freq.ngram.raw": {
+            "Dolma": 17850309,
+            "C4": 7483166,
+            "The Pile": 673279,
+            "OpenWebText": 46648
+        }
+    },
+    "yago:International_financial_institutions": {
+        "freq.ngram.raw": {
+            "Dolma": 266432,
+            "C4": 60852,
+            "The Pile": 11345,
+            "OpenWebText": 953
+        }
+    },
+    "yago:Bank": {
+        "freq.ngram.raw": {
+            "Dolma": 50203551,
+            "C4": 18763309,
+            "The Pile": 2163173,
+            "OpenWebText": 189185
+        }
+    },
+    "yago:University": {
+        "freq.ngram.raw": {
+            "Dolma": 33421807,
+            "C4": 10703959,
+            "The Pile": 1453146,
+            "OpenWebText": 104224
+        }
+    },
+    "yago:School": {
+        "freq.ngram.raw": {
+            "Dolma": 105774983,
+            "C4": 45989158,
+            "The Pile": 3950944,
+            "OpenWebText": 292260
+        }
+    },
+    "yago:College": {
+        "freq.ngram.raw": {
+            "Dolma": 22730275,
+            "C4": 10619880,
+            "The Pile": 862575,
+            "OpenWebText": 57082
+        }
+    },
+    "yago:Diary": {
+        "freq.ngram.raw": {
+            "C4": 5353735,
+            "Dolma": 4079881,
+            "The Pile": 235955,
+            "OpenWebText": 13173
+        }
+    },
+    "yago:Encyclopedia": {
+        "freq.ngram.raw": {
+            "Dolma": 705967,
+            "C4": 632343,
+            "The Pile": 34168,
+            "OpenWebText": 1407
+        }
+    },
+    "yago:Novel": {
+        "freq.ngram.raw": {
+            "Dolma": 17860312,
+            "C4": 8752923,
+            "The Pile": 916484,
+            "OpenWebText": 51179
+        }
+    },
+    "yago:Biography": {
+        "freq.ngram.raw": {
+            "C4": 3872706,
+            "Dolma": 3105861,
+            "The Pile": 170546,
+            "OpenWebText": 8232
+        }
+    },
+    "yago:Short_film": {
+        "freq.ngram.raw": {
+            "Dolma": 2046174,
+            "C4": 1268144,
+            "The Pile": 109625,
+            "OpenWebText": 5137
+        }
+    },
+    "yago:Narrative_film": {
+        "freq.ngram.raw": {
+            "Dolma": 48121,
+            "C4": 17809,
+            "The Pile": 3884,
+            "OpenWebText": 162
+        }
+    },
+    "yago:Song": {
+        "freq.ngram.raw": {
+            "Dolma": 60523422,
+            "C4": 22427191,
+            "The Pile": 2438046,
+            "OpenWebText": 131747
+        }
+    },
+    "yago:Television_show": {
+        "freq.ngram.raw": {
+            "Dolma": 9980872,
+            "C4": 6640281,
+            "The Pile": 330702,
+            "OpenWebText": 30253
+        }
+    },
+    "yago:Painting__u0028_object_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 19636999,
+            "C4": 10278156,
+            "The Pile": 717818,
+            "OpenWebText": 30877
+        }
+    },
+    "yago:Umesh_Mishra": {
+        "freq.ngram.raw": {
+            "Dolma": 1648,
+            "C4": 1531,
+            "The Pile": 95,
+            "OpenWebText": 10
+        }
+    },
+    "yago:Alan_M_u002E__Lovelace": {
+        "freq.ngram.raw": {
+            "Dolma": 52,
+            "C4": 20,
+            "The Pile": 13,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Michael_W_u002E__Davidson": {
+        "freq.ngram.raw": {
+            "Dolma": 1882,
+            "C4": 1502,
+            "The Pile": 146,
+            "OpenWebText": 12
+        }
+    },
+    "yago:Mariya_Borodayevskaya": {
+        "freq.ngram.raw": {
+            "Dolma": 1,
+            "The Pile": 0,
+            "OpenWebText": 0,
+            "C4": 0
+        }
+    },
+    "yago:Artist": {
+        "freq.ngram.raw": {
+            "Dolma": 3430,
+            "C4": 1355,
+            "The Pile": 225,
+            "OpenWebText": 5
+        }
+    },
+    "yago:Journalist": {
+        "freq.ngram.raw": {
+            "Dolma": 16530390,
+            "C4": 6082343,
+            "The Pile": 1264750,
+            "OpenWebText": 160167
+        }
+    },
+    "yago:Inventor": {
+        "freq.ngram.raw": {
+            "Dolma": 2343718,
+            "C4": 1160492,
+            "The Pile": 402104,
+            "OpenWebText": 9447
+        }
+    },
+    "yago:Author": {
+        "freq.ngram.raw": {
+            "Dolma": 56057016,
+            "C4": 35974777,
+            "The Pile": 9121590,
+            "OpenWebText": 167617
+        }
+    },
+    "yago:Henri_Vaugeois": {
+        "freq.ngram.raw": {
+            "Dolma": 123,
+            "The Pile": 77,
+            "C4": 18,
+            "OpenWebText": 1
+        }
+    },
+    "yago:Francis_II_Rákóczi": {
+        "freq.ngram.raw": {
+            "Dolma": 1532,
+            "The Pile": 462,
+            "C4": 259,
+            "OpenWebText": 9
+        }
+    },
+    "yago:Gore_Vidal": {
+        "freq.ngram.raw": {
+            "C4": 120834,
+            "Dolma": 112066,
+            "The Pile": 12478,
+            "OpenWebText": 1027
+        }
+    },
+    "yago:Rosalynn_Carter": {
+        "freq.ngram.raw": {
+            "Dolma": 39598,
+            "C4": 23905,
+            "The Pile": 3172,
+            "OpenWebText": 279
+        }
+    },
+    "yago:Ilona_Staller": {
+        "freq.ngram.raw": {
+            "C4": 9554,
+            "Dolma": 4868,
+            "The Pile": 344,
+            "OpenWebText": 20
+        }
+    },
+    "yago:Athlete": {
+        "freq.ngram.raw": {
+            "Dolma": 24891505,
+            "C4": 8462850,
+            "The Pile": 1028768,
+            "OpenWebText": 78620
+        }
+    },
+    "yago:Coach__u0028_sport_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 21918384,
+            "C4": 8870878,
+            "The Pile": 1075833,
+            "OpenWebText": 110778
+        }
+    },
+    "schema:City": {
+        "freq.ngram.raw": {
+            "Dolma": 84734332,
+            "C4": 38373915,
+            "The Pile": 3571940,
+            "OpenWebText": 335200
+        }
+    },
+    "yago:Village": {
+        "freq.ngram.raw": {
+            "Dolma": 17876847,
+            "C4": 5360512,
+            "The Pile": 1027871,
+            "OpenWebText": 58681
+        }
+    },
+    "yago:Building": {
+        "freq.ngram.raw": {
+            "Dolma": 61239475,
+            "C4": 19071537,
+            "The Pile": 2750651,
+            "OpenWebText": 180148
+        }
+    },
+    "schema:Airport": {
+        "freq.ngram.raw": {
+            "Dolma": 12082916,
+            "C4": 5440649,
+            "The Pile": 451245,
+            "OpenWebText": 36811
+        }
+    },
+    "yago:Park": {
+        "freq.ngram.raw": {
+            "Dolma": 36218530,
+            "C4": 19795547,
+            "The Pile": 1251489,
+            "OpenWebText": 88233
+        }
+    },
+    "yago:Hospital": {
+        "freq.ngram.raw": {
+            "Dolma": 33044048,
+            "C4": 9977514,
+            "The Pile": 1805827,
+            "OpenWebText": 90364
+        }
+    },
+    "yago:Stadium": {
+        "freq.ngram.raw": {
+            "Dolma": 3124878,
+            "C4": 1152413,
+            "The Pile": 162627,
+            "OpenWebText": 18051
+        }
+    },
+    "schema:BodyOfWater": {
+        "freq.ngram.raw": {
+            "Dolma": 959885,
+            "C4": 164780,
+            "The Pile": 53714,
+            "OpenWebText": 1772
+        }
+    },
+    "yago:Mountain_range": {
+        "freq.ngram.raw": {
+            "Dolma": 1389112,
+            "C4": 358331,
+            "The Pile": 73605,
+            "OpenWebText": 3404
+        }
+    },
+    "schema:Continent": {
+        "freq.ngram.raw": {
+            "Dolma": 7277524,
+            "C4": 2252016,
+            "The Pile": 350608,
+            "OpenWebText": 20824
+        }
+    },
+    "yago:Island": {
+        "freq.ngram.raw": {
+            "Dolma": 31684795,
+            "C4": 27020234,
+            "The Pile": 1512675,
+            "OpenWebText": 85637
+        }
+    },
+    "yago:Ameriflight": {
+        "freq.ngram.raw": {
+            "C4": 8439,
+            "Dolma": 3420,
+            "The Pile": 128,
+            "OpenWebText": 2
+        }
+    },
+    "yago:Amerijet_International": {
+        "freq.ngram.raw": {
+            "C4": 9223,
+            "Dolma": 2533,
+            "The Pile": 101,
+            "OpenWebText": 1
+        }
+    },
+    "yago:Alada": {
+        "freq.ngram.raw": {
+            "Dolma": 7551,
+            "C4": 6011,
+            "The Pile": 647,
+            "OpenWebText": 6
+        }
+    },
+    "yago:Mahfooz_Aviation": {
+        "freq.ngram.raw": {
+            "C4": 2962,
+            "Dolma": 69,
+            "The Pile": 13,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Hewa_Bora_Airways": {
+        "freq.ngram.raw": {
+            "C4": 6294,
+            "Dolma": 715,
+            "The Pile": 115,
+            "OpenWebText": 8
+        }
+    },
+    "yago:Bellemonte_Silk_Mill": {
+        "freq.ngram.raw": {
+            "Dolma": 109,
+            "C4": 39,
+            "The Pile": 14,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Steelite": {
+        "freq.ngram.raw": {
+            "C4": 58518,
+            "Dolma": 13867,
+            "The Pile": 229,
+            "OpenWebText": 5
+        }
+    },
+    "yago:Vulcan_Foundry": {
+        "freq.ngram.raw": {
+            "Dolma": 5324,
+            "C4": 2774,
+            "The Pile": 816,
+            "OpenWebText": 5
+        }
+    },
+    "yago:Flat_Rock_Assembly_Plant": {
+        "freq.ngram.raw": {
+            "Dolma": 5800,
+            "C4": 1740,
+            "The Pile": 368,
+            "OpenWebText": 58
+        }
+    },
+    "yago:Dead_Sea_Works": {
+        "freq.ngram.raw": {
+            "Dolma": 3339,
+            "C4": 1172,
+            "The Pile": 292,
+            "OpenWebText": 25
+        }
+    },
+    "yago:Cinergi_Pictures": {
+        "freq.ngram.raw": {
+            "Dolma": 768,
+            "C4": 355,
+            "The Pile": 80,
+            "OpenWebText": 3
+        }
+    },
+    "yago:Intourist": {
+        "freq.ngram.raw": {
+            "C4": 20188,
+            "Dolma": 15683,
+            "The Pile": 1645,
+            "OpenWebText": 54
+        }
+    },
+    "yago:ALcot": {
+        "freq.ngram.raw": {
+            "C4": 3484,
+            "Dolma": 2627,
+            "The Pile": 159,
+            "OpenWebText": 7
+        }
+    },
+    "yago:Louis_Dreyfus_Company": {
+        "freq.ngram.raw": {
+            "Dolma": 1908,
+            "C4": 296,
+            "The Pile": 204,
+            "OpenWebText": 17
+        }
+    },
+    "yago:Dinamic_Software": {
+        "freq.ngram.raw": {
+            "C4": 6461,
+            "Dolma": 894,
+            "The Pile": 72,
+            "OpenWebText": 5
+        }
+    },
+    "yago:Hall_Dickler_Kent_Goldstein__u0026__Wood": {
+        "freq.ngram.raw": {
+            "Dolma": 136,
+            "C4": 23,
+            "The Pile": 14,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Tonkon_Torp": {
+        "freq.ngram.raw": {
+            "Dolma": 4871,
+            "C4": 1853,
+            "The Pile": 485,
+            "OpenWebText": 9
+        }
+    },
+    "yago:Van_Ness_Feldman": {
+        "freq.ngram.raw": {
+            "Dolma": 3858,
+            "C4": 2247,
+            "The Pile": 371,
+            "OpenWebText": 22
+        }
+    },
+    "yago:Ashurst_LLP": {
+        "freq.ngram.raw": {
+            "Dolma": 3156,
+            "C4": 1301,
+            "The Pile": 74,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Keker_u002C__Van_Nest__u0026__Peters_LLP": {
+        "freq.ngram.raw": {
+            "Dolma": 835,
+            "C4": 652,
+            "The Pile": 386,
+            "OpenWebText": 13
+        }
+    },
+    "yago:CPB_Bank": {
+        "freq.ngram.raw": {
+            "C4": 172,
+            "Dolma": 77,
+            "The Pile": 22,
+            "OpenWebText": 1
+        }
+    },
+    "yago:ICBC_Turkey": {
+        "freq.ngram.raw": {
+            "Dolma": 245,
+            "C4": 167,
+            "The Pile": 7,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Royal_Bank_of_Scotland": {
+        "freq.ngram.raw": {
+            "Dolma": 144464,
+            "C4": 56278,
+            "The Pile": 8871,
+            "OpenWebText": 1021
+        }
+    },
+    "yago:Citizens_Republic_Bancorp": {
+        "freq.ngram.raw": {
+            "C4": 2112,
+            "Dolma": 1709,
+            "The Pile": 86,
+            "OpenWebText": 6
+        }
+    },
+    "yago:China_Merchants_Bank": {
+        "freq.ngram.raw": {
+            "Dolma": 28827,
+            "C4": 12948,
+            "The Pile": 995,
+            "OpenWebText": 99
+        }
+    },
+    "yago:World_Bank": {
+        "freq.ngram.raw": {
+            "Dolma": 5607132,
+            "C4": 1796110,
+            "The Pile": 241668,
+            "OpenWebText": 22090
+        }
+    },
+    "yago:International_Monetary_Fund": {
+        "freq.ngram.raw": {
+            "Dolma": 2106298,
+            "C4": 611074,
+            "The Pile": 129001,
+            "OpenWebText": 17685
+        }
+    },
+    "yago:Clarkson_University": {
+        "freq.ngram.raw": {
+            "Dolma": 62275,
+            "C4": 42695,
+            "The Pile": 3938,
+            "OpenWebText": 239
+        }
+    },
+    "yago:National_University_of_Kyiv-Mohyla_Academy": {
+        "freq.ngram.raw": {
+            "Dolma": 7135,
+            "C4": 3454,
+            "The Pile": 606,
+            "OpenWebText": 25
+        }
+    },
+    "yago:Kokushikan_University": {
+        "freq.ngram.raw": {
+            "Dolma": 1832,
+            "C4": 838,
+            "The Pile": 461,
+            "OpenWebText": 12
+        }
+    },
+    "yago:Technion__u2013__Israel_Institute_of_Technology": {
+        "freq.ngram.raw": {
+            "Dolma": 66035,
+            "C4": 39270,
+            "The Pile": 9145,
+            "OpenWebText": 367
+        }
+    },
+    "yago:Shahid_Beheshti_University": {
+        "freq.ngram.raw": {
+            "Dolma": 37184,
+            "C4": 11912,
+            "The Pile": 8984,
+            "OpenWebText": 77
+        }
+    },
+    "yago:Munro_College": {
+        "freq.ngram.raw": {
+            "Dolma": 2540,
+            "C4": 1055,
+            "The Pile": 110,
+            "OpenWebText": 1
+        }
+    },
+    "yago:The_Kinkaid_School": {
+        "freq.ngram.raw": {
+            "C4": 8411,
+            "Dolma": 3337,
+            "The Pile": 260,
+            "OpenWebText": 4
+        }
+    },
+    "yago:Bayard_Rustin_Educational_Complex": {
+        "freq.ngram.raw": {
+            "Dolma": 199,
+            "C4": 143,
+            "The Pile": 45,
+            "OpenWebText": 2
+        }
+    },
+    "yago:Chant_Garden_Elementary_School": {
+        "freq.ngram.raw": {
+            "Dolma": 10,
+            "The Pile": 3,
+            "C4": 1,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Fordham_Preparatory_School": {
+        "freq.ngram.raw": {
+            "C4": 3407,
+            "Dolma": 2429,
+            "The Pile": 241,
+            "OpenWebText": 12
+        }
+    },
+    "yago:New_College_at_Hackney": {
+        "freq.ngram.raw": {
+            "Dolma": 121,
+            "The Pile": 54,
+            "C4": 16,
+            "OpenWebText": 2
+        }
+    },
+    "yago:Coe_College": {
+        "freq.ngram.raw": {
+            "Dolma": 27809,
+            "C4": 23787,
+            "The Pile": 1539,
+            "OpenWebText": 123
+        }
+    },
+    "yago:Institute_of_Cancer_Research": {
+        "freq.ngram.raw": {
+            "Dolma": 71983,
+            "C4": 25490,
+            "The Pile": 8440,
+            "OpenWebText": 229
+        }
+    },
+    "yago:Ezra_Stiles_College": {
+        "freq.ngram.raw": {
+            "Dolma": 2450,
+            "C4": 366,
+            "The Pile": 193,
+            "OpenWebText": 7
+        }
+    },
+    "yago:Malaysian_Institute_of_Art": {
+        "freq.ngram.raw": {
+            "C4": 1682,
+            "Dolma": 1481,
+            "The Pile": 37,
+            "OpenWebText": 2
+        }
+    },
+    "yago:Henderson_the_Rain_King": {
+        "freq.ngram.raw": {
+            "Dolma": 3729,
+            "C4": 3500,
+            "The Pile": 379,
+            "OpenWebText": 32
+        }
+    },
+    "yago:The_Far_Side_of_the_Dollar": {
+        "freq.ngram.raw": {
+            "Dolma": 351,
+            "C4": 230,
+            "The Pile": 38,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Pictures_of_Perfection": {
+        "freq.ngram.raw": {
+            "Dolma": 1876,
+            "C4": 906,
+            "The Pile": 182,
+            "OpenWebText": 6
+        }
+    },
+    "yago:Nanjing_Requiem": {
+        "freq.ngram.raw": {
+            "C4": 946,
+            "Dolma": 396,
+            "The Pile": 36,
+            "OpenWebText": 3
+        }
+    },
+    "yago:The_Little_Lady_of_the_Big_House": {
+        "freq.ngram.raw": {
+            "C4": 448,
+            "Dolma": 432,
+            "The Pile": 37,
+            "OpenWebText": 2
+        }
+    },
+    "yago:My_Own_Country": {
+        "freq.ngram.raw": {
+            "Dolma": 261756,
+            "C4": 62124,
+            "The Pile": 25287,
+            "OpenWebText": 1285
+        }
+    },
+    "yago:Louise_Michel__u0028_biography_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 11567,
+            "C4": 9731,
+            "The Pile": 1550,
+            "OpenWebText": 109
+        }
+    },
+    "yago:My_Brother_u0027_s_Road": {
+        "freq.ngram.raw": {
+            "Dolma": 223,
+            "C4": 75,
+            "The Pile": 14,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Too_Much_and_Never_Enough": {
+        "freq.ngram.raw": {
+            "Dolma": 15399,
+            "C4": 623,
+            "The Pile": 114,
+            "OpenWebText": 6
+        }
+    },
+    "yago:Of_Plymouth_Plantation": {
+        "freq.ngram.raw": {
+            "Dolma": 12256,
+            "C4": 5247,
+            "The Pile": 755,
+            "OpenWebText": 56
+        }
+    },
+    "yago:Kagerō_Nikki": {
+        "freq.ngram.raw": {
+            "C4": 314,
+            "Dolma": 200,
+            "The Pile": 63,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Diary_of_George_Fletcher_Moore": {
+        "freq.ngram.raw": {
+            "Dolma": 28,
+            "The Pile": 11,
+            "C4": 4,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Goebbels_Diaries": {
+        "freq.ngram.raw": {
+            "Dolma": 2615,
+            "C4": 1456,
+            "The Pile": 586,
+            "OpenWebText": 29
+        }
+    },
+    "yago:Pears_u0027__Cyclopaedia": {
+        "freq.ngram.raw": {
+            "C4": 724,
+            "Dolma": 617,
+            "The Pile": 56,
+            "OpenWebText": 2
+        }
+    },
+    "yago:Lexikon_des_Mittelalters": {
+        "freq.ngram.raw": {
+            "Dolma": 1149,
+            "C4": 568,
+            "The Pile": 304,
+            "OpenWebText": 5
+        }
+    },
+    "yago:Gran_Enciclopedia_de_Andalucía": {
+        "freq.ngram.raw": {
+            "The Pile": 3,
+            "Dolma": 1,
+            "C4": 1,
+            "OpenWebText": 0
+        }
+    },
+    "yago:The_Oxford_Companion_to_Chess": {
+        "freq.ngram.raw": {
+            "Dolma": 2420,
+            "C4": 485,
+            "The Pile": 135,
+            "OpenWebText": 5
+        }
+    },
+    "yago:Encyclopedia_Lituanica": {
+        "freq.ngram.raw": {
+            "Dolma": 504,
+            "The Pile": 88,
+            "C4": 73,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Safe_in_Jail": {
+        "freq.ngram.raw": {
+            "Dolma": 1429,
+            "The Pile": 318,
+            "C4": 302,
+            "OpenWebText": 12
+        }
+    },
+    "yago:The_Sick_Kitten": {
+        "freq.ngram.raw": {
+            "Dolma": 751,
+            "C4": 173,
+            "The Pile": 52,
+            "OpenWebText": 4
+        }
+    },
+    "yago:Alice_u0027_s_Wonderland": {
+        "freq.ngram.raw": {
+            "Dolma": 7234,
+            "C4": 5468,
+            "The Pile": 619,
+            "OpenWebText": 25
+        }
+    },
+    "yago:An_Expensive_Visit": {
+        "freq.ngram.raw": {
+            "Dolma": 4718,
+            "C4": 748,
+            "The Pile": 155,
+            "OpenWebText": 4
+        }
+    },
+    "yago:Street_of_Crocodiles": {
+        "freq.ngram.raw": {
+            "C4": 6542,
+            "Dolma": 5831,
+            "The Pile": 465,
+            "OpenWebText": 40
+        }
+    },
+    "yago:Stromboli__u0028_2022_film_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 140806,
+            "C4": 133947,
+            "The Pile": 6023,
+            "OpenWebText": 218
+        }
+    },
+    "yago:101_Flight": {
+        "freq.ngram.raw": {
+            "C4": 936,
+            "Dolma": 917,
+            "The Pile": 124,
+            "OpenWebText": 5
+        }
+    },
+    "yago:The_Pod_Generation": {
+        "freq.ngram.raw": {
+            "Dolma": 659,
+            "C4": 8,
+            "The Pile": 7,
+            "OpenWebText": 1
+        }
+    },
+    "yago:De_Brief_voor_Sinterklaas": {
+        "freq.ngram.raw": {
+            "The Pile": 23,
+            "Dolma": 11,
+            "C4": 1,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Het_Feest_van_Tante_Rita": {
+        "freq.ngram.raw": {
+            "Dolma": 7,
+            "The Pile": 0,
+            "OpenWebText": 0,
+            "C4": 0
+        }
+    },
+    "yago:My_Head_u0027_s_in_Mississippi": {
+        "freq.ngram.raw": {
+            "Dolma": 519,
+            "C4": 385,
+            "The Pile": 71,
+            "OpenWebText": 1
+        }
+    },
+    "yago:Butterfly__u0028_Koda_Kumi_song_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 10409490,
+            "C4": 8488044,
+            "The Pile": 421134,
+            "OpenWebText": 16846
+        }
+    },
+    "yago:Love__u0028_John_Lennon_song_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 531555382,
+            "C4": 167507106,
+            "The Pile": 13105841,
+            "OpenWebText": 919903
+        }
+    },
+    "yago:Just_for_One_Day__u0028_Heroes_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 58718,
+            "C4": 19249,
+            "The Pile": 3485,
+            "OpenWebText": 156
+        }
+    },
+    "yago:Caravan__u0028_Rush_song_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 4629012,
+            "C4": 4567802,
+            "The Pile": 189521,
+            "OpenWebText": 8683
+        }
+    },
+    "yago:Tomorrow_u0027_s_Pioneers": {
+        "freq.ngram.raw": {
+            "Dolma": 741,
+            "C4": 195,
+            "The Pile": 81,
+            "OpenWebText": 4
+        }
+    },
+    "yago:Deewar__u0028_TV_series_u0029_": {
+        "freq.ngram.raw": {
+            "C4": 24285,
+            "Dolma": 23359,
+            "The Pile": 899,
+            "OpenWebText": 52
+        }
+    },
+    "yago:Hardy_u002F_Webber_family": {
+        "freq.ngram.raw": {
+            "The Pile": 14,
+            "Dolma": 14,
+            "C4": 3,
+            "OpenWebText": 0
+        }
+    },
+    "yago:La_Mujer_del_Presidente": {
+        "freq.ngram.raw": {
+            "Dolma": 155,
+            "The Pile": 78,
+            "C4": 45,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Good_Day_New_York": {
+        "freq.ngram.raw": {
+            "Dolma": 22159,
+            "C4": 15372,
+            "The Pile": 1316,
+            "OpenWebText": 67
+        }
+    },
+    "yago:Adoration_of_the_Shepherds__u0028_Lorenzo_di_Credi_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 15219,
+            "C4": 12781,
+            "The Pile": 1687,
+            "OpenWebText": 33
+        }
+    },
+    "yago:Cardinal_de_Granvelle_u0027_s_Dwarf": {
+        "freq.ngram.raw": {
+            "C4": 18,
+            "The Pile": 3,
+            "Dolma": 3,
+            "OpenWebText": 0
+        }
+    },
+    "yago:The_Fall_of_the_Rebel_Angels": {
+        "freq.ngram.raw": {
+            "Dolma": 2142,
+            "C4": 911,
+            "The Pile": 206,
+            "OpenWebText": 4
+        }
+    },
+    "yago:Self-Portrait_in_the_Costume_of_the_Abbot_of_the_Accademia_della_Val_di_Blenio": {
+        "freq.ngram.raw": {
+            "Dolma": 3,
+            "C4": 2,
+            "The Pile": 0,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Cleopatra__u0028_Artemisia_Gentileschi_u002C__Ferrara_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 1832152,
+            "C4": 1076661,
+            "The Pile": 66701,
+            "OpenWebText": 2640
+        }
+    },
+    "yago:Musician": {
+        "freq.ngram.raw": {
+            "Dolma": 21818277,
+            "C4": 8077559,
+            "The Pile": 1047320,
+            "OpenWebText": 53403
+        }
+    },
+    "yago:Painter": {
+        "freq.ngram.raw": {
+            "Dolma": 67712539,
+            "C4": 34092556,
+            "The Pile": 2449636,
+            "OpenWebText": 154714
+        }
+    },
+    "yago:Simon_Lake": {
+        "freq.ngram.raw": {
+            "Dolma": 4592,
+            "C4": 3294,
+            "The Pile": 415,
+            "OpenWebText": 29
+        }
+    },
+    "yago:Chris_Reeve": {
+        "freq.ngram.raw": {
+            "C4": 29079,
+            "Dolma": 19621,
+            "The Pile": 739,
+            "OpenWebText": 65
+        }
+    },
+    "yago:Charles_Brasher": {
+        "freq.ngram.raw": {
+            "C4": 406,
+            "Dolma": 77,
+            "The Pile": 14,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Cyril_Bencraft_Joly": {
+        "freq.ngram.raw": {
+            "The Pile": 12,
+            "Dolma": 9,
+            "C4": 1,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Charles_Litton_Sr_u002E_": {
+        "freq.ngram.raw": {
+            "Dolma": 132,
+            "The Pile": 28,
+            "C4": 19,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Wulff-Dieter_Heintz": {
+        "freq.ngram.raw": {
+            "Dolma": 69,
+            "The Pile": 30,
+            "C4": 21,
+            "OpenWebText": 1
+        }
+    },
+    "yago:Jill_Briscoe": {
+        "freq.ngram.raw": {
+            "Dolma": 3394,
+            "C4": 3342,
+            "The Pile": 144,
+            "OpenWebText": 2
+        }
+    },
+    "yago:Selahattin_Demirtaş": {
+        "freq.ngram.raw": {
+            "Dolma": 14509,
+            "C4": 2508,
+            "The Pile": 1311,
+            "OpenWebText": 226
+        }
+    },
+    "yago:Elaine_Crowley__u0028_author_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 1807,
+            "C4": 714,
+            "The Pile": 100,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Isa_Chandra_Moskowitz": {
+        "freq.ngram.raw": {
+            "Dolma": 10115,
+            "C4": 9598,
+            "The Pile": 683,
+            "OpenWebText": 75
+        }
+    },
+    "yago:Angela_Carter": {
+        "freq.ngram.raw": {
+            "C4": 69587,
+            "Dolma": 59106,
+            "The Pile": 3694,
+            "OpenWebText": 291
+        }
+    },
+    "yago:Barbara_Olson": {
+        "freq.ngram.raw": {
+            "C4": 7224,
+            "Dolma": 7029,
+            "The Pile": 858,
+            "OpenWebText": 99
+        }
+    },
+    "yago:Hugh_Hefner": {
+        "freq.ngram.raw": {
+            "Dolma": 190736,
+            "C4": 184325,
+            "The Pile": 14294,
+            "OpenWebText": 1257
+        }
+    },
+    "yago:Connie_Hedegaard": {
+        "freq.ngram.raw": {
+            "Dolma": 13852,
+            "C4": 3907,
+            "The Pile": 1938,
+            "OpenWebText": 281
+        }
+    },
+    "yago:Shin_Dong-hyuk": {
+        "freq.ngram.raw": {
+            "Dolma": 3997,
+            "C4": 1683,
+            "The Pile": 545,
+            "OpenWebText": 132
+        }
+    },
+    "yago:Badminton_player": {
+        "freq.ngram.raw": {
+            "Dolma": 51698,
+            "C4": 20668,
+            "The Pile": 10582,
+            "OpenWebText": 103
+        }
+    },
+    "yago:Cricketer": {
+        "freq.ngram.raw": {
+            "Dolma": 940373,
+            "C4": 291384,
+            "The Pile": 133384,
+            "OpenWebText": 3861
+        }
+    },
+    "yago:Zhanna_Gureyeva": {
+        "freq.ngram.raw": {
+            "C4": 7,
+            "The Pile": 5,
+            "Dolma": 2,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Fjodor_Koltšin": {
+        "freq.ngram.raw": {
+            "The Pile": 3,
+            "Dolma": 3,
+            "C4": 2,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Georgina_Kenaghan": {
+        "freq.ngram.raw": {
+            "Dolma": 31,
+            "The Pile": 12,
+            "C4": 5,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Ed_Pastilong": {
+        "freq.ngram.raw": {
+            "Dolma": 400,
+            "C4": 82,
+            "The Pile": 69,
+            "OpenWebText": 2
+        }
+    },
+    "yago:Lee_Chatfield": {
+        "freq.ngram.raw": {
+            "Dolma": 13533,
+            "C4": 2593,
+            "The Pile": 598,
+            "OpenWebText": 29
+        }
+    },
+    "yago:Fredericia": {
+        "freq.ngram.raw": {
+            "C4": 67655,
+            "Dolma": 58533,
+            "The Pile": 2685,
+            "OpenWebText": 44
+        }
+    },
+    "yago:Langepas": {
+        "freq.ngram.raw": {
+            "C4": 9191,
+            "Dolma": 871,
+            "The Pile": 39,
+            "OpenWebText": 2
+        }
+    },
+    "yago:Antibes": {
+        "freq.ngram.raw": {
+            "C4": 242254,
+            "Dolma": 196955,
+            "The Pile": 8853,
+            "OpenWebText": 212
+        }
+    },
+    "yago:Bekabad": {
+        "freq.ngram.raw": {
+            "C4": 959,
+            "Dolma": 713,
+            "The Pile": 32,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Bairnsdale": {
+        "freq.ngram.raw": {
+            "C4": 93229,
+            "Dolma": 73690,
+            "The Pile": 2182,
+            "OpenWebText": 69
+        }
+    },
+    "yago:Carbost_u002C__Loch_Harport": {
+        "freq.ngram.raw": {
+            "Dolma": 5818,
+            "C4": 5318,
+            "The Pile": 233,
+            "OpenWebText": 5
+        }
+    },
+    "yago:Ballingdon": {
+        "freq.ngram.raw": {
+            "C4": 3173,
+            "Dolma": 2600,
+            "The Pile": 141,
+            "OpenWebText": 1
+        }
+    },
+    "yago:Kelvedon": {
+        "freq.ngram.raw": {
+            "C4": 33948,
+            "Dolma": 30146,
+            "The Pile": 1116,
+            "OpenWebText": 32
+        }
+    },
+    "yago:Bönigen": {
+        "freq.ngram.raw": {
+            "Dolma": 1353,
+            "C4": 1075,
+            "The Pile": 96,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Mitlödi": {
+        "freq.ngram.raw": {
+            "Dolma": 245,
+            "C4": 123,
+            "The Pile": 54,
+            "OpenWebText": 0
+        }
+    },
+    "yago:12305_Fifth_Helena_Drive": {
+        "freq.ngram.raw": {
+            "Dolma": 513,
+            "C4": 228,
+            "The Pile": 61,
+            "OpenWebText": 5
+        }
+    },
+    "yago:Vaillant_Arena": {
+        "freq.ngram.raw": {
+            "Dolma": 1085,
+            "C4": 298,
+            "The Pile": 97,
+            "OpenWebText": 10
+        }
+    },
+    "yago:Bretton_Hall__u0028_Manhattan_u0029_": {
+        "freq.ngram.raw": {
+            "The Pile": 9,
+            "C4": 2,
+            "Dolma": 1,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Courtland_Flats": {
+        "freq.ngram.raw": {
+            "C4": 5,
+            "The Pile": 4,
+            "Dolma": 4,
+            "OpenWebText": 0
+        }
+    },
+    "yago:International_Library_La_Vigna": {
+        "freq.ngram.raw": {
+            "Dolma": 30,
+            "C4": 12,
+            "The Pile": 7,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Nero-Mer_Airport": {
+        "freq.ngram.raw": {
+            "Dolma": 23,
+            "C4": 19,
+            "The Pile": 3,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Paris_u2013_Le_Bourget_Airport": {
+        "freq.ngram.raw": {
+            "Dolma": 5687,
+            "C4": 2530,
+            "The Pile": 418,
+            "OpenWebText": 23
+        }
+    },
+    "yago:Bakharevka_Airport": {
+        "freq.ngram.raw": {
+            "Dolma": 20,
+            "C4": 9,
+            "The Pile": 6,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Yaoundé_Airport": {
+        "freq.ngram.raw": {
+            "Dolma": 298,
+            "C4": 83,
+            "The Pile": 26,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Oskarshamn_Airport": {
+        "freq.ngram.raw": {
+            "Dolma": 237,
+            "C4": 216,
+            "The Pile": 13,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Sutton_Park_u002C__West_Midlands": {
+        "freq.ngram.raw": {
+            "Dolma": 31189,
+            "C4": 29858,
+            "The Pile": 1081,
+            "OpenWebText": 45
+        }
+    },
+    "yago:Beacon_Park": {
+        "freq.ngram.raw": {
+            "C4": 26722,
+            "Dolma": 19365,
+            "The Pile": 599,
+            "OpenWebText": 39
+        }
+    },
+    "yago:Queen_u0027_s_Park_u002C__Maryborough": {
+        "freq.ngram.raw": {
+            "Dolma": 36,
+            "The Pile": 14,
+            "C4": 7,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Anniversary_Park": {
+        "freq.ngram.raw": {
+            "Dolma": 3248,
+            "C4": 1374,
+            "The Pile": 134,
+            "OpenWebText": 5
+        }
+    },
+    "yago:Kensington_Gardens": {
+        "freq.ngram.raw": {
+            "Dolma": 119864,
+            "C4": 78357,
+            "The Pile": 7106,
+            "OpenWebText": 231
+        }
+    },
+    "yago:MD_Anderson_Cancer_Center": {
+        "freq.ngram.raw": {
+            "Dolma": 98353,
+            "C4": 23380,
+            "The Pile": 8126,
+            "OpenWebText": 235
+        }
+    },
+    "yago:Limbe_Provincial_Hospital": {
+        "freq.ngram.raw": {
+            "Dolma": 37,
+            "The Pile": 11,
+            "C4": 2,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Stanford_University_Medical_Center": {
+        "freq.ngram.raw": {
+            "Dolma": 35726,
+            "C4": 10854,
+            "The Pile": 2929,
+            "OpenWebText": 114
+        }
+    },
+    "yago:Jorvi_Hospital": {
+        "freq.ngram.raw": {
+            "Dolma": 765,
+            "C4": 304,
+            "The Pile": 142,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Lady_Willingdon_Hospital": {
+        "freq.ngram.raw": {
+            "C4": 1142,
+            "Dolma": 861,
+            "The Pile": 50,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Kiama_Showground": {
+        "freq.ngram.raw": {
+            "Dolma": 320,
+            "C4": 131,
+            "The Pile": 25,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Huainan_Sports_Stadium": {
+        "freq.ngram.raw": {
+            "C4": 5,
+            "Dolma": 4,
+            "The Pile": 3,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Locke_Field": {
+        "freq.ngram.raw": {
+            "Dolma": 119,
+            "C4": 32,
+            "The Pile": 12,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Empower_Field_at_Mile_High": {
+        "freq.ngram.raw": {
+            "Dolma": 18332,
+            "The Pile": 219,
+            "OpenWebText": 0,
+            "C4": 0
+        }
+    },
+    "yago:Acrisure_Stadium": {
+        "freq.ngram.raw": {
+            "Dolma": 6920,
+            "The Pile": 0,
+            "OpenWebText": 0,
+            "C4": 0
+        }
+    },
+    "yago:Frauenchiemsee": {
+        "freq.ngram.raw": {
+            "Dolma": 1581,
+            "C4": 1100,
+            "The Pile": 99,
+            "OpenWebText": 3
+        }
+    },
+    "yago:Usedom": {
+        "freq.ngram.raw": {
+            "C4": 32456,
+            "Dolma": 22581,
+            "The Pile": 1642,
+            "OpenWebText": 47
+        }
+    },
+    "yago:Ombo": {
+        "freq.ngram.raw": {
+            "Dolma": 54673,
+            "C4": 38341,
+            "The Pile": 1670,
+            "OpenWebText": 51
+        }
+    },
+    "yago:São_Tomé_Island": {
+        "freq.ngram.raw": {
+            "Dolma": 2720,
+            "The Pile": 1061,
+            "C4": 591,
+            "OpenWebText": 10
+        }
+    },
+    "yago:Tenarunga": {
+        "freq.ngram.raw": {
+            "Dolma": 130,
+            "C4": 72,
+            "The Pile": 41,
+            "OpenWebText": 1
+        }
+    },
+    "yago:Australia__u0028_continent_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 207137,
+            "C4": 29159,
+            "The Pile": 5619,
+            "OpenWebText": 360
+        }
+    },
+    "yago:Africa": {
+        "freq.ngram.raw": {
+            "Dolma": 76246892,
+            "C4": 49414083,
+            "The Pile": 2931844,
+            "OpenWebText": 195590
+        }
+    },
+    "yago:North_America": {
+        "freq.ngram.raw": {
+            "Dolma": 31845428,
+            "C4": 16928888,
+            "The Pile": 1602070,
+            "OpenWebText": 106517
+        }
+    },
+    "yago:Insular_Oceania": {
+        "freq.ngram.raw": {
+            "Dolma": 35,
+            "The Pile": 3,
+            "C4": 3,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Mount_Langya__u0028_Anhui_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 226,
+            "C4": 167,
+            "The Pile": 25,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Šar_Mountains": {
+        "freq.ngram.raw": {
+            "Dolma": 1495,
+            "The Pile": 424,
+            "C4": 321,
+            "OpenWebText": 6
+        }
+    },
+    "yago:Harburg_Hills": {
+        "freq.ngram.raw": {
+            "Dolma": 134,
+            "The Pile": 50,
+            "C4": 15,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Dinaric_Alps": {
+        "freq.ngram.raw": {
+            "The Pile": 1619,
+            "OpenWebText": 69,
+            "Dolma": 22071,
+            "C4": 16585
+        }
+    },
+    "yago:Subbaetic_System": {
+        "freq.ngram.raw": {
+            "Dolma": 153,
+            "C4": 98,
+            "The Pile": 36,
+            "OpenWebText": 0
+        }
+    },
+    "yago:River": {
+        "freq.ngram.raw": {
+            "Dolma": 20245925,
+            "C4": 8408859,
+            "The Pile": 1050783,
+            "OpenWebText": 58841
+        }
+    },
+    "yago:Glacier": {
+        "freq.ngram.raw": {
+            "Dolma": 2543271,
+            "C4": 952154,
+            "The Pile": 139653,
+            "OpenWebText": 10762
+        }
+    },
+    "yago:Lake": {
+        "freq.ngram.raw": {
+            "Dolma": 19206745,
+            "C4": 10835223,
+            "The Pile": 800363,
+            "OpenWebText": 37375
+        }
+    },
+    "yago:Antonello_da_Messina": {
+        "freq.ngram.raw": {
+            "Dolma": 9014,
+            "C4": 8867,
+            "The Pile": 970,
+            "OpenWebText": 15
+        }
+    },
+    "yago:Jared_Leto": {
+        "freq.ngram.raw": {
+            "Dolma": 280647,
+            "C4": 228716,
+            "The Pile": 12985,
+            "OpenWebText": 1745
+        }
+    },
+    "yago:Wang_Wei__u0028_Tang_dynasty_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 96308,
+            "C4": 49110,
+            "The Pile": 4325,
+            "OpenWebText": 143
+        }
+    },
+    "yago:Anna_Ancher": {
+        "freq.ngram.raw": {
+            "C4": 2625,
+            "Dolma": 1940,
+            "The Pile": 242,
+            "OpenWebText": 2
+        }
+    },
+    "yago:Adeline_Oppenheim_Guimard": {
+        "freq.ngram.raw": {
+            "Dolma": 41,
+            "C4": 19,
+            "The Pile": 9,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Ola_Ray": {
+        "freq.ngram.raw": {
+            "C4": 7016,
+            "Dolma": 2902,
+            "The Pile": 172,
+            "OpenWebText": 13
+        }
+    },
+    "yago:Paul_Rust": {
+        "freq.ngram.raw": {
+            "Dolma": 10602,
+            "C4": 4595,
+            "The Pile": 915,
+            "OpenWebText": 135
+        }
+    },
+    "yago:Ricky_Gervais": {
+        "freq.ngram.raw": {
+            "Dolma": 267121,
+            "C4": 169182,
+            "The Pile": 14999,
+            "OpenWebText": 1793
+        }
+    },
+    "yago:Elizabeth_Price__u0028_artist_u0029_": {
+        "freq.ngram.raw": {
+            "C4": 23686,
+            "Dolma": 14269,
+            "The Pile": 1101,
+            "OpenWebText": 104
+        }
+    },
+    "yago:Konrad_Becker": {
+        "freq.ngram.raw": {
+            "C4": 1701,
+            "Dolma": 1214,
+            "The Pile": 97,
+            "OpenWebText": 4
+        }
+    },
+    "yago:Lucius_Gwynn": {
+        "freq.ngram.raw": {
+            "Dolma": 914,
+            "C4": 153,
+            "The Pile": 84,
+            "OpenWebText": 3
+        }
+    },
+    "yago:Hylton_Philipson": {
+        "freq.ngram.raw": {
+            "Dolma": 91,
+            "The Pile": 38,
+            "C4": 33,
+            "OpenWebText": 1
+        }
+    },
+    "yago:Louis_Tancred": {
+        "freq.ngram.raw": {
+            "Dolma": 103,
+            "The Pile": 62,
+            "C4": 37,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Arthur_Cresswell": {
+        "freq.ngram.raw": {
+            "C4": 102,
+            "Dolma": 75,
+            "The Pile": 27,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Alan_Dowding": {
+        "freq.ngram.raw": {
+            "Dolma": 23,
+            "The Pile": 12,
+            "C4": 4,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Ng_Wei": {
+        "freq.ngram.raw": {
+            "Dolma": 2946,
+            "C4": 2222,
+            "The Pile": 188,
+            "OpenWebText": 8
+        }
+    },
+    "yago:Chang_Jeng-shyuang": {
+        "freq.ngram.raw": {
+            "Dolma": 5,
+            "C4": 4,
+            "The Pile": 0,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Brigitte_Steden": {
+        "freq.ngram.raw": {
+            "Dolma": 11,
+            "The Pile": 9,
+            "C4": 1,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Nong_Qunhua": {
+        "freq.ngram.raw": {
+            "The Pile": 23,
+            "Dolma": 21,
+            "C4": 9,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Kanako_Yonekura": {
+        "freq.ngram.raw": {
+            "Dolma": 97,
+            "The Pile": 25,
+            "C4": 14,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Armançon": {
+        "freq.ngram.raw": {
+            "Dolma": 1324,
+            "C4": 475,
+            "The Pile": 197,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Guaire_River": {
+        "freq.ngram.raw": {
+            "Dolma": 1075,
+            "C4": 387,
+            "The Pile": 176,
+            "OpenWebText": 13
+        }
+    },
+    "yago:Kano_River": {
+        "freq.ngram.raw": {
+            "Dolma": 1493,
+            "C4": 254,
+            "The Pile": 116,
+            "OpenWebText": 1
+        }
+    },
+    "yago:Vechte": {
+        "freq.ngram.raw": {
+            "C4": 2044,
+            "Dolma": 2016,
+            "The Pile": 197,
+            "OpenWebText": 6
+        }
+    },
+    "yago:Moesa__u0028_river_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 1150,
+            "C4": 909,
+            "The Pile": 205,
+            "OpenWebText": 2
+        }
+    },
+    "yago:Carwitzer_See": {
+        "freq.ngram.raw": {
+            "Dolma": 36,
+            "C4": 21,
+            "The Pile": 10,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Sabine_Lake": {
+        "freq.ngram.raw": {
+            "Dolma": 7566,
+            "C4": 4474,
+            "The Pile": 423,
+            "OpenWebText": 16
+        }
+    },
+    "yago:Lake_Vrana__u0028_Cres_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 2227,
+            "C4": 1085,
+            "The Pile": 61,
+            "OpenWebText": 1
+        }
+    },
+    "yago:Hücker_Moor": {
+        "freq.ngram.raw": {
+            "Dolma": 29,
+            "C4": 12,
+            "The Pile": 9,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Schlachtensee__u0028_lake_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 3375,
+            "C4": 2363,
+            "The Pile": 329,
+            "OpenWebText": 5
+        }
+    },
+    "yago:Tschingel_Glacier": {
+        "freq.ngram.raw": {
+            "The Pile": 28,
+            "Dolma": 28,
+            "OpenWebText": 0,
+            "C4": 0
+        }
+    },
+    "yago:Fireman_Glacier": {
+        "freq.ngram.raw": {
+            "Dolma": 20,
+            "C4": 10,
+            "The Pile": 6,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Odin_Glacier": {
+        "freq.ngram.raw": {
+            "Dolma": 11,
+            "The Pile": 8,
+            "C4": 4,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Bearman_Glacier": {
+        "freq.ngram.raw": {
+            "The Pile": 3,
+            "Dolma": 3,
+            "OpenWebText": 0,
+            "C4": 0
+        }
+    },
+    "yago:Polar_Times_Glacier": {
+        "freq.ngram.raw": {
+            "Dolma": 32,
+            "The Pile": 16,
+            "C4": 7,
+            "OpenWebText": 0
+        }
+    },
+    "schema:Product": {
+        "freq.ngram.raw": {
+            "Dolma": 367844131,
+            "C4": 214775167,
+            "The Pile": 10527833,
+            "OpenWebText": 407661
+        }
+    },
+    "yago:Software": {
+        "freq.ngram.raw": {
+            "Dolma": 2055316,
+            "C4": 1471266,
+            "The Pile": 63439,
+            "OpenWebText": 1057
+        }
+    },
+    "yago:Food": {
+        "freq.ngram.raw": {
+            "Dolma": 284338784,
+            "C4": 136129171,
+            "The Pile": 9203913,
+            "OpenWebText": 582643
+        }
+    },
+    "yago:Material": {
+        "freq.ngram.raw": {
+            "Dolma": 172725332,
+            "C4": 59462532,
+            "The Pile": 8945637,
+            "OpenWebText": 197566
+        }
+    },
+    "yago:Organic_matter": {
+        "freq.ngram.raw": {
+            "Dolma": 2212198,
+            "C4": 362632,
+            "The Pile": 163895,
+            "OpenWebText": 4167
+        }
+    },
+    "yago:Building_material": {
+        "freq.ngram.raw": {
+            "Dolma": 6591996,
+            "C4": 2470503,
+            "The Pile": 115849,
+            "OpenWebText": 5143
+        }
+    },
+    "yago:Ingredient": {
+        "freq.ngram.raw": {
+            "Dolma": 71729372,
+            "C4": 19440130,
+            "The Pile": 1697034,
+            "OpenWebText": 88372
+        }
+    },
+    "yago:Chemical_substance": {
+        "freq.ngram.raw": {
+            "Dolma": 32219031,
+            "C4": 12027768,
+            "The Pile": 1449582,
+            "OpenWebText": 62384
+        }
+    },
+    "yago:System_software": {
+        "freq.ngram.raw": {
+            "Dolma": 3589,
+            "C4": 3338,
+            "The Pile": 119,
+            "OpenWebText": 4
+        }
+    },
+    "yago:Application_software": {
+        "freq.ngram.raw": {
+            "C4": 10162,
+            "Dolma": 5698,
+            "The Pile": 317,
+            "OpenWebText": 3
+        }
+    },
+    "yago:Snack": {
+        "freq.ngram.raw": {
+            "Dolma": 20437994,
+            "C4": 11479325,
+            "The Pile": 451977,
+            "OpenWebText": 23057
+        }
+    },
+    "yago:Delicacy": {
+        "freq.ngram.raw": {
+            "Dolma": 2788235,
+            "C4": 712043,
+            "The Pile": 81711,
+            "OpenWebText": 2895
+        }
+    },
+    "yago:Drink": {
+        "freq.ngram.raw": {
+            "Dolma": 42250455,
+            "C4": 18819053,
+            "The Pile": 1257264,
+            "OpenWebText": 71595
+        }
+    },
+    "yago:Staple_food": {
+        "freq.ngram.raw": {
+            "Dolma": 179321,
+            "C4": 36419,
+            "The Pile": 11798,
+            "OpenWebText": 667
+        }
+    },
+    "yago:Mixture": {
+        "freq.ngram.raw": {
+            "Dolma": 3959911,
+            "C4": 950928,
+            "The Pile": 701596,
+            "OpenWebText": 4798
+        }
+    },
+    "yago:Drug": {
+        "freq.ngram.raw": {
+            "Dolma": 60555761,
+            "C4": 16548347,
+            "The Pile": 4616605,
+            "OpenWebText": 213062
+        }
+    },
+    "yago:Plastic": {
+        "freq.ngram.raw": {
+            "Dolma": 9148326,
+            "C4": 4673799,
+            "The Pile": 347213,
+            "OpenWebText": 11471
+        }
+    },
+    "yago:Plaster": {
+        "freq.ngram.raw": {
+            "Dolma": 116784,
+            "C4": 34944,
+            "The Pile": 1477,
+            "OpenWebText": 30
+        }
+    },
+    "yago:Lumber": {
+        "freq.ngram.raw": {
+            "Dolma": 5025486,
+            "C4": 2479124,
+            "The Pile": 298889,
+            "OpenWebText": 9321
+        }
+    },
+    "yago:Cement": {
+        "freq.ngram.raw": {
+            "Dolma": 20787300,
+            "C4": 5680252,
+            "The Pile": 602737,
+            "OpenWebText": 30392
+        }
+    },
+    "yago:Glass": {
+        "freq.ngram.raw": {
+            "Dolma": 103808369,
+            "C4": 47052023,
+            "The Pile": 3919418,
+            "OpenWebText": 184746
+        }
+    },
+    "yago:Compost": {
+        "freq.ngram.raw": {
+            "Dolma": 4571946,
+            "C4": 2005226,
+            "The Pile": 128487,
+            "OpenWebText": 5852
+        }
+    },
+    "yago:Biomass": {
+        "freq.ngram.raw": {
+            "Dolma": 5742426,
+            "C4": 1298602,
+            "The Pile": 354898,
+            "OpenWebText": 8802
+        }
+    },
+    "yago:Petroleum_product": {
+        "freq.ngram.raw": {
+            "Dolma": 11264791,
+            "C4": 4114738,
+            "The Pile": 615631,
+            "OpenWebText": 31865
+        }
+    },
+    "yago:Food_Ingredient_Q25403900": {
+        "freq.ngram.raw": {
+            "Dolma": 640836,
+            "C4": 323918,
+            "The Pile": 23848,
+            "OpenWebText": 854
+        }
+    },
+    "yago:Ingredients_of_cosmetics": {
+        "freq.ngram.raw": {
+            "Dolma": 2235,
+            "C4": 454,
+            "The Pile": 179,
+            "OpenWebText": 3
+        }
+    },
+    "yago:Device_driver": {
+        "freq.ngram.raw": {
+            "Dolma": 55693573,
+            "C4": 18075029,
+            "The Pile": 2133859,
+            "OpenWebText": 146896
+        }
+    },
+    "yago:Virtual_machine": {
+        "freq.ngram.raw": {
+            "The Pile": 37,
+            "OpenWebText": 2,
+            "Dolma": 366,
+            "C4": 82
+        }
+    },
+    "yago:Operating_system": {
+        "freq.ngram.raw": {
+            "Dolma": 7516311,
+            "C4": 3694453,
+            "The Pile": 359053,
+            "OpenWebText": 21128
+        }
+    },
+    "yago:Web_browser": {
+        "freq.ngram.raw": {
+            "Dolma": 2390491,
+            "C4": 1234774,
+            "The Pile": 106720,
+            "OpenWebText": 5837
+        }
+    },
+    "yago:Console_application": {
+        "freq.ngram.raw": {
+            "Dolma": 38333,
+            "C4": 12946,
+            "The Pile": 5372,
+            "OpenWebText": 126
+        }
+    },
+    "yago:Video_game": {
+        "freq.ngram.raw": {
+            "Dolma": 21123220,
+            "C4": 10028847,
+            "The Pile": 672154,
+            "OpenWebText": 61065
+        }
+    },
+    "yago:Drinking_water": {
+        "freq.ngram.raw": {
+            "Dolma": 9283987,
+            "C4": 2778533,
+            "The Pile": 478852,
+            "OpenWebText": 28131
+        }
+    },
+    "yago:Non-alcoholic_drink": {
+        "freq.ngram.raw": {
+            "Dolma": 370973,
+            "C4": 198772,
+            "The Pile": 9709,
+            "OpenWebText": 478
+        }
+    },
+    "yago:Alcoholic_beverage": {
+        "freq.ngram.raw": {
+            "Dolma": 2384285,
+            "C4": 981892,
+            "The Pile": 113550,
+            "OpenWebText": 5254
+        }
+    },
+    "yago:Fritter": {
+        "freq.ngram.raw": {
+            "Dolma": 663147,
+            "C4": 424682,
+            "The Pile": 26433,
+            "OpenWebText": 1043
+        }
+    },
+    "yago:Chaat": {
+        "freq.ngram.raw": {
+            "Dolma": 275413,
+            "C4": 215663,
+            "The Pile": 5247,
+            "OpenWebText": 303
+        }
+    },
+    "yago:Popcorn": {
+        "freq.ngram.raw": {
+            "Dolma": 6304985,
+            "C4": 4298827,
+            "The Pile": 234465,
+            "OpenWebText": 13921
+        }
+    },
+    "yago:Chip__u0028_snack_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 29689814,
+            "C4": 9965589,
+            "The Pile": 1187291,
+            "OpenWebText": 60508
+        }
+    },
+    "yago:Vegetarian_food": {
+        "freq.ngram.raw": {
+            "Dolma": 524745,
+            "C4": 283148,
+            "The Pile": 17640,
+            "OpenWebText": 1094
+        }
+    },
+    "yago:Dessert": {
+        "freq.ngram.raw": {
+            "Dolma": 8895237,
+            "C4": 7776647,
+            "The Pile": 205216,
+            "OpenWebText": 9305
+        }
+    },
+    "yago:Non-Vegetarian_Food_Q12973313": {
+        "freq.ngram.raw": {
+            "Dolma": 88476,
+            "C4": 18484,
+            "The Pile": 2671,
+            "OpenWebText": 225
+        }
+    },
+    "yago:Flour": {
+        "freq.ngram.raw": {
+            "Dolma": 1245962,
+            "C4": 520468,
+            "The Pile": 37840,
+            "OpenWebText": 1392
+        }
+    },
+    "yago:Bread": {
+        "freq.ngram.raw": {
+            "Dolma": 3275299,
+            "C4": 2437791,
+            "The Pile": 103487,
+            "OpenWebText": 4114
+        }
+    },
+    "yago:Paracetamol": {
+        "freq.ngram.raw": {
+            "Dolma": 935501,
+            "C4": 206727,
+            "The Pile": 59306,
+            "OpenWebText": 1014
+        }
+    },
+    "yago:Hydroxocobalamin": {
+        "freq.ngram.raw": {
+            "Dolma": 27070,
+            "C4": 10404,
+            "The Pile": 1966,
+            "OpenWebText": 18
+        }
+    },
+    "yago:Tolperisone": {
+        "freq.ngram.raw": {
+            "C4": 6288,
+            "Dolma": 2671,
+            "The Pile": 360,
+            "OpenWebText": 3
+        }
+    },
+    "yago:Azithromycin": {
+        "freq.ngram.raw": {
+            "Dolma": 838433,
+            "C4": 210382,
+            "The Pile": 42005,
+            "OpenWebText": 315
+        }
+    },
+    "yago:Polytetrafluoroethylene": {
+        "freq.ngram.raw": {
+            "Dolma": 1623969,
+            "C4": 809424,
+            "The Pile": 113620,
+            "OpenWebText": 2869
+        }
+    },
+    "yago:Rubber": {
+        "freq.ngram.raw": {
+            "Dolma": 35624008,
+            "C4": 15942294,
+            "The Pile": 1218600,
+            "OpenWebText": 58014
+        }
+    },
+    "yago:Nylon": {
+        "freq.ngram.raw": {
+            "Dolma": 12083155,
+            "C4": 8657551,
+            "The Pile": 329244,
+            "OpenWebText": 8044
+        }
+    },
+    "yago:Polyvinylcarbazole": {
+        "freq.ngram.raw": {
+            "Dolma": 10011156,
+            "C4": 5829879,
+            "The Pile": 166159,
+            "OpenWebText": 4719
+        }
+    },
+    "yago:Natural_gasoline": {
+        "freq.ngram.raw": {
+            "Dolma": 11209165,
+            "C4": 4105545,
+            "The Pile": 516979,
+            "OpenWebText": 43708
+        }
+    },
+    "yago:Synthetic_resin": {
+        "freq.ngram.raw": {
+            "Dolma": 54534,
+            "C4": 14727,
+            "The Pile": 10969,
+            "OpenWebText": 31
+        }
+    },
+    "yago:Gasoline": {
+        "freq.ngram.raw": {
+            "Dolma": 9789604,
+            "C4": 3669937,
+            "The Pile": 513726,
+            "OpenWebText": 33862
+        }
+    },
+    "yago:Kerosene": {
+        "freq.ngram.raw": {
+            "Dolma": 1364746,
+            "C4": 563949,
+            "The Pile": 96884,
+            "OpenWebText": 4950
+        }
+    },
+    "yago:Spice": {
+        "freq.ngram.raw": {
+            "Dolma": 13339112,
+            "C4": 5550522,
+            "The Pile": 322626,
+            "OpenWebText": 16052
+        }
+    },
+    "yago:Tropical_fruit": {
+        "freq.ngram.raw": {
+            "Dolma": 30165936,
+            "C4": 10163470,
+            "The Pile": 1041624,
+            "OpenWebText": 44111
+        }
+    },
+    "yago:Vegetable": {
+        "freq.ngram.raw": {
+            "Dolma": 32977595,
+            "C4": 11719470,
+            "The Pile": 1010546,
+            "OpenWebText": 49833
+        }
+    },
+    "yago:Windows_11": {
+        "freq.ngram.raw": {
+            "Dolma": 119705819,
+            "C4": 46018720,
+            "The Pile": 5355452,
+            "OpenWebText": 219455
+        }
+    },
+    "yago:Linux": {
+        "freq.ngram.raw": {
+            "Dolma": 22538898,
+            "C4": 13197113,
+            "The Pile": 2106462,
+            "OpenWebText": 68579
+        }
+    },
+    "yago:Mobile_operating_system": {
+        "freq.ngram.raw": {
+            "Dolma": 12372,
+            "C4": 3530,
+            "The Pile": 1620,
+            "OpenWebText": 172
+        }
+    },
+    "yago:Real-time_operating_system": {
+        "freq.ngram.raw": {
+            "Dolma": 663,
+            "C4": 94,
+            "The Pile": 74,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Common_Language_Runtime": {
+        "freq.ngram.raw": {
+            "Dolma": 40018,
+            "C4": 5865,
+            "The Pile": 2881,
+            "OpenWebText": 77
+        }
+    },
+    "yago:Java_virtual_machine": {
+        "freq.ngram.raw": {
+            "Dolma": 51472,
+            "C4": 11818,
+            "The Pile": 5589,
+            "OpenWebText": 204
+        }
+    },
+    "yago:QEMU": {
+        "freq.ngram.raw": {
+            "Dolma": 347162,
+            "C4": 227852,
+            "The Pile": 47247,
+            "OpenWebText": 1046
+        }
+    },
+    "yago:ANSI_u002E_SYS": {
+        "freq.ngram.raw": {
+            "Dolma": 2968,
+            "C4": 1014,
+            "The Pile": 427,
+            "OpenWebText": 10
+        }
+    },
+    "yago:HP_Universal_Print_Driver": {
+        "freq.ngram.raw": {
+            "Dolma": 9703,
+            "C4": 4569,
+            "The Pile": 89,
+            "OpenWebText": 1
+        }
+    },
+    "yago:HostAP": {
+        "freq.ngram.raw": {
+            "C4": 22342,
+            "Dolma": 9517,
+            "The Pile": 1362,
+            "OpenWebText": 34
+        }
+    },
+    "yago:Mobile_game": {
+        "freq.ngram.raw": {
+            "Dolma": 1584890,
+            "C4": 854362,
+            "The Pile": 38890,
+            "OpenWebText": 4113
+        }
+    },
+    "yago:PC_game": {
+        "freq.ngram.raw": {
+            "C4": 1734980,
+            "Dolma": 1389346,
+            "The Pile": 39895,
+            "OpenWebText": 4521
+        }
+    },
+    "yago:Google_chrome": {
+        "freq.ngram.raw": {
+            "C4": 3748618,
+            "Dolma": 3186908,
+            "The Pile": 198098,
+            "OpenWebText": 6613
+        }
+    },
+    "yago:Internet_Explorer": {
+        "freq.ngram.raw": {
+            "C4": 5451326,
+            "Dolma": 4195896,
+            "The Pile": 264006,
+            "OpenWebText": 10140
+        }
+    },
+    "yago:Firefox": {
+        "freq.ngram.raw": {
+            "C4": 1745819,
+            "Dolma": 1101300,
+            "The Pile": 87384,
+            "OpenWebText": 1977
+        }
+    },
+    "yago:Standard_Unix_Utility_Or_Command_Q18343316": {
+        "freq.ngram.raw": {
+            "Dolma": 381,
+            "C4": 107,
+            "The Pile": 29,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Command-Line_Tool_Q115214659": {
+        "freq.ngram.raw": {
+            "Dolma": 184,
+            "The Pile": 25,
+            "C4": 23,
+            "OpenWebText": 0
+        }
+    },
+    "yago:Ice_cube": {
+        "freq.ngram.raw": {
+            "Dolma": 1539987,
+            "C4": 450859,
+            "The Pile": 54768,
+            "OpenWebText": 1960
+        }
+    },
+    "yago:Bottled_water": {
+        "freq.ngram.raw": {
+            "Dolma": 2551693,
+            "C4": 1072805,
+            "The Pile": 99879,
+            "OpenWebText": 7119
+        }
+    },
+    "yago:Liquor": {
+        "freq.ngram.raw": {
+            "Dolma": 8363587,
+            "C4": 4240093,
+            "The Pile": 553015,
+            "OpenWebText": 33172
+        }
+    },
+    "yago:Fermented_Beverage_Q26343751": {
+        "freq.ngram.raw": {
+            "Dolma": 39834,
+            "C4": 17135,
+            "The Pile": 3481,
+            "OpenWebText": 172
+        }
+    },
+    "yago:Cocktail": {
+        "freq.ngram.raw": {
+            "Dolma": 10444677,
+            "C4": 5186752,
+            "The Pile": 282710,
+            "OpenWebText": 17600
+        }
+    },
+    "yago:Milk": {
+        "freq.ngram.raw": {
+            "Dolma": 46357480,
+            "C4": 18277965,
+            "The Pile": 1903582,
+            "OpenWebText": 84428
+        }
+    },
+    "yago:Soft_drink": {
+        "freq.ngram.raw": {
+            "Dolma": 2395839,
+            "C4": 1406945,
+            "The Pile": 103221,
+            "OpenWebText": 5279
+        }
+    },
+    "yago:Juice": {
+        "freq.ngram.raw": {
+            "Dolma": 32457542,
+            "C4": 11948512,
+            "The Pile": 958708,
+            "OpenWebText": 49903
+        }
+    },
+    "yago:Tea": {
+        "freq.ngram.raw": {
+            "Dolma": 57068125,
+            "C4": 29824030,
+            "The Pile": 1789949,
+            "OpenWebText": 119517
+        }
+    },
+    "yago:Small_Pastry_Q1746803": {
+        "freq.ngram.raw": {
+            "Dolma": 10701,
+            "C4": 2470,
+            "The Pile": 659,
+            "OpenWebText": 13
+        }
+    },
+    "yago:Halva": {
+        "freq.ngram.raw": {
+            "C4": 86529,
+            "Dolma": 76910,
+            "The Pile": 6366,
+            "OpenWebText": 162
+        }
+    },
+    "yago:Tart": {
+        "freq.ngram.raw": {
+            "Dolma": 1341899,
+            "C4": 1325533,
+            "The Pile": 59159,
+            "OpenWebText": 2433
+        }
+    },
+    "yago:Biscuit_cake": {
+        "freq.ngram.raw": {
+            "C4": 35612,
+            "Dolma": 25539,
+            "The Pile": 693,
+            "OpenWebText": 19
+        }
+    },
+    "yago:Kebab": {
+        "freq.ngram.raw": {
+            "Dolma": 696772,
+            "C4": 334871,
+            "The Pile": 24642,
+            "OpenWebText": 1327
+        }
+    },
+    "yago:Kerala_beef_fry": {
+        "freq.ngram.raw": {
+            "The Pile": 6,
+            "OpenWebText": 0,
+            "Dolma": 163,
+            "C4": 139
+        }
+    },
+    "yago:Sushi": {
+        "freq.ngram.raw": {
+            "Dolma": 5162668,
+            "C4": 3835821,
+            "The Pile": 171104,
+            "OpenWebText": 11194
+        }
+    },
+    "yago:Foie_gras": {
+        "freq.ngram.raw": {
+            "Dolma": 617634,
+            "C4": 325947,
+            "The Pile": 29846,
+            "OpenWebText": 1655
+        }
+    },
+    "yago:Kofta": {
+        "freq.ngram.raw": {
+            "C4": 127855,
+            "Dolma": 110459,
+            "The Pile": 3335,
+            "OpenWebText": 139
+        }
+    },
+    "yago:Dal_bhat": {
+        "freq.ngram.raw": {
+            "Dolma": 20487,
+            "C4": 9734,
+            "The Pile": 623,
+            "OpenWebText": 30
+        }
+    },
+    "yago:Ramen": {
+        "freq.ngram.raw": {
+            "Dolma": 1891667,
+            "C4": 1330167,
+            "The Pile": 71466,
+            "OpenWebText": 5313
+        }
+    },
+    "yago:Dahi_baigana": {
+        "freq.ngram.raw": {
+            "C4": 186,
+            "Dolma": 170,
+            "The Pile": 19,
+            "OpenWebText": 1
+        }
+    },
+    "yago:Leaf_vegetable": {
+        "freq.ngram.raw": {
+            "Dolma": 662957,
+            "C4": 186453,
+            "The Pile": 25289,
+            "OpenWebText": 728
+        }
+    },
+    "yago:Onion_Q3406628": {
+        "freq.ngram.raw": {
+            "Dolma": 14995253,
+            "C4": 6366428,
+            "The Pile": 428059,
+            "OpenWebText": 25905
+        }
+    },
+    "yago:Carrot": {
+        "freq.ngram.raw": {
+            "Dolma": 6298959,
+            "C4": 3633702,
+            "The Pile": 245469,
+            "OpenWebText": 13730
+        }
+    },
+    "yago:Strawberry": {
+        "freq.ngram.raw": {
+            "Dolma": 8855050,
+            "C4": 6367863,
+            "The Pile": 288406,
+            "OpenWebText": 13076
+        }
+    },
+    "yago:Banana": {
+        "freq.ngram.raw": {
+            "Dolma": 11705255,
+            "C4": 8561331,
+            "The Pile": 463125,
+            "OpenWebText": 24808
+        }
+    },
+    "yago:Chili_pepper": {
+        "freq.ngram.raw": {
+            "Dolma": 121160,
+            "C4": 80470,
+            "The Pile": 3394,
+            "OpenWebText": 163
+        }
+    },
+    "yago:Chaat_masala": {
+        "freq.ngram.raw": {
+            "Dolma": 74222,
+            "C4": 40491,
+            "The Pile": 1285,
+            "OpenWebText": 84
+        }
+    },
+    "yago:Cinnamon": {
+        "freq.ngram.raw": {
+            "Dolma": 11190196,
+            "C4": 5082398,
+            "The Pile": 294964,
+            "OpenWebText": 15081
+        }
+    },
+    "yago:Saffron": {
+        "freq.ngram.raw": {
+            "Dolma": 2506610,
+            "C4": 1558978,
+            "The Pile": 105393,
+            "OpenWebText": 5294
+        }
+    },
+    "yago:iOS_16": {
+        "freq.ngram.raw": {
+            "Dolma": 29449979,
+            "C4": 17736734,
+            "The Pile": 1404438,
+            "OpenWebText": 72092
+        }
+    },
+    "yago:Android_13": {
+        "freq.ngram.raw": {
+            "Dolma": 1556480,
+            "C4": 432077,
+            "The Pile": 39204,
+            "OpenWebText": 2583
+        }
+    },
+    "yago:ThreadX": {
+        "freq.ngram.raw": {
+            "Dolma": 12335,
+            "C4": 10418,
+            "The Pile": 1684,
+            "OpenWebText": 25
+        }
+    },
+    "yago:FreeRTOS": {
+        "freq.ngram.raw": {
+            "Dolma": 97745,
+            "C4": 34304,
+            "The Pile": 8761,
+            "OpenWebText": 126
+        }
+    },
+    "yago:Grand_Theft_Auto_V": {
+        "freq.ngram.raw": {
+            "Dolma": 536184,
+            "C4": 294317,
+            "The Pile": 13173,
+            "OpenWebText": 1691
+        }
+    },
+    "yago:Overwatch__u0028_video_game_u0029_": {
+        "freq.ngram.raw": {
+            "C4": 1639214,
+            "Dolma": 1539667,
+            "The Pile": 59323,
+            "OpenWebText": 7289
+        }
+    },
+    "yago:Call_of_Duty": {
+        "freq.ngram.raw": {
+            "Dolma": 2982375,
+            "C4": 1943237,
+            "The Pile": 130175,
+            "OpenWebText": 15441
+        }
+    },
+    "yago:Counter-Strike": {
+        "freq.ngram.raw": {
+            "Dolma": 1007918,
+            "C4": 805709,
+            "The Pile": 42150,
+            "OpenWebText": 6004
+        }
+    },
+    "yago:PUBG_Mobile": {
+        "freq.ngram.raw": {
+            "Dolma": 1227385,
+            "C4": 1208955,
+            "The Pile": 18477,
+            "OpenWebText": 706
+        }
+    },
+    "yago:Candy_Crush_Saga": {
+        "freq.ngram.raw": {
+            "Dolma": 195091,
+            "C4": 166877,
+            "The Pile": 5575,
+            "OpenWebText": 695
+        }
+    },
+    "yago:Pokémon_Go": {
+        "freq.ngram.raw": {
+            "Dolma": 461913,
+            "C4": 391128,
+            "The Pile": 22488,
+            "OpenWebText": 3121
+        }
+    },
+    "yago:Ps__u0028_Unix_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 18103943,
+            "C4": 8622739,
+            "The Pile": 1377948,
+            "OpenWebText": 29997
+        }
+    },
+    "yago:Grep": {
+        "freq.ngram.raw": {
+            "Dolma": 1314160,
+            "C4": 1013462,
+            "The Pile": 344198,
+            "OpenWebText": 4583
+        }
+    },
+    "yago:CURL": {
+        "freq.ngram.raw": {
+            "Dolma": 7091839,
+            "C4": 3132639,
+            "The Pile": 543205,
+            "OpenWebText": 13873
+        }
+    },
+    "yago:GNU_nano": {
+        "freq.ngram.raw": {
+            "Dolma": 4048,
+            "C4": 2032,
+            "The Pile": 669,
+            "OpenWebText": 19
+        }
+    },
+    "yago:Vim__u0028_text_editor_u0029_": {
+        "freq.ngram.raw": {
+            "Dolma": 3665,
+            "The Pile": 1760,
+            "C4": 1381,
+            "OpenWebText": 16
+        }
+    },
+    "yago:Midnight_Commander": {
+        "freq.ngram.raw": {
+            "Dolma": 1290,
+            "C4": 798,
+            "The Pile": 371,
+            "OpenWebText": 3
+        }
+    },
+    "yago:Old_Cuban": {
+        "freq.ngram.raw": {
+            "Dolma": 48227,
+            "C4": 10006,
+            "The Pile": 3639,
+            "OpenWebText": 450
+        }
+    },
+    "yago:Bloody_Margaret": {
+        "freq.ngram.raw": {
+            "Dolma": 202,
+            "C4": 60,
+            "The Pile": 31,
+            "OpenWebText": 2
+        }
+    },
+    "yago:Highball": {
+        "freq.ngram.raw": {
+            "Dolma": 282153,
+            "C4": 183894,
+            "The Pile": 12297,
+            "OpenWebText": 511
+        }
+    },
+    "yago:Gin": {
+        "freq.ngram.raw": {
+            "Dolma": 4773788,
+            "C4": 3239624,
+            "The Pile": 232255,
+            "OpenWebText": 10624
+        }
+    },
+    "yago:Rum": {
+        "freq.ngram.raw": {
+            "Dolma": 4924181,
+            "C4": 3059897,
+            "The Pile": 224848,
+            "OpenWebText": 10315
+        }
+    },
+    "yago:Whisky": {
+        "freq.ngram.raw": {
+            "Dolma": 3220485,
+            "C4": 2175129,
+            "The Pile": 147499,
+            "OpenWebText": 7557
+        }
+    },
+    "yago:Beer": {
+        "freq.ngram.raw": {
+            "Dolma": 37843816,
+            "C4": 19872668,
+            "The Pile": 1652941,
+            "OpenWebText": 128424
+        }
+    },
+    "yago:Sake": {
+        "freq.ngram.raw": {
+            "Dolma": 26282904,
+            "C4": 6143191,
+            "The Pile": 1960502,
+            "OpenWebText": 102592
+        }
+    },
+    "yago:Hot_chocolate": {
+        "freq.ngram.raw": {
+            "Dolma": 3123519,
+            "C4": 1680040,
+            "The Pile": 92773,
+            "OpenWebText": 3548
+        }
+    },
+    "yago:Coffee": {
+        "freq.ngram.raw": {
+            "Dolma": 84052145,
+            "C4": 45213795,
+            "The Pile": 2377841,
+            "OpenWebText": 138655
+        }
+    },
+    "yago:Carbonated_water": {
+        "freq.ngram.raw": {
+            "Dolma": 1666,
+            "C4": 374,
+            "The Pile": 12,
+            "OpenWebText": 1
+        }
+    },
+    "yago:Cola": {
+        "freq.ngram.raw": {
+            "Dolma": 5727600,
+            "C4": 3503944,
+            "The Pile": 306393,
+            "OpenWebText": 19225
+        }
+    },
+    "yago:Green_tea": {
+        "freq.ngram.raw": {
+            "Dolma": 5450959,
+            "C4": 2474193,
+            "The Pile": 118821,
+            "OpenWebText": 4538
+        }
+    },
+    "yago:Black_tea": {
+        "freq.ngram.raw": {
+            "Dolma": 1302448,
+            "C4": 639354,
+            "The Pile": 40495,
+            "OpenWebText": 1644
+        }
+    }
+}

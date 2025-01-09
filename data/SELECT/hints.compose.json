@@ -1,0 +1,232 @@
+[
+    {
+        "relation": "Consuming {} at {}",
+        "components": [
+            {
+                "concept": "yago:Alcoholic_beverage",
+                "flow": [
+                    "self",
+                    "descendants"
+                ]
+            },
+            {
+                "concept": "yago:HumanMadeGeographicalEntity",
+                "flow": [
+                    "descendants"
+                ]
+            }
+        ]
+    },
+    {
+        "relation": "Consuming {} at {}",
+        "components": [
+            {
+                "concept": "yago:Alcoholic_beverage",
+                "flow": [
+                    "self",
+                    "descendants"
+                ]
+            },
+            {
+                "concept": "yago:Educational_institution",
+                "flow": [
+                    "descendants"
+                ]
+            }
+        ]
+    },
+    {
+        "relation": "Dumping {} in {}",
+        "components": [
+            {
+                "concept": "yago:Chemical_substance",
+                "flow": [
+                    "self",
+                    "descendants"
+                ]
+            },
+            {
+                "concept": "schema:BodyOfWater",
+                "flow": [
+                    "descendants"
+                ],
+                "exclude": [
+                    "yago:Glacier"
+                ]
+            }
+        ]
+    },
+    {
+        "relation": "{} about {}",
+        "components": [
+            {
+                "concept": "schema:CreativeWork",
+                "flow": [
+                    "self",
+                    "descendants"
+                ],
+                "exclude": "leaves"
+            },
+            {
+                "concept": "schema:Person",
+                "flow": [
+                    "self",
+                    "descendants"
+                ]
+            }
+        ]
+    },
+    {
+        "relation": "{} working in {}",
+        "components": [
+            {
+                "concept": "schema:Person",
+                "flow": [
+                    "self"
+                ]
+            },
+            {
+                "concept": "schema:Corporation",
+                "flow": [
+                    "self",
+                    "descendants"
+                ]
+            }
+        ]
+    },
+    {
+        "relation": "{} of {}",
+        "components": [
+            {
+                "concept": "yago:Food_Ingredient_Q25403900",
+                "flow": [
+                    "self"
+                ]
+            },
+            {
+                "concept": "yago:Food",
+                "flow": [
+                    "descendants"
+                ]
+            }
+        ]
+    },
+    {
+        "relation": "Damage from production of {} to {}",
+        "components": [
+            {
+                "concept": "yago:Chemical_substance",
+                "flow": [
+                    "self",
+                    "descendants"
+                ]
+            },
+            {
+                "concept": "schema:Landform",
+                "flow": [
+                    "descendants"
+                ],
+                "exclude": [
+                    "schema:Continent"
+                ]
+            }
+        ]
+    },
+    {
+        "relation": "{} mass-producing {}",
+        "components": [
+            {
+                "concept": "yago:Factory",
+                "flow": [
+                    "self"
+                ]
+            },
+            {
+                "concept": "yago:Chemical_substance",
+                "flow": [
+                    "self",
+                    "descendants"
+                ],
+                "exclude": [
+                    "yago:Mixture"
+                ]
+            }
+        ]
+    },
+    {
+        "relation": "Aid to {} by {}",
+        "components": [
+            {
+                "concept": "schema:Continent",
+                "flow": [
+                    "self",
+                    "descendants"
+                ]
+            },
+            {
+                "concept": "yago:International_financial_institutions",
+                "flow": [
+                    "self"
+                ]
+            }
+        ]
+    },
+    {
+        "relation": "Effect of {} on {}",
+        "components": [
+            {
+                "concept": "yago:Chemical_substance",
+                "flow": [
+                    "self",
+                    "descendants"
+                ],
+                "exclude": [
+                    "yago:Mixture"
+                ]
+            },
+            {
+                "concept": "schema:Person",
+                "flow": [
+                    "self"
+                ]
+            }
+        ]
+    },
+    {
+        "relation": "{} culture in {}",
+        "components": [
+            {
+                "concept": "yago:Food",
+                "flow": [
+                    "self",
+                    "descendants"
+                ],
+                "exclude": "leaves"
+            },
+            {
+                "concept": "schema:City",
+                "flow": [
+                    "descendants"
+                ]
+            }
+        ]
+    },
+    {
+        "relation": "{} published by {}",
+        "components": [
+            {
+                "concept": "schema:Book",
+                "flow": [
+                    "self"
+                ]
+            },
+            {
+                "concept": "schema:Person",
+                "flow": [
+                    "descendants"
+                ],
+                "exclude": "leaves"
+            }
+        ]
+    }
+]
