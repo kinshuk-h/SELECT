@@ -1,6 +1,6 @@
-- 'Gemma-2-IT-2B'
-- 'Gemma-2-IT-9B'
-- 'LLaMa-3.1-Instruct-8B'
-- 'GPT-3.5-U'
-- 'GPT-4o-U'
-- 'Mistral-Instruct-7B-v3'
+"Gemma-2-IT-2B"         : "google/gemma-2-2b-it"
+"Gemma-2-IT-9B"         : "google/gemma-2-9b-it"
+"LLaMa-3.1-Instruct-8B" : "meta-llama/Meta-Llama-3.1-8B-Instruct"
+"GPT-3.5-U"             : "openai/azure/gpt-3.5-turbo"
+"GPT-4o-U"              : "openai/azure/gpt-4o"
+"Mistral-Instruct-7B-v3": "mistralai/Mistral-7B-Instruct-v0.3"
