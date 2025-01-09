@@ -1,3 +1,3 @@
-[submodule "lib/representation-engineering"]
-	path = lib/representation-engineering
+[submodule "deps/representation-engineering"]
+	path = deps/representation-engineering
 	url = https://github.com/andyzoujm/representation-engineering
