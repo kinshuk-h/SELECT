@@ -8,13 +8,11 @@ import numpy
 import datasets
 import transformers
 import tqdm.auto as tqdm
-from matplotlib import pyplot
-
-from ...utils import common
-from ...visualization.utils import compute_confidence_interval
 
 from ..base import AbstentionTechnique
-from ..utils import APPROACH_CONFIGS, generate_id, level_traverse, sample_queries
+from ..constants import APPROACH_CONFIGS
+from ...inference.utils import sync_vram
+from ...evaluation.dataset import generate_id, level_traverse, sample_queries
 
 # =============================== Specific Utilities
 
@@ -179,7 +177,7 @@ def estimate_cls_params(model, test_dataset, concept_vector, num_layers, system_
         hidden_states_layers[layer] = hidden_states
 
     del outputs
-    common.sync_vram()
+    sync_vram()
 
     hidden_scores = {
         layer: [ vector_similarity(state, concept_vector[layer]['vector']) for state in states ]
@@ -219,7 +217,7 @@ def predict_concept(model, concept_reader, instances, layer_ids, layer_threshold
         hidden_states_layers[layer] = hidden_states
 
     del outputs
-    common.sync_vram()
+    sync_vram()
 
     scores = {
         layer: [
@@ -390,7 +388,7 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
         # pyplot.fill_between(layers, results.mean(axis=0)-res_err, results.mean(axis=0)+res_err, alpha=0.4)
 
         del rep_reading_pipeline
-        common.sync_vram()
+        sync_vram()
 
         refusal_control_bundle = {
             'control_kwargs': control_kwargs,
@@ -433,7 +431,7 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
         # pyplot.fill_between(layers, results.mean(axis=0)-res_err, results.mean(axis=0)+res_err, alpha=0.4)
 
         del rep_reading_pipeline
-        common.sync_vram()
+        sync_vram()
 
         mean_concept_vector        = get_aggregate_concept_vector(concept_vectors)
         _, _, c_test_data_hard, _  = self.make_concept_dataset(concept, hard=True)
@@ -460,7 +458,7 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
         self.sibling_map   = sibling_map
         self.node_data     = node_data
 
-        common.seed_all(seed)
+        transformers.set_seed(seed)
 
         self.refusal_vector = self.get_refusal_vector(model_id, model)
 

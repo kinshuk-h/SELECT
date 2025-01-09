@@ -1,5 +1,4 @@
 import os
-import random
 
 import trl
 import peft
@@ -8,10 +7,10 @@ import itertools
 import transformers
 import tqdm.auto as tqdm
 
-from ...utils import common
-
 from ..base import AbstentionTechnique
-from ..utils import APPROACH_CONFIGS, generate_id, level_traverse, sample_queries
+from ..constants import APPROACH_CONFIGS
+from ...inference.utils import sync_vram, get_inference_params
+from ...evaluation.dataset import generate_id, level_traverse, sample_queries
 
 MODEL_SPECIFIC_PARAMS = {
     'Gemma-2-IT-27B': dict(num_train_epochs=10, learning_rate=5.0e-4,),
@@ -111,7 +110,7 @@ class AbstentionWithSFTTraining(AbstentionTechnique):
         return datasets.Dataset.from_list(entries).shuffle(seed=seed)
 
     def train_adapter(self, tokenizer, model_id, model, concept, adapter_path, seed=42, pbar=None):
-        common.seed_all(seed)
+        transformers.set_seed(seed)
 
         config = peft.LoraConfig(
             task_type='CAUSAL_LM', lora_alpha=32, r=32, lora_dropout=0.0,
@@ -170,7 +169,7 @@ class AbstentionWithSFTTraining(AbstentionTechnique):
             os.makedirs(os.path.dirname(adapter_path), exist_ok=True)
 
             if not _model:
-                _model_kwargs = dict(**common.STD_AUTOREGRESSIVE_MODEL_INIT_ARGS)
+                _model_kwargs = dict(**get_inference_params())
                 # if self.HAS_UNSLOTH:
                 #     _model_kwargs['dtype'] = _model_kwargs['torch_dtype']
                 #     del _model_kwargs['torch_dtype']
@@ -192,7 +191,7 @@ class AbstentionWithSFTTraining(AbstentionTechnique):
         self.adapters = adapters
 
         del _model
-        common.sync_vram()
+        sync_vram()
 
     def prepare_for_inference(self, concept: str | tuple[str, str], request: str, **prepare_kwargs):
         return self.template.format(query=request)

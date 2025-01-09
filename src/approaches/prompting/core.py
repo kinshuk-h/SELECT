@@ -6,7 +6,7 @@ import regex
 from ...utils import formatting
 
 from ..base import AbstentionTechnique
-from ..utils import APPROACH_CONFIGS, STRINGS
+from ..constants import APPROACH_CONFIGS, STRINGS
 
 class AbstentionWithPrompting(AbstentionTechnique):
     """ Common wrapper for simple prompting-based abstention methods. """

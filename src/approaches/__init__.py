@@ -1,5 +1,5 @@
-from .utils import APPROACH_CONFIGS
 from .base import AbstentionTechnique
+from .constants import APPROACH_CONFIGS
 from . import prompting, editing, unlearning, tuning
 
 def get_approach(name):

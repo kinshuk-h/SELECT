@@ -11,7 +11,9 @@ import tqdm.auto as tqdm
 from ...utils import common
 
 from ..base import AbstentionTechnique
-from ..utils import APPROACH_CONFIGS, generate_id, level_traverse, sample_queries
+from ..constants import APPROACH_CONFIGS
+from ...inference.utils import sync_vram
+from ...evaluation.dataset import generate_id, level_traverse, sample_queries
 
 USE_UNSLOTH = False
 
@@ -128,7 +130,7 @@ class AbstentionWithDPOTraining(AbstentionTechnique):
 
     def train_adapter(self, tokenizer, model_id, model, concept, adapter_path, seed=42, pbar=None):
         # offset the seed to avoid training on the _exact_ same instances
-        common.seed_all(seed + (2024 if self.post_sft_checkpoint else 0))
+        transformers.set_seed(seed + (2024 if self.post_sft_checkpoint else 0))
 
         if self.post_sft_checkpoint:
             sft_adapter_path = adapter_path.replace(self.tuning_method, 'AFT').replace(self.tuning_algorithm, 'SFT')

@@ -1,7 +1,7 @@
 import abc
 
-from .utils import STRINGS, PROMPTS
-from ..evaluation.models import ModelInference
+from ..inference import ModelInference
+from .constants import STRINGS, PROMPTS
 
 class AbstentionTechnique(abc.ABC):
     def __init__(self, nature, name, short_name, instruction=None, template=None) -> None:
