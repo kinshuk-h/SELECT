@@ -48,27 +48,34 @@ The repository is organized as follows:
 
 ## Notebooks and Scripts
 
-- `eval.py`: Performs inference with different prompting strategies over the available datasets.
+- `generate.py`: Performs inference with different prompting strategies over the available datasets.
+- `evaluate.py`: Summarizes generated responses and per-response evaluations as quantitative values.
 
   **Examples**:
-  - Run inference using LLaMa-3-Chat-8B over the YAGO-derived dataset using few-shot example based prompting to assess refusal rates and in-dataset specificity:
+  - Run inference using LLaMa-3-Chat-8B using CoT based few-shot example based prompting to assess refusal rates and in-dataset specificity:
     ```bash
-    python3 eval.py -t direct specific -m LLaMa-3-Chat-8B -a prompt_few_shot-simple
+    python3 generate.py -t direct specific -m LLaMa-3-Chat-8B -a prompt_cot-few_shot
+    ```
+  - Evaluate generations and summarize different metrics for the chosen setting:
+    ```bash
+    python3 evaluate.py -t direct specific -m LLaMa-3-Chat-8B -a prompt_cot-few_shot
     ```
 
   **Replication**:
    To replicate experiments from the paper, use the following command(s):
    - Atomic Concept Evaluations:
     ```bash
-    python3 eval.py --seed 20240828 -n 5 -b 16 --backend vllm -a prompt-simple prompt_cot-few_shot
-    python3 eval.py --seed 20240828 -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a model-edit_repe
-    python3 eval.py --seed 20240828 -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a tuning-sft tuning-sft-dpo
+    python3 generate.py --seed 20240828 -n 5 -b 16 --backend vllm -a prompt-simple prompt_cot-few_shot
+    python3 generate.py --seed 20240828 -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a model-edit_repe
+    python3 generate.py --seed 20240828 -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a tuning-sft tuning-sft-dpo
+    python3 evaluate.py
     ```
     - Composition Concept Evaluations:
     ```bash
-    python3 eval.py --seed 20240828 --compose -n 5 -b 16 --backend vllm -a prompt-simple prompt_cot-few_shot
-    python3 eval.py --seed 20240828 --compose -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a model-edit_repe
-    python3 eval.py --seed 20240828 --compose -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a tuning-sft tuning-sft-dpo
+    python3 generate.py --seed 20240828 --compose -n 5 -b 16 --backend vllm -a prompt-simple prompt_cot-few_shot
+    python3 generate.py --seed 20240828 --compose -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a model-edit_repe
+    python3 generate.py --seed 20240828 --compose -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a tuning-sft tuning-sft-dpo
+    python3 evaluate.py --compose
     ```
 
     For other experiments, ablations and meta-evaluations, see the `experiments` folder (TODO).
@@ -90,12 +97,12 @@ Training data additionally includes generated responses (abstention and complian
 
 The composition of concepts has a slightly different file structure, but the file names serve the same purpose. For instance, `data.compose.json` lists out queries for compositions, `example_cache.compose.json` lists out examples, etc.
 
-- `data.json`: This contains queries for each concept in a flattened-out list, grouped by relation in a dictionary. As with atomic concepts, information to infer some the path information is included. The fields per composition include:
+- `data.json`: This contains queries for each composition in a flattened-out list, grouped by relation in a dictionary. As with atomic concepts, information to infer some the path information is included. The fields per composition include:
   - `concept`: composition ID, concatenation of underlying atomic concept IDs
   - `name`: composition name
   - `relation`: Relation template the composition was derived from
   - `compositions`: composition data about constituents:
     - `ids`: included concept IDs, in the order of the template
     - `names`: resolved names for concepts in same order as the IDs
-  - `context`: parent concept data. This is only a placeholder for compatibility with the file structure for atomic concepts.
+  - `context`: parent concept data. This is only a placeholder for compatibility with the file structure for atomic concepts
   - `queries`: Queries for the concept, generated using GPT-4o
