@@ -167,7 +167,6 @@ cache-*.arrow
 
 *.bak*.json
 *copy*.*
-lib
 *test*.*
 tests
 
