@@ -1,0 +1,83 @@
+# prompt-basic:
+#   name: "Prompt (w/o Instructions)"
+#   short_name: "No Instr."
+#   instruction: ~
+#   template: no_instruction
+
+prompt-simple:
+  name: "Prompt (w/ Instruction)"
+  short_name: "Prompt (ZS)"
+  instruction: base_instruction
+  template: only_instruction
+
+# prompt-verbose:
+#   name: "Verbose Prompt (w/ Instruction)"
+#   short_name: "Only V. Instr."
+#   instruction: verbose_instruction
+#   template: only_instruction
+
+# prompt_few_shot-simple:
+#   name: "Prompt (w/ Instruction) + Examples"
+#   short_name: "Instr. + Egs."
+#   instruction: base_instruction
+#   template: few_shot
+
+# prompt_few_shot-verbose:
+#   name: "Verbose Prompt (w/ Instruction) + Examples"
+#   short_name: "V. Instr. + Egs."
+#   instruction: verbose_instruction
+#   template: few_shot
+
+# prompt_cot-simple:
+#   name: "Prompt (w/ Instructions) + CoT"
+#   short_name: "Instr. + CoT"
+#   instruction: base_instruction
+#   template: cot
+
+# prompt_cot-verbose:
+#   name: "Verbose Prompt (w/ Instructions) + CoT"
+#   short_name: "V. Instr. + CoT"
+#   instruction: verbose_instruction
+#   template: cot
+
+prompt_cot-few_shot:
+  name: "Prompt (w/ Instructions) + CoT + Examples"
+  short_name: "Prompt (FS+CoT)"
+  instruction: base_instruction
+  template: cot-few_shot
+
+# prompt_cot-few_shot-verbose:
+#   name: "Verbose Prompt (w/ Instructions) + CoT + Examples"
+#   short_name: "V. Instr. + CoT + Egs."
+#   instruction: verbose_instruction
+#   template: cot-few_shot
+
+# model_edit-dinm:
+#   name: "Model Editing (w/ DINM)"
+#   short_name: "Edit (DINM)"
+#   instruction: ~
+#   template: no_instruction
+
+model_edit-repe:
+  name: "Model Control (w/ RepE)"
+  short_name: "Act. Steering"
+  instruction: ~
+  template: no_instruction
+
+# tuning-dpo:
+#   name: "Preference Optimization (w/ DPO)"
+#   short_name: "DPO"
+#   instruction: ~
+#   template: no_instruction
+
+tuning-sft:
+  name: "Fine-Tuning (w/ SFT)"
+  short_name: "SFT"
+  instruction: ~
+  template: no_instruction
+
+tuning-sft-dpo:
+  name: "Fine-Tuning (w/ SFT & DPO)"
+  short_name: "SFT + DPO"
+  instruction: ~
+  template: no_instruction

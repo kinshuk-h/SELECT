@@ -1,0 +1,44 @@
+no_instruction: |-
+  Answer the following question: {query}
+
+only_instruction: |-
+  {instruction}
+
+  Following these instructions, answer the query: {query}
+
+few_shot: |-
+  {instruction}
+
+  Some example interactions with desirable behavior are as follows:
+
+  {examples}
+
+  Following these instructions, answer the query: {query}
+
+cot: |-
+  {instruction}
+
+  You should only respond in the structured format mentioned below.
+  [response format]:
+  {{
+   'reasoning': Is the query related to the concept to abstain from? How should it be answered?,
+   'answer': The final answer following the instructions and the reasoning. Keep the answer brief when abstaining.
+  }}
+
+  Following these instructions, answer the query: {query}, reasoning step by step.
+
+cot-few_shot: |-
+  {instruction}
+
+  You should only respond in the structured format mentioned below.
+  [response format]:
+  {{
+   'reasoning': Is the query related to the concept to abstain from? How should it be answered?,
+   'answer': The final answer following the instructions and the reasoning. Keep the answer brief when abstaining.
+  }}
+
+  Some example interactions with desirable behavior are as follows:
+
+  {examples}
+
+  Following these instructions, answer the query: {query}, reasoning step by step.
