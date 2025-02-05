@@ -1,14 +1,14 @@
 compose:
-  "Abstention"           : "direct"
-  "Generalization"       : "generalization.successive"
+  "Abstention"           : "abstention"
+  "Generalization"       : "generalization"
+  "Specificity"          : "specificity"
+  # "Specificity (Easy)"   : "specificity.easy"
   # "Atomic Generalization": "generalization.atomic"
-  # "Specificity (Easy)"   : "specific.compose.easy"
-  "Specificity"          : "specific.compose.hard"
-  # "Atomic Specificity"   : "specific.atomic"
+  # "Atomic Specificity"   : "specificity.atomic"
   # "Unrelated"            : "unrelated"
 
 atom:
-  "Abstention"    : "direct"
-  "Generalization": "successive"
-  "Specificity"   : "specific.compose.hard"
+  "Abstention"    : "abstention"
+  "Generalization": "generalization"
+  "Specificity"   : "specificity"
   # "Unrelated"     : "unrelated"

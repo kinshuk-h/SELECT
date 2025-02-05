@@ -52,14 +52,8 @@ prompt_cot-few_shot:
 #   instruction: verbose_instruction
 #   template: cot-few_shot
 
-# model_edit-dinm:
-#   name: "Model Editing (w/ DINM)"
-#   short_name: "Edit (DINM)"
-#   instruction: ~
-#   template: no_instruction
-
-model_edit-repe:
-  name: "Model Control (w/ RepE)"
+steering-repe:
+  name: "Activation Steering (w/ RepE)"
   short_name: "Act. Steering"
   instruction: ~
   template: no_instruction

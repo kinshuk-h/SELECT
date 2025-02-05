@@ -24,12 +24,15 @@ class AbstentionTechnique(abc.ABC):
     def prepare(self, model_id, model: ModelInference, dataset_state,
                 concepts: list[str|tuple[str, str]], **prepare_kwargs):
         """ Prepares the abstention method for a set of concepts.
+            Can be used to train adapters or steering vectors, or to generate few-shot examples.
+            This method is run once per abstention technique.
 
         Args:
             model_id (str): Model ID to identify processed items from cached data.
             model (ModelInference): Model instance to prepare.
             dataset_state (DatasetState): Dataset state to borrow instances from.
             concepts (list[str|tuple[str, str]]): List of atomic/composite concepts to prepare abstention for.
+            prepare_kwargs (dict): Additional arguments to use during technique-level preparation.
 
         Raises:
             NotImplementedError: Must be implemented in subclasses.
@@ -37,12 +40,14 @@ class AbstentionTechnique(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def prepare_for_inference(self, concept: str|tuple[str, str], request: str, **prepare_kwargs):
+    def prepare_instance(self, concept: str|tuple[str, str], request: str, **prepare_kwargs):
         """ Prepares an instance for inference with the abstention method.
+            This can be used to format prompts as per the target concept, add instructions, etc.
 
         Args:
             concept (str | tuple[str, str]): Atomic/Composite concept to abstain from.
             request (str): User request / query to process.
+            prepare_kwargs (dict): Additional arguments to use during instance-level preparation.
 
         Raises:
             NotImplementedError: Must be implemented in subclasses.
@@ -51,11 +56,12 @@ class AbstentionTechnique(abc.ABC):
 
     @abc.abstractmethod
     def generate(self, model: ModelInference, instances: list, **gen_kwargs):
-        """Performs inference for a set of prompts using a model prepared for the abstention method.
+        """ Performs inference for a set of prompts using a model prepared for the abstention method.
 
         Args:
             model (ModelInference): Model to perform inference with.
             instances (list): User request instances prepared for inference.
+            gen_kwargs (dict): HuggingFace generate API compatible arguments to control decoding.
 
         Raises:
             NotImplementedError: Must be implemented in subclasses.

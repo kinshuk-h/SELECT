@@ -1,7 +1,96 @@
 import sys
 import timeit
+import pathlib
+import argparse
 
 from .formatting import format_time
+
+class SELECTEvaluationArgumentParser(argparse.ArgumentParser):
+    TASK_DESCRIPTIONS = {
+        'generate': "generates responses for abstention with different prompting methods",
+        "evaluate": "summarizes evaluations for abstention with different prompting methods"
+    }
+
+    def __init__(self, task, model_aliases, techniques, types, *args, **kwargs):
+        kwargs['description'] = kwargs.get('description', self.TASK_DESCRIPTIONS.get(task))
+        super().__init__(*args, **kwargs)
+
+        self.task = task
+        self.model_aliases = model_aliases
+        self.techniques = techniques
+        self.types = types
+
+    def print_help(self, file = None):
+        super().print_help(file)
+
+        _print = file.write if file else sys.stdout.write
+
+        _print('\n')
+
+        _print("supported abstention techniques (use with -a, --approaches):\n")
+        width = max(len(name) for name in self.techniques)
+        for tech_name, technique in self.techniques.items():
+            _print(f"  {tech_name:<{width}}  {technique.nature}: {technique.name}\n")
+        _print("\n")
+
+        _print("supported evaluations (based on metrics) (use with -t, --types):\n")
+        for category, cat_types in self.types.items():
+            _print(f"  {'atoms' if category == 'atom' else 'compositions (w/ -c, --compose)'}\n")
+            width = max(len(eval_name) for eval_name in cat_types.values())
+            for eval_type, eval_name in cat_types.items():
+                _print(f"    {eval_name:<{width}}  {eval_type}\n")
+        _print("\n")
+
+        _print("registered model aliases (use with -m, --models, -M, --exclude-models):\n")
+        width = max(len(alias) for alias in self.model_aliases)
+        for model_alias, model_name in self.model_aliases.items():
+            _print(f"  {model_alias:<{width}}  {model_name}\n")
+        _print("\n")
+
+def make_parser(task, model_aliases: dict, techniques: dict, types: dict):
+    parser = SELECTEvaluationArgumentParser(task, model_aliases, techniques, types)
+
+    parser.add_argument("--data-dir", default="data", type=pathlib.Path,
+                        help="root directory to load data from")
+    parser.add_argument("-r", "--root-dir", default="results", type=pathlib.Path,
+                        help="root directory to save generation results")
+
+    parser.add_argument("-m", "--models", nargs="+", default=set(model_aliases.keys()),
+                        help="models to evaluate with, defaulting to the list defined in config/models.yaml")
+    parser.add_argument("-M", "--exclude-models", nargs="+", default=[],
+                        help="models to exclude from evaluation")
+    parser.add_argument("-a", "--approaches", "--techniques", nargs="+", default=set(techniques.keys()),
+                        help="abstention techniques to test out, defaulting to those listed in config/techniques.yaml")
+    parser.add_argument("-t", "--types", nargs="+", default=None,
+                        help=("type(s) of results to compute (correspond to metrics). "
+                              "Defaults to the list in config/types.yaml."))
+
+    parser.add_argument('-c', "--compose", action="store_true",
+                        help="whether to use the compositional subset of the dataset")
+
+    parser.add_argument("-S", "--no-sample", dest="sample", action="store_false",
+                        help="run on the entire partitions, do not select samples")
+
+    if task == 'generate':
+        parser.add_argument("--backend", type=str, default='huggingface', choices=[ 'huggingface', 'openai', 'vllm' ],
+                            help="backend to run inference with, defaulting to huggingface/openai.")
+
+        parser.add_argument('--seed', type=int, help="global random seed to use for determinism")
+        parser.add_argument('-n', '--num-seeds', type=int, default=5,
+                            help="number of seeds (determines replications to run)")
+
+        parser.add_argument("-b", "--batch-size", type=int, default=16,
+                            help="batch size for inference, automatically scaled relative to model size")
+        parser.add_argument("-s", "--save-every", type=int, default=2,
+                            help="number of batches processed to save afterwards")
+        parser.add_argument("-x", "--preview", action="store_true",
+                            help="dry run the code, with no actual generations")
+
+    if task == 'evaluate':
+        parser.add_argument('--method', type=str, default='heuristic',
+                            help='evaluation method to use for signifying refusal / abstention')
+
+    return parser
 
 def gather(collection, entries):
     if isinstance(collection, dict):
@@ -72,7 +161,7 @@ class BatchProgressTimer:
                 'batch': self.batch, 'total': self.timer.total,
                 'cur.': format_time(end_time - self.time, 'iter') + "/it",
                 'avg.': format_time(self.timer.avg_time, 'iter') + "/it",
-                'eta': format_time(self.timer.avg_time * self.remaining, 'eta')
+                'etc': format_time(self.timer.avg_time * self.remaining, 'etc')
             })
 
             if exc_val is not None: raise exc_val

@@ -1,12 +1,11 @@
 import pathlib
-import argparse
 
 import numpy
 import scipy
 import pandas
 
-from src.approaches import APPROACHES
 from src.utils import io, common, data
+from src.techniques import get_techniques
 from src.evaluation import refusal, dataset
 
 MODELS = io.read_yaml("config/models.yaml")
@@ -20,52 +19,26 @@ def compute_confidence_interval(data: numpy.ndarray, percentage=0.95):
         for row in data
     ])
 
-def make_parser():
-    parser = argparse.ArgumentParser(
-        description="summarizes evaluations for abstention with different prompting methods"
-    )
-
-    parser.add_argument("-r", "--root-dir", type=str, default="results",
-                        help="root directory to save intermediate results")
-    parser.add_argument("-m", "--models", nargs="+", default=set(MODELS.keys()),
-                        help="models to evaluate with")
-    parser.add_argument("-M", "--exclude-models", nargs="+", default=[],
-                        help="models to evaluate with")
-    parser.add_argument("-a", "--approaches", nargs="+", default=set(APPROACHES.keys()),
-                        help="abstention techniques to test out")
-    parser.add_argument("-t", "--types", nargs="+", default=None,
-                        help="type(s) of results to compute")
-    parser.add_argument("-S", "--no-sample", dest="sample", action="store_false",
-                        help="run on the entire partitions, do not select samples")
-    parser.add_argument('-c', "--compose", action="store_true",
-                        help="whether to use the compositional subset of the dataset")
-    parser.add_argument('--method', type=str, default='heuristic', choices=list(refusal.EVALUATION_METHODS),
-                        help='evaluation method to use for signifying refusal / abstention')
-
-    return parser
-
 def get_result(root: pathlib.Path, model, eval_type, approach):
     result_path = root / model / eval_type / f"{approach}.json"
     if result_path.exists(): return data.NestedListItemResult(result_path)[eval_type]
 
 def main():
-    parser = make_parser()
+    parser = common.make_parser('evaluate', MODELS, get_techniques(), TYPES)
     args   = parser.parse_args()
 
     dataset_dtype = 'compose' if args.compose else 'atom'
     dtype_suffix  = '' if dataset_dtype == 'atom' else f'.{dataset_dtype}'
 
-    args.dataset = 'select'
-
     models     = common.gather(MODELS, (set(args.models) - set(args.exclude_models or [])))
-    approaches = common.gather(APPROACHES, args.approaches)
+    approaches = common.gather(get_techniques(), args.approaches)
     eval_types = TYPES[dataset_dtype]
     if args.types: eval_types = { name: id for name, id in eval_types.items() if id in args.types }
 
-    APPR_MAP = { appr: appr_inst.short_name for appr, appr_inst in APPROACHES.items() }
+    APPR_MAP = { appr: appr_inst.short_name for appr, appr_inst in get_techniques().items() }
     TYPE_MAP = { eval_type: eval_name for eval_name, eval_type in TYPES[dataset_dtype].items() }
 
-    root_path = pathlib.Path(args.root_dir) / f"expr.abstain.{args.dataset}{dtype_suffix}"
+    root_path = args.root_dir / f"expr.abstain.select{dtype_suffix}"
 
     # load all results
     all_results = {

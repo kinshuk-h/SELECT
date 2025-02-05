@@ -5,7 +5,7 @@ import itertools
 
 import tqdm.auto as tqdm
 
-from src.utils import data, common
+from src.utils import data, common, io
 from src.evaluation import refusal, dataset
 from src.inference import ModelManager, seed_all, sync_vram
 
@@ -31,72 +31,48 @@ def batch_multiplier(model_key):
 
 # ==================================================
 
-class Evaluator:
+class Evaluator(object):
     def __init__(self, dataset_state: dataset.DatasetState,
-                 eval_dataset, models, approaches,
-                 batch_size=16, save_steps=1,
+                 models, approaches, batch_size=16, save_steps=1,
                  root="results/expr.abstain", sample=True,
                  seed=20240801, num_seeds=5, **kwargs):
 
         self.dataset_state = dataset_state
-        self.dataset_state.eval_dataset = eval_dataset
 
-        self.eval_dataset  = eval_dataset
-        self.batch_size    = batch_size
-        self.save_steps    = save_steps
-        self.root          = root
-        self.sample        = sample
+        self.batch_size = batch_size
+        self.save_steps = save_steps
+        self.root       = root
+        self.sample     = sample
 
         self.seed = seed
         random.seed(seed)
-        self.seeds = [ random.randint(100000+(i*100000), 100000+((i+1)*100000)) for i in range(num_seeds) ]
+        self.seeds = [
+            random.randint(100000+(i*100000), 100000+((i+1)*100000))
+            for i in range(num_seeds)
+        ]
 
         self.models     = models
         self.approaches = approaches
 
-        self.__refresh_state()
-
         if self.dataset_state.compose:
             if 'atomic_ds_state' not in kwargs:
                 raise ValueError(
-                    f"{self.__class__.__name__}: compositional dataset state requires "
+                    f"{self.__class__.__name__}: compositions dataset state requires "
                     "companion atomic dataset state (in property 'atomic_ds_state')"
                 )
             else:
                 self.atomic_state = kwargs['atomic_ds_state']
-                self.atomic_state.eval_dataset = eval_dataset
-
-    def __refresh_state(self):
-        trav_vars = dataset.get_traversal_variables(self.taxonomy, self.compose_mode)
-        for var_name, var in trav_vars.items(): setattr(self, var_name, var)
-
-    def set_state(self, dataset_state: dataset.DatasetState, refresh=True):
-        old_state          = self.dataset_state
-        self.dataset_state = dataset_state
-        if refresh: self.__refresh_state()
-        return old_state
 
     # ------------------------------------------------------------------------------------------------------------
 
-    @property
-    def taxonomy(self):
-        return self.dataset_state.taxonomy
+    def __getattr__(self, name):
+        if (attr_val := getattr(self.dataset_state, name, None)) is not None:
+            return attr_val
+        return object.__getattribute__(self, name)
 
     @property
     def dataset_name(self):
         return self.dataset_state.name
-
-    @property
-    def dataset(self):
-        return self.dataset_state.dataset
-
-    @property
-    def train_dataset(self):
-        return self.dataset_state.train_dataset
-
-    @property
-    def example_cache(self):
-        return self.dataset_state.example_cache
 
     @property
     def dataset_type(self):
@@ -114,9 +90,7 @@ class Evaluator:
             concept if isinstance(concept, (list, tuple)) else (concept, )
             for concept in sorted(concepts)
         ]
-        return dataset.sample_queries(
-            self.dataset, concepts, num_queries, return_concepts=False
-        )
+        return dataset.sample_queries(self.dataset, concepts, num_queries, return_concepts=False)
 
     def efficient_run_for_all(self, modes, compose_run, preview=False, range=None, **model_kwargs):
         mode_data = {}
@@ -191,7 +165,7 @@ class Evaluator:
                                     id = dataset.generate_id(instance['query'])
                                     if not results[mode][approach].deepget((mode, str(seed), *instance['label'], id)):
                                         ids.append(id); labels.append(instance['label'])
-                                        prompts.append(approach_inst.prepare_for_inference(
+                                        prompts.append(approach_inst.prepare_instance(
                                             instance['concept_desc'], instance['query'],
                                             examples=instance['examples']
                                         ))
@@ -216,7 +190,7 @@ class Evaluator:
                             timer = common.BatchProgressTimer(pbar, total=math.ceil(len(labels)/batch_size))
 
                             for batch, (_ids, _prompts, _labels, _configs) in enumerate(batches):
-                                with timer.timed_operation(batch=batch+1, approach=approach): #, save=((batch+1) % self.save_steps == 0)):
+                                with timer.timed_operation(batch=batch+1, approach=approach):
                                     __labels = _labels
                                     if not compose_run:
                                         __labels = [ _label[1:] if len(_label) > 1 else _label for _label in _labels ]
@@ -328,11 +302,12 @@ class Evaluator:
             num_queries, eval_type, random_state = self.seed or random_state
         )
 
-        for model_key, model_name in self.models.items():
-            batch_size = batch_multiplier(model_key) * self.batch_size
-            if model_kwargs.get('backend', 'huggingface') == 'vllm' and '-U' not in model_key: batch_size = 1024
+        for model_name in self.models:
+            batch_size = batch_multiplier(model_name) * self.batch_size
+            if model_kwargs.get('backend', 'huggingface') == 'vllm' and 'openai' not in model_name: batch_size = 1024
 
-            print("> Using", model_key, "for inference ...")
+            print("> Using", model_name, "for inference ...")
+            pathsafe_model = io.pathsafe(model_name.replace('/', '--').lower())
 
             with tqdm.tqdm(total = total_iters) as pbar:
                 for seed in self.seeds:
@@ -345,7 +320,7 @@ class Evaluator:
                             pbar.set_description(approach_inst.short_name)
 
                             results = data.NestedListItemResult(
-                                os.path.join(self.root, model_key, eval_type, f"{approach}.json"),
+                                os.path.join(self.root, pathsafe_model, eval_type, f"{approach}.json"),
                             )
 
                             ids, prompts, labels = [], [], []
@@ -355,25 +330,25 @@ class Evaluator:
                                     id = dataset.generate_id(instance['query'])
                                     if not results.deepget((eval_type, str(seed), *instance['label'], id)):
                                         ids.append(id); labels.append(instance['label'])
-                                        prompts.append(approach_inst.prepare_for_inference(
+                                        prompts.append(approach_inst.prepare_instance(
                                             instance['concept_desc'], instance['query'],
                                             examples=instance['examples']
                                         ))
                                     else: pbar.update()
 
                             self._run(
-                                pbar, model_key, model, approach_inst, results,
+                                pbar, pathsafe_model, model, approach_inst, results,
                                 prompts, ids, labels, eval_type, seed, preview, batch_size
                             )
 
     def estimate_iterations_atomic(self, mode):
-        if mode != 'successive': num_concepts = len(self.node_data)
+        if mode != 'generalization': num_concepts = len(self.node_data)
         else: num_concepts = sum(1 for cdata in self.node_data.values() if cdata['children'])
 
         num_queries = len(next(iter(self.dataset.values()))['queries'])
 
-        if self.sample == False and mode in ("successive", "specific"):
-            if mode == "successive":
+        if self.sample == False and mode in ("generalization", "specificity"):
+            if mode == "generalization":
                 num_concepts = sum(
                     len(dataset.level_traverse(dict(XYZ=self.node_data[concept]))[1])
                     for concept in self.node_data
@@ -387,12 +362,12 @@ class Evaluator:
         return num_concepts, num_queries
 
     def estimate_iterations_compose(self, mode):
-        if mode == "generalization.successive":
+        if mode == "generalization":
             num_concepts = sum(
                 1 for rel_data in self.node_data.values()
                 for c_data in rel_data.values() if c_data['children']
             )
-        elif mode in { "specific.atomic", "generalization.atomic" }:
+        elif mode in { "specificity.atomic", "generalization.atomic" }:
             num_concepts = sum(
                 len(c_data['names']) for rel_data in self.node_data.values()
                 for c_data in rel_data.values()
@@ -416,7 +391,7 @@ class Evaluator:
             ]
             collation = { concept: eval_instances for concept in self.node_data }
 
-        elif mode == 'successive':
+        elif mode == 'generalization':
             collation = {}
             for concept in self.node_data:
                 if not self.node_data[concept]['children']: continue
@@ -426,7 +401,7 @@ class Evaluator:
                     par_map.keys(), _num_queries, random_state=random_state
                 )
 
-        elif mode == 'specific':
+        elif mode == 'specificity':
             collation = {}
             for concept in self.node_data:
                 concepts = self.sibling_map[concept] + self.dataset[concept]['context']['ids']
@@ -435,7 +410,7 @@ class Evaluator:
                     concepts, _num_queries, random_state=random_state
                 )
 
-        else: # mode == "direct"
+        else: # mode == "abstention"
             collation = { concept: self.dataset[concept]['queries'][:num_queries] for concept in self.node_data }
 
         instances_collation = {}
@@ -465,7 +440,7 @@ class Evaluator:
                 for relation in self.dataset for concept in self.node_data[relation]
             }
 
-        elif mode == 'generalization.successive':
+        elif mode == 'generalization':
             for relation in self.dataset:
                 for concept, c_data in self.node_data[relation].items():
                     if not c_data['children']: continue
@@ -491,7 +466,7 @@ class Evaluator:
                             ))
                     collation[(relation, concept)] = instances
 
-        elif mode == 'specific.compose.easy':
+        elif mode == 'specificity.easy':
             for relation in self.dataset:
                 for concept, c_data in self.node_data[relation].items():
                     sub_concepts = []
@@ -502,7 +477,7 @@ class Evaluator:
                     instances = self.sample_queries(sub_concepts, max_queries, random_state=random_state)
                     collation[(relation, concept)] = instances
 
-        elif mode == 'specific.compose.hard':
+        elif mode == 'specificity':
             for relation in self.dataset:
                 for concept, c_data in self.node_data[relation].items():
                     concepts = set(self.sibling_map[relation][concept])
@@ -524,7 +499,7 @@ class Evaluator:
                     instances = self.sample_queries(concepts, _num_queries, random_state=random_state)
                     collation[(relation, concept)] = instances
 
-        elif mode == 'specific.atomic':
+        elif mode == 'specificity.atomic':
             for relation in self.dataset:
                 for concept in self.node_data[relation]:
                     random.seed(random_state)
@@ -534,7 +509,7 @@ class Evaluator:
                     ]
                     collation[(relation, concept)] = instances
 
-        else: # mode == "direct"
+        else: # mode == "abstention"
             collation = {
                 (relation, concept): self.dataset[relation][concept]['queries'][:num_queries]
                 for relation in self.dataset for concept in self.node_data[relation]

@@ -1,64 +1,22 @@
 import os
-import random
 import itertools
 
 import repe
 import torch
-import numpy
 import datasets
 import transformers
 import tqdm.auto as tqdm
 
 from ..base import AbstentionTechnique
-from ..constants import APPROACH_CONFIGS
 from ...inference.utils import sync_vram
+from ..manager import register_technique
+from ..constants import TECHNIQUE_CONFIGS
+from .utils import (
+    learn_concept_vectors, predict_concept, cast_for_model,
+    get_aggregate_concept_vector, evaluate_concept_vector,
+    estimate_cls_params, estimate_cls_params_with_eval_results
+)
 from ...evaluation.dataset import generate_id, level_traverse, sample_queries
-
-# =============================== Specific Utilities
-
-def vector_similarity(vec_a, vec_b):
-    return ((torch.dot(vec_a, vec_b)) / (torch.norm(vec_a) * torch.norm(vec_b))).item()
-
-def cast_for_model(model, control_vector, coefficient):
-    return {
-        layer: coefficient * tensor['vector'].to(dtype=model.dtype, device=model.model.device)
-        for layer, tensor in control_vector.items()
-    }
-
-def make_prompt(tokenizer, instruction, prefill=None, system_prompt=None):
-    try:
-        return tokenizer.apply_chat_template([
-            dict(role='system', content=system_prompt),
-            dict(role='user', content=instruction)
-        ][1 if not system_prompt else 0:], tokenize=False, add_generation_prompt=True) + (prefill or '')
-    except:
-        return tokenizer.apply_chat_template([
-            dict(role='user', content=((system_prompt + '\n\n') if system_prompt else '') + instruction)
-        ], tokenize=False, add_generation_prompt=True) + (prefill or '')
-
-def format_dataset(model, dataset, system_prompt=None, prefills=None, labels=None):
-    if prefills and labels:
-        new_dataset = []
-        for pair, label in zip(dataset, labels):
-            pos_prefill, neg_prefill = random.choice(prefills['positive']), random.choice(prefills['negative'])
-            if label[0] == False: pos_prefill, neg_prefill = neg_prefill, pos_prefill
-            new_dataset.append([ (pair[0], pos_prefill), (pair[1], neg_prefill) ])
-        dataset = numpy.concatenate(new_dataset).tolist()
-        return [ make_prompt(model.tokenizer, instruction=instr, system_prompt=system_prompt, prefill=prefill) for instr, prefill in dataset ]
-    else:
-        dataset = numpy.concatenate(dataset).tolist()
-        return [ make_prompt(model.tokenizer, instruction=instr, system_prompt=system_prompt) for instr in dataset ]
-
-def shuffle_data(instances, labels):
-    instances = [ instances[i:i+2] for i in range(0, len(instances), 2) ]
-    labels    = [ list(label) for label in labels ]
-    for instance, label in zip(instances, labels):
-        if random.random() >= 0.5:
-            label[0], label[1]       = label[1], label[0]
-            instance[0], instance[1] = instance[1], instance[0]
-    return numpy.concatenate(instances).tolist(), labels
-
-# =============================== Implementation
 
 # Behavior control parameters for refusal vectors that were determined by manual search.
 # Known to work well for certain models than those returned by estimation methods.
@@ -69,183 +27,20 @@ KNOWN_CONTROL_KWARGS_FOR_REFUSAL = {
     'Mistral-Instruct-7B-v3': dict(layer_ids=[ -21, -18, -17 ], strength=-1.3),
 }
 
-def learn_concept_vectors(model, train_dataset, train_labels, system_prompt=None, prefills=None, num_vectors=1, shuffle=True, pbar=None):
-    hidden_layers = list(range(-1, -model.config.num_hidden_layers, -1))
-    rep_reading_pipeline = transformers.pipeline("rep-reading", model=model.model, tokenizer=model.tokenizer)
-
-    train_dataset = format_dataset(model, train_dataset, system_prompt=system_prompt,
-                                   labels=train_labels, prefills=prefills)
-
-    concept_readers = []
-    for v in range(num_vectors):
-        if pbar: pbar.set_postfix(dict(vector=v+1))
-
-        if shuffle:
-            # shuffle the data labels to remove any positional bias
-            train_dataset, train_labels = shuffle_data(train_dataset, train_labels)
-
-        # get a direction using PCA over difference of representations
-        concept_reader = rep_reading_pipeline.get_directions(
-            train_dataset,
-            rep_token               = -1,
-            hidden_layers           = hidden_layers,
-            n_difference            = 1,
-            train_labels            = train_labels,
-            direction_method        = 'pca',
-            direction_finder_kwargs = dict(n_components=1),
-            batch_size              = 64,
-            add_special_tokens      = False
-        )
-        concept_readers.append(concept_reader)
-
-    return rep_reading_pipeline, concept_readers
-
-def evaluate_concept_vector(model, rep_reading_pipeline, concept_reader, test_dataset, system_prompt=None, prefills=None):
-    hidden_layers = list(range(-1, -model.config.num_hidden_layers, -1))
-    test_dataset  = format_dataset(model, test_dataset, system_prompt=system_prompt,
-                                   labels=[ [True, False] * len(test_dataset) ], prefills=prefills)
-
-    scores = rep_reading_pipeline(
-        test_dataset,
-        rep_token          = -1,
-        hidden_layers      = hidden_layers,
-        rep_reader         = concept_reader,
-        component_index    = 0,
-        batch_size         = 64,
-        add_special_tokens = False
-    )
-
-    results = { layer: 0.0 for layer in hidden_layers }
-
-    for layer in hidden_layers:
-        # Extract score per layer
-        l_scores = [ score[layer] for score in scores ]
-        # Group two examples as a pair
-        l_scores = [ l_scores[i:i+2] for i in range(0, len(l_scores), 2) ]
-
-        sign = concept_reader.direction_signs[layer][0]
-        eval_func = min if sign == -1 else max
-
-        # Try to see if the representation's scores can correctly select between the paired instances.
-        results[layer] = numpy.mean([eval_func(score) == score[0] for score in l_scores])
-
-    return results
-
-def get_aggregate_concept_vector(concept_vectors):
-    return {
-        layer: dict(
-            vector = torch.stack([
-                torch.from_numpy(concept_reader.direction_signs[layer][0] * concept_reader.directions[layer][0])
-                for concept_reader in concept_vectors
-            ]).mean(dim=0),
-            directions = torch.stack([
-                torch.from_numpy(concept_reader.directions[layer][0])
-                for concept_reader in concept_vectors
-            ]),
-            signs = torch.tensor([
-                concept_reader.direction_signs[layer][0]
-                for concept_reader in concept_vectors
-            ])
-        )
-        for layer in concept_vectors[0].directions
-    }
-
-def estimate_cls_params_with_eval_results(eval_results, num_layers):
-    layers  = list(eval_results[0].keys())
-    results = numpy.array([ list(result.values()) for result in eval_results ])
-
-    layer_scores = [ (layer, score) for layer, score in zip(layers, results.mean(0)) ]
-    layer_scores = sorted(layer_scores, key=lambda x: (x[1], -x[0]))
-
-    if -1 in [ l[0] for l in layer_scores[-10:] ]:
-        return [ l[0] for l in layer_scores[-num_layers+1:] ] + [ -1 ]
-    return [ l[0] for l in layer_scores[-num_layers:] ]
-
-def estimate_cls_params(model, test_dataset, concept_vector, num_layers, system_prompt=None):
-    hidden_layers = list(range(-1, -model.config.num_hidden_layers, -1))
-
-    test_dataset  = format_dataset(model, test_dataset, system_prompt=system_prompt)
-
-    with torch.no_grad():
-        inputs  = model.tokenizer(test_dataset, add_special_tokens=False, return_tensors='pt', padding='longest')
-        outputs = model.model(**inputs.to(model.model.device), output_hidden_states=True)
-
-    hidden_states_layers = {} # layer x batch
-    for layer in hidden_layers:
-        hidden_states = outputs['hidden_states'][layer].detach().cpu()[:, -1, :]
-        if hidden_states.dtype in (torch.bfloat16, torch.float16): hidden_states = hidden_states.float()
-        hidden_states_layers[layer] = hidden_states
-
-    del outputs
-    sync_vram()
-
-    hidden_scores = {
-        layer: [ vector_similarity(state, concept_vector[layer]['vector']) for state in states ]
-        for layer, states in hidden_states_layers.items()
-    }
-    hidden_scores = {
-        layer: [ scores[i:i+2] for i in range(0, len(scores), 2) ]
-        for layer, scores in hidden_scores.items()
-    }
-    layer_scores = { layer: min([ score[0]-score[1] for score in scores ]) for layer, scores in hidden_scores.items() }
-
-    # select layers which have highest separations between similarities for close enough instances
-    layer_order = [ layer for layer, _ in sorted(layer_scores.items(), key=lambda x: (x[1], -x[0])) ][::-1]
-    if -1 not in layer_order[:num_layers] and -1 in layer_order[:2*num_layers]:
-        layer_ids = layer_order[:num_layers-1]; layer_order.append(-1)
-    else: layer_ids = layer_order[:num_layers]
-
-    # select thresholds based on minimum scores across instances
-    layer_thresh = { layer: round(min([ score[0] for score in hidden_scores[layer] ]), 2) - 0.04 for layer in layer_ids }
-
-    return layer_ids, layer_thresh
-
-def predict_concept(model, concept_reader, instances, layer_ids, layer_thresholds, system_prompt=None):
-    instances = [
-        make_prompt(model.tokenizer, instance, system_prompt=system_prompt)
-        for instance in instances
-    ]
-
-    with torch.no_grad():
-        inputs = model.tokenizer(instances, add_special_tokens=False, return_tensors='pt', padding='longest')
-        outputs = model.model(**inputs.to(model.model.device), output_hidden_states=True)
-
-    hidden_states_layers = {}
-    for layer in layer_ids:
-        hidden_states = outputs['hidden_states'][layer].detach().cpu()[:, -1, :]
-        if hidden_states.dtype in (torch.bfloat16, torch.float16): hidden_states = hidden_states.float()
-        hidden_states_layers[layer] = hidden_states
-
-    del outputs
-    sync_vram()
-
-    scores = {
-        layer: [
-            vector_similarity( hidden_repr, concept_reader[layer]['vector'] )
-            for hidden_repr in hidden_states_layers[layer]
-        ]
-        for layer in layer_ids
-    }
-
-    # for layer in layer_ids:
-    #     print(layer, scores[layer], layer_thresholds[layer])
-
-    return [
-        all( scores[layer][idx] >= layer_thresholds[layer] for layer in layer_ids )
-        for idx in range(len(scores[layer_ids[0]]))
-    ]
-
 class AbstentionWithReprEngineering(AbstentionTechnique):
     """ Abstention Technique using Representation Engineering for Conditional Activation Steering """
 
     REFUSAL_INSTRUCTION = (
-        "You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. "
-        "You should refuse to comply to any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. "
-        # "Please ensure that your responses are socially unbiased and positive in nature.\n\n"
-        # "If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. "
-        # "If you don't know the answer to a question, please don't share false information."
+        "You are a helpful, respectful and honest assistant. "
+        "Always answer as helpfully as possible, while being safe. "
+        "You should refuse to comply to any harmful, unethical, "
+        "racist, sexist, toxic, dangerous, or illegal content. "
     )
-    READING_TEMPLATE = "Consider the relation of a query to {concept}:\nQuery: {stimulus}\nThe degree of relation to {concept} is:"
+    READING_TEMPLATE = (
+        "Consider the relation of a query to {concept}:\n"
+        "Query: {stimulus}\n"
+        "The degree of relation to {concept} is:"
+    )
 
     REFUSAL_COMPLIANCE_PREFILLS = {
         'positive': [
@@ -275,15 +70,14 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
     }
 
     def __init__(self):
-        super().__init__(
-            'MODEL_EDITING',
-            **APPROACH_CONFIGS['model_edit-repe']
-        )
+        super().__init__('STEERING', **TECHNIQUE_CONFIGS['steering-repe'])
         self.algorithm = 'repe-pca'
 
         repe.repe_pipeline_registry()
 
     def format_for_read(self, request, concept):
+        """ Formats a prompt for reading (detection) by adding concept data """
+
         concept_desc = self.node_data.deepget(concept)['name']
         if names := self.dataset_state.dataset.deepget(concept)['context']['names']:
             concept_desc += ' in the context of ' + ', '.join(names)
@@ -291,6 +85,8 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
         return self.READING_TEMPLATE.format(concept=concept_desc, stimulus=request)
 
     def make_concept_dataset(self, concept, hard=False):
+        """ Create a contrast dataset for learning steering vectors """
+
         c_data = self.dataset_state.train_dataset.deepget(concept)
         _, par_map   = level_traverse(dict(XYZ=self.node_data.deepget(concept)))
 
@@ -342,6 +138,8 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
         return train_dataset, train_labels, test_dataset, test_labels
 
     def get_refusal_vector(self, model_id, model):
+        """ Load or learn a refusal vector """
+
         vector_path = os.path.join(
             "data", self.dataset_state.name.upper(), "control.act_str",
             self.algorithm, model_id, f"vectors.notion.refusal.harm"
@@ -400,6 +198,8 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
         return refusal_control_bundle
 
     def get_concept_vector(self, model_id, model, concept, seed=42, pbar=None):
+        """ Load or learn a concept vector """
+
         concept_id = generate_id('#'.join(concept))
 
         vector_path = os.path.join(
@@ -471,7 +271,7 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
                 model_id, model, concept, seed=seed, pbar=pbar
             )
 
-    def prepare_for_inference(self, concept: str, request: str, **prepare_kwargs):
+    def prepare_instance(self, concept: str, request: str, **prepare_kwargs):
         return dict(request=self.template.format(query=request),
                     reading=self.READING_TEMPLATE.format(concept=concept, stimulus=request))
 
@@ -498,7 +298,9 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
 
     def generate(self, model, instances: list, concepts=None, **gen_kwargs):
         generate_kwargs = dict(chat=True, max_new_tokens=512, do_sample=False, temperature=0)
-        generate_kwargs.update({ attr: value for attr, value in gen_kwargs.items() if attr not in ('concepts', 'deltas') })
+        generate_kwargs.update(**gen_kwargs)
+
+        # group and generate, to avoid loading the same vectors multiple times.
 
         concept_groups = { '#'.join(concept): [] for concept in concepts }
         concept_outs = { '#'.join(concept): [] for concept in concepts }
@@ -516,8 +318,6 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
                 [ p['reading'] for p in c_prompts ],
                 **concept_vector['classification_kwargs']
             )
-
-            # print(concept_rel)
 
             # Based on classification results, selectively abstain
             in_concept, out_concept = [], []
@@ -546,8 +346,15 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
             if len(out_outputs) > 0: concept_outs[concept].extend([ p[1] for p in out_outputs ])
             if len(in_outputs ) > 0: concept_outs[concept].extend([ p[1] for p in in_outputs ])
 
+        # ungroup
+
         outputs, idx = [], 0
         while len(outputs) < len(instances):
             outputs.extend(concept_outs['#'.join(concepts[idx])])
             idx = len(outputs)
         return outputs
+
+# ============================= Registry
+
+if 'steering-repe' in TECHNIQUE_CONFIGS:
+    register_technique('steering-repe', AbstentionWithReprEngineering())

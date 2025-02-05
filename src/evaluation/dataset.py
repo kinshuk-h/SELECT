@@ -1,9 +1,7 @@
-import os
 import random
 import hashlib
+import pathlib
 import dataclasses
-
-import datasets
 
 from ..utils import io
 
@@ -59,31 +57,6 @@ def concept_iterator(data_collation, compose=False):
     else:
         for concept, c_data in data_collation.items():
             yield (concept, ), c_data
-
-# ==================================================
-
-def get_dataset(dataset_name: str, dtype='atom'):
-    ref = dataset_name.upper()
-    dtype      = '' if dtype == 'atom' else f'.{dtype}'
-    taxon_type = '_plus' if os.path.exists(f"data/{ref}/taxonomy_plus{dtype}.json") else ''
-    taxonomy   = io.Record.load(f"data/{ref}/taxonomy{taxon_type}{dtype}.json")
-    return io.Record.load(f"data/{ref}/data{dtype}.json"), taxonomy
-
-def get_train_dataset(dataset_name: str, dtype='atom'):
-    ref = dataset_name.upper()
-    dtype = '' if dtype == 'atom' else f'.{dtype}'
-    return io.Record.load_if(f"data/{ref}/data.train{dtype}.json")
-
-def get_eval_dataset(random_state=20240603):
-    alpaca = datasets.load_dataset("tatsu-lab/alpaca")
-    return alpaca['train'].train_test_split(test_size=500, shuffle=True, seed=random_state)['test']
-
-def load_example_cache(dataset_name: str, dtype='atom'):
-    ref = dataset_name.upper()
-    dtype = '' if dtype == 'atom' else f'.{dtype}'
-    return io.Record.load_if(f"data/{ref}/example_cache{dtype}.json")
-
-# ==================================================
 
 def search_taxonomy(taxonomy, target_nodes):
     """ Invokes a tree-search (using BFS) to find paths to target nodes and their corresponding data.
@@ -150,28 +123,95 @@ def get_traversal_variables(taxonomy: dict | io.Record, compose_mode: bool, visi
         sibling_map = io.Record(sibling_map),
         parent_map  = parent_map,
         node_data   = io.Record(node_data),
-        node_paths  = node_paths
+        node_paths  = io.Record(node_paths)
     )
 
 @dataclasses.dataclass
 class DatasetState:
     """ Class to jointly hold state information about a dataset """
-    name         : str
-    dtype        : str
-    taxonomy     : dict|io.Record
-    dataset      : dict|io.Record
-    train_dataset: dict|io.Record|None
-    example_cache: dict|io.Record|None
-    compose      : bool
+    name            : str
+    root            : pathlib.Path
+    compose         : bool                 = False
+    visit_fn        : 'callable'           = None
+    __aux_variables : dict[dict|io.Record] = dataclasses.field(default_factory=lambda: {})
 
-    @staticmethod
-    def from_name(name, dataset_dtype='atom'):
-        dataset, taxonomy = get_dataset       (name, dataset_dtype)
-        example_cache     = load_example_cache(name, dataset_dtype)
-        train_dataset     = get_train_dataset (name, dataset_dtype)
+    def __load_traversal_vars(self):
+        self.__aux_variables.update(get_traversal_variables(self.taxonomy, self.compose, self.visit_fn))
 
-        return DatasetState(
-            name, dataset_dtype, taxonomy,
-            dataset, train_dataset, example_cache,
-            compose = dataset_dtype == 'compose'
-        )
+    def __get_var_path(self, variable):
+        path_prefix = self.root / self.name.upper() / self.dtype
+        if variable == 'dataset': return path_prefix / "data.json"
+        elif variable == 'train_dataset': return path_prefix / "data.train.json"
+        elif variable == 'example_cache': return path_prefix / "example_cache.json"
+        elif (taxon_plus := path_prefix / "taxonomy_plus.json").exists(): return taxon_plus
+        else: return path_prefix / "taxonomy.json"
+
+    def __iterate(self, variable='dataset'):
+        yield from concept_iterator(getattr(self, variable), self.compose)
+
+    def keys(self, variable='dataset'):
+        for key, _ in self.__iterate(variable): yield key
+
+    def values(self, variable='dataset'):
+        for _, value in self.__iterate(variable): yield value
+
+    def items(self, variable='dataset'):
+        yield from self.__iterate(variable)
+
+    def lazy_loaded(_property):
+        def property_impl(self):
+            if (variable := _property.__name__) not in self.__aux_variables:
+                if variable.endswith('_map') or variable.startswith('node_'): self.__load_traversal_vars()
+                else: self.__aux_variables[variable] = io.Record.load_if(self.__get_var_path(variable))
+            return _property(self)
+        property_impl.__name__ == _property.__name__
+        return property_impl
+
+    def set_visitor(self, visit_fn=None):
+        self.visit_fn = visit_fn
+        for prop in ( 'sibling_map', 'parents_map', 'node_data', 'node_paths' ):
+            self.__aux_variables.pop(prop, None)
+
+    @property
+    def dtype(self):
+        return 'compositions' if self.compose else 'atoms'
+
+    @property
+    @lazy_loaded
+    def dataset(self) -> io.Record:
+        return self.__aux_variables['dataset']
+
+    @property
+    @lazy_loaded
+    def train_dataset(self) -> io.Record:
+        return self.__aux_variables['train_dataset']
+
+    @property
+    @lazy_loaded
+    def taxonomy(self) -> io.Record:
+        return self.__aux_variables['taxonomy']
+
+    @property
+    @lazy_loaded
+    def example_cache(self) -> io.Record:
+        return self.__aux_variables['example_cache']
+
+    @property
+    @lazy_loaded
+    def node_data(self) -> io.Record:
+        return self.__aux_variables['node_data']
+
+    @property
+    @lazy_loaded
+    def node_paths(self) -> io.Record:
+        return self.__aux_variables['node_paths']
+
+    @property
+    @lazy_loaded
+    def sibling_map(self) -> io.Record:
+        return self.__aux_variables['sibling_map']
+
+    @property
+    @lazy_loaded
+    def parent_map(self) -> dict:
+        return self.__aux_variables['parent_map']

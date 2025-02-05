@@ -6,18 +6,20 @@ import regex
 from ...utils import formatting
 
 from ..base import AbstentionTechnique
-from ..constants import APPROACH_CONFIGS, STRINGS
+from ..manager import register_technique
+from ..constants import TECHNIQUE_CONFIGS, STRINGS
 
 class AbstentionWithPrompting(AbstentionTechnique):
     """ Common wrapper for simple prompting-based abstention methods. """
 
     def __init__(self, name) -> None:
-        super().__init__('PROMPTING', **APPROACH_CONFIGS[name])
+        super().__init__('PROMPTING', **TECHNIQUE_CONFIGS[name])
 
     def prepare(self, model_id, model, train_dataset, concept: str | tuple[str, str], **prepare_kwargs):
+        # TODO add dynamic few shot example generation here.
         pass
 
-    def prepare_for_inference(self, concept, query, examples=None, instruction=None):
+    def prepare_instance(self, concept, query, examples=None, instruction=None):
         """ Creates the approach specific prompt from a query and concept (with context).
 
         Args:
@@ -70,27 +72,24 @@ class AbstentionWithPrompting(AbstentionTechnique):
 
     def generate(self, model, instances: list, *args, **gen_kwargs):
         generate_kwargs = dict(chat=True, max_new_tokens=512, do_sample=False, temperature=0)
-        generate_kwargs.update({ attr: value for attr, value in gen_kwargs.items() if attr not in ('concepts', 'deltas') })
+        generate_kwargs.update(**gen_kwargs)
 
-        if "self_mod" in self.tmpl_name:
-            fmtd_prompts = model.make_prompt([ p0 for p0, _ in instances ], instructions=[], chat=True)
-            responses = model.generate(fmtd_prompts, **generate_kwargs)
-            fmtd_mod_prompts = [ p1.replace('{response}', resp) for (_, p1), resp in zip(instances, responses) ]
-            fmtd_prompts = model.make_prompt(fmtd_mod_prompts, instructions=[], chat=True)
-            return model.generate(fmtd_prompts, **generate_kwargs)
+        fmtd_prompts = model.make_prompt(instances, instructions=[], chat=True)
 
-        else:
-            fmtd_prompts = model.make_prompt(instances, instructions=[], chat=True)
+        if 'cot' in self.tmpl_name:
+            # Ensure sufficient generation for CoT reasoning
+            if generate_kwargs['max_new_tokens'] < 1024:
+                generate_kwargs['max_new_tokens'] = 1024
 
-            if 'cot' in self.tmpl_name:
-                # Ensure sufficient generation for CoT reasoning
-                if generate_kwargs['max_new_tokens'] < 1024:
-                    generate_kwargs['max_new_tokens'] = 1024
+        outputs = model.generate(fmtd_prompts, **generate_kwargs)
+        if 'cot' in self.tmpl_name:
+            return [
+                dict(complete=output, answer=self.__extract_answer(output))
+                for output in outputs
+            ]
+        return outputs
 
-            outputs = model.generate(fmtd_prompts, **generate_kwargs)
-            if 'cot' in self.tmpl_name:
-                return [
-                    dict(complete=output, answer=self.__extract_answer(output))
-                    for output in outputs
-                ]
-            return outputs
+# ======================================== Registry
+
+for alias in TECHNIQUE_CONFIGS:
+    if alias.startswith('prompt'): register_technique(alias, AbstentionWithPrompting(alias))

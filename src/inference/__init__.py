@@ -38,7 +38,8 @@ def prepare_model_for_inference(model_name: str, backend='huggingface', seed=42)
     return load_backend(backend)(model_name, seed=seed, **model_kwargs)
 
 class ModelManager:
-    """ Context Manager for model inference: Maintains resources for a model until a specified context. """
+    """ Context Manager for model inference: Maintains
+        resources for a model in a finite context. """
 
     def __init__(self, *args, model_initializer=prepare_model_for_inference, **kwargs) -> None:
         self.model_initializer = model_initializer
