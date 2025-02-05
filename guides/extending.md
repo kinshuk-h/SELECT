@@ -12,8 +12,11 @@ from src.techniques.base import AbstentionTechnique
 class NewAbstentionTechnique(AbstentionTechnique):
     def __init__(self):
         super().__init__(
+            # group tag for techniques, just for readability
             nature='CUSTOM',
+            # name of your technique
             name='New Abstention Technique',
+            # short name to show during progress
             short_name='NAT',
             # this is not automatically used by default
             instruction=None,
@@ -40,11 +43,11 @@ class NewAbstentionTechnique(AbstentionTechnique):
 
 ```
 
-1. In the main script (`{generate,evaluate}.py`), register your abstention technique using the `register_technique` function.
+2. In the main script (`{generate,evaluate}.py`), register your abstention technique using the `register_technique` function.
    Following this step, the technique can be referred whenever invoking the script:
 
 ```python
-from src.techniques import APPROACHES, register_technique
+from src.techniques import get_techniques, register_technique
 
 from new_technique import NewAbstentionTechnique
 
@@ -57,7 +60,7 @@ def main():
     ...
 ```
 
-1. Evaluate models with the added abstention technique(s):
+3. Evaluate models with the added abstention technique(s):
 
 ```bash
 python3 generate.py -m Gemma-2-IT-2B -a NAT -n 1 -b 32
