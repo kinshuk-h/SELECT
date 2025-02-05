@@ -1,15 +1,42 @@
-# Abstention Project
+# Knowledge-Graph Guided Evaluation of Abstention Techniques
 
-## Setup
+This repository provides the code and benchmark data for the paper: "Knowledge-Graph Guided Evaluation of Abstention Techniques".
+
+The repository is organized as follows:
+
+- `data/SELECT`: queries and taxonomy for the `SELECT` benchmark, derived from the [YAGO](https://yago-knowledge.org) [taxonomy](https://yago-knowledge.org/data/yago4.5/design-document.pdf). Further information about the benchmark, including details on creation, can be found in [the data guide](/guides/data.md).
+
+- `results/expr.abstain.select`: Abstention experiment results. See [the results guide](/guides/results.md) for further information on results and formats.
+
+- `src`: Source code for experiment related utility modules.
+  - `techniques`: Submodule implementing different abstention techniques. Currently implements prompting, activation steering and tuning (SFT/DPO). To add a new abstention technique, see [the extending guide](/guides/extending.md).
+  - `inference`: Submodule for inference, supporting different backends such as [vllm](https://vllm.ai), [HuggingFace transformers](https://github.com/huggingface/transformers) and [OpenAI](https://platform.openai.com/api).
+  - `evaluation`: Module for utilities related to evaluation.
+    - `refusal.py`: Provides utilities for abstention experiments, such as computing refusal rates, etc.
+    - `dataset.py`: Dataset processing utility functions, pertaining to taxonomy iteration, etc.
+    - `task.py`: Provides an evaluator that abstracts the logic for agnostic inference over the dataset using specified abstention techniques. Any new registered techniques will be automatically supported.
+  - `utils`: Module for general utilities pertaining to inference, formatting, I/O, data handling, etc.
+
+## Notebooks and Scripts
+
+To evaluate techniques using the benchmark, the following scripts can be used:
+
+- `generate.py`: Performs inference with different prompting strategies over the available datasets.
+- `evaluate.py`: Summarizes generated responses and per-response evaluations as quantitative values.
+
+Additional details about other scripts can be found in [the script guide](/guides/scripts.md).
+
+#### Setup
 
 We use [conda](https://docs.anaconda.com/miniconda/install/) to manage dependencies for the project. To setup an environment for executing the code from the repository, follow these steps:
 
 1. Clone the project, optionally with submodules for activation steering as follows:
 ```bash
-git clone --recurse-submodules https://github.com/kinshuk-h/abstention-project
+git clone [--recurse-submodules] https://github.com/kinshuk-h/SELECT
+cd SELECT
 ```
 
-2. In the directory where the repository is cloned, run the following commands to create and activate the environment with necessary dependecies:
+2. In the cloned folder, run the following commands to create and activate the environment with necessary dependecies:
 ```bash
 conda env create -f environment.yml -n select
 conda activate select
@@ -21,53 +48,38 @@ git submodule update
 pip install -e "deps/representation-engineering"
 ```
 
-## Project Hierarchy
+4. Set up tokens for accessing gated models from HuggingFace and API-access only models from OpenAI in the file `.env`, to be created in the project root folder.
+   Details about the names for environment variables can be found in [`.env.example`](/.env.example).
 
-The repository is organized as follows:
+#### Quickstart
 
-- `data`: Datasets and assets used throughout the experiments.
-  - `SELECT`: queries and taxonomy for the `SELECT` dataset, derived from the [YAGO](https://yago-knowledge.org) [taxonomy](https://yago-knowledge.org/data/yago4.5/design-document.pdf).
-    - `taxonomy.json`: Comprises of the base hierarchy of concepts derived from `YAGO`.
-    - `taxonomy_plus.json`: Extension of `taxonomy.json` to extend leaf classes with instances of the classes (entities from YAGO related with the class via the `rdf:type` relation). This is the final taxonomy used in experiments.
-    - `data.json`: Comprises of queries for different concepts, for **evaluation**.
-    - `data.train.json`: Queries for different concepts, for use in training or prompting.
-    - `example_cache.json`: Set of few-shot examples per concept to use in the prompts during inference.
-    - `stats.concepts.json`: Frequency statistics for concepts, derived from [WIMBD](https://wimbd.allen.ai) across different corpora.
-    - `hints.compose.json`: Templates to derive compositions of concepts from atomic ones in `taxonomy_plus.json`.
-    - `*.compose.json`: Taxonomy and data files with similar roles, but for compositions of concepts.
+Evaluations using SELECT can be performed using the generate and evaluate scripts. For example:
 
-- `results/expr.abstain.select`: Abstention experiment results
-
-- `src`: Source code for experiment related utility modules.
-  - `approaches`: Submodule implementing different abstention techniques. Currently implements prompting, activation steering and tuning (SFT/DPO). To add a new abstention technique, follow the steps below.
-  - `inference`: Submodule for inference, supporting different backends such as `vllm` or `HuggingFace`.
-  - `evaluation`: Module for utilities related to evaluation.
-    - `refusal.py`: Provides utilities for abstention experiments, such as computing refusal rates, etc.
-    - `dataset.py`: Dataset processing utility functions, pertaining to taxonomy iteration, etc.
-    - `task.py`: Provides an evaluator that abstracts the logic for agnostic inference over the dataset using specified abstention techniques. Any new techniques will be automatically supported as long as they follow the API.
-  - `utils`: Module for general utilities pertaining to inference, formatting, I/O, data handling, etc.
-
-## Notebooks and Scripts
-
-To evaluate techniques using the benchmark, the following scripts can be used:
-
-- `generate.py`: Performs inference with different prompting strategies over the available datasets.
-- `evaluate.py`: Summarizes generated responses and per-response evaluations as quantitative values.
-
-#### Examples
-
-- Run inference using LLaMa-3-Chat-8B using CoT based few-shot example based prompting to assess refusal rates and in-dataset specificity:
+- Run inference, using LLaMa-3-Chat-8B with CoT-based few-shot example prompting to assess refusal rates and in-dataset specificity:
     ```bash
-    python3 generate.py -t direct specific -m LLaMa-3-Chat-8B -a prompt_cot-few_shot
+    python3 generate.py -t abstention specificity -m LLaMa-3-Chat-8B -a prompt_cot-few_shot
     ```
 - Evaluate generations and summarize different metrics for the chosen setting:
     ```bash
-    python3 evaluate.py -t direct specific -m LLaMa-3-Chat-8B -a prompt_cot-few_shot
+    python3 evaluate.py -t abstention specificity -m LLaMa-3-Chat-8B -a prompt_cot-few_shot
     ```
+
+The above example uses an alias for the model name, defined in `config/models.yml`.
+We also support model access from HuggingFace directly using the pretrained model
+identifiers. For example, the same generate command can be rewritten as:
+
+```bash
+    python3 generate.py -t abstention specificity -m meta-llama/Meta-Llama-3.1-8B-Instruct -a prompt_cot-few_shot
+```
+
+Further details about the defined aliases, the abstention techniques available, and evaluations supported can be accessed via:
+```bash
+python3 {generate,evaluate}.py --help
+```
 
 #### Replication
 
-To replicate the experiments corresponding to the main tables from the paper, use the following command(s):
+To reproduce the results for the experiments described in the paper, use the following command(s):
 
 For atomic concept evaluations:
 
@@ -87,87 +99,33 @@ For compositions of concepts based evaluations:
     python3 evaluate.py --compose
     ```
 
-For other experiments, ablations and meta-evaluations, see the `experiments` folder (TODO).
-
-## Dataset
-
-`SELECT` is divided into the following files:
-
-- `taxonomy*.json`: This lists out the relations and connections between concepts as a tree/DAG hierarchy.
-- `data.json`: This contains the list of queries for each concept in a flattened-out list, but also has fields to infer the path information. The fields per concept include:
-  - `concept`: concept ID
-  - `name`: concept name
-  - `context`: parent concept data, used to build a context during query generation:
-    - `ids`: parent context ids, in order of ancestry (farthest to closest)
-    - `names`: resolved names for parent concepts in same order as the IDs
-  - `queries`: Queries for the concept, generated using GPT-4o
-
-Training data additionally includes generated responses (abstention and compliance) in a dictionary mapping query hashes to responses.
-
-The composition of concepts has a slightly different file structure, but the file names serve the same purpose. For instance, `data.compose.json` lists out queries for compositions, `example_cache.compose.json` lists out examples, etc.
-
-- `data.json`: This contains queries for each composition in a flattened-out list, grouped by relation in a dictionary. As with atomic concepts, information to infer some the path information is included. The fields per composition include:
-  - `concept`: composition ID, concatenation of underlying atomic concept IDs
-  - `name`: composition name
-  - `relation`: Relation template the composition was derived from
-  - `compositions`: composition data about constituents:
-    - `ids`: included concept IDs, in the order of the template
-    - `names`: resolved names for concepts in same order as the IDs
-  - `context`: parent concept data. This is only a placeholder for compatibility with the file structure for atomic concepts
-  - `queries`: Queries for the concept, generated using GPT-4o
-
 ## Extending the Evaluation of `SELECT`
 
-To add a new abstention technique for evaluation via `SELECT`, follow these steps:
+A guide on extending the evaluation of `SELECT` using new abstention
+techniques can be found [here](/guides/extending.md).
 
-1. Create a new class that extends `src.approaches.base.AbstentionTechnique`. This abstract class provides the base API for all techniques. Specifically, ensure the new class implements the `prepare()` and `generate()` methods. Additionally, provide metadata such as the name of the technique in the call of the `super().__init__()`. For example:
+## `lm-evaluation-harness` Integration
 
-```python
-# file: custom_abst.py
+We plan to integrate evaluation for SELECT as part of the [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness).
+Details about this will be updated soon!
 
-from src.approaches.base import AbstentionTechnique
+## Citation
 
-class MyCustomAbstentionTechnique(AbstentionTechnique):
-    def __init__(self):
-        super().__init__(
-            nature='CUSTOM',
-            name='Custom Technique',
-            short_name='C. Tech.',
-            # this is not automatically used by default
-            instruction=None,
-            # See templates/prompts.yaml for options
-            template='no_instruction'
-        )
+If you find this work useful for your research, please cite it as follows:
 
-    def prepare(self, ...):
-        # Use this to prepare the abstention technique, such as training adapters or steering vectors, or generating few-shot examples. This is run only once per model.
-        ...
-
-    def generate(self, ...):
-        # Actual generation code, specific to a batch of prompts, goes here. Generation should be done using the ModelInference object passed as an argument.
-        ...
-
+```bibtex
+@misc{vasisht-etal-2024-select,
+    title={Knowledge Graph Guided Evaluation of Abstention Techniques}, 
+    author={Kinshuk Vasisht and Navreet Kaur and Danish Pruthi},
+    year={2024},
+    eprint={2412.07430},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL},
+    url={https://arxiv.org/abs/2412.07430},
+}
 ```
 
-2. In the main script (`{generate,evaluate}.py`), link an instance of the abstention technique to the shared `APPROACHES` object. Following this step, the technique can be referred when invoking the script:
+## Contact
 
-```python
-from src.approaches import APPROACHES
-
-from custom_abst import MyCustomAbstentionTechnique
-
-...
-
-def main():
-    APPROACHES['abst-custom'] = MyCustomAbstentionTechnique()
-
-    parser = make_parser()
-    ...
-```
-
-3. Evaluate models with the added abstention technique(s):
-
-```bash
-python3 generate.py -m Gemma-2-IT-2B -a abst-custom -n 1 -b 32
-python3 evaluate.py -m Gemma-2-IT-2B -a abst-custom
-```
+For any questions and further correspondence related to the project, please
+reach out at [kinshukv \[at\] iisc \[dot\] ac \[dot\] in](mailto:kinshukv@iisc.ac.in). Thanks!
