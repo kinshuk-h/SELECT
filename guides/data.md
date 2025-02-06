@@ -1,0 +1,71 @@
+## Data Comprising SELECT
+
+The `SELECT` benchmark is organized into two partitions: one for atomic concepts and one for compositions. This repository provides the version used in the paper. A similar version can be generated using the data generation scripts provided [here](/scripts/data).
+
+### Atomic Concepts
+
+This partition of `SELECT` includes the benign concepts targeted for abstention, as derived from [YAGO](https://yago-knowledge.org). The data for the partition is available in the following directory [`/data/SELECT/atoms/`](/data/SELECT/atoms/). The benchmark data is split into the following files:
+
+- `taxonomy.json`: Comprises of the base hierarchy of concepts derived from `YAGO`.
+- `taxonomy_plus.json`: Extension of `taxonomy.json` to extend leaf classes with instances of the classes (entities from YAGO related with the class via the `rdf:type` relation). This is the final taxonomy used in experiments.
+- `data.json`: Comprises of queries for different concepts, for **evaluation**.
+- `data.train.json`: Queries for different concepts, for use in training or prompting.
+- `example_cache.json`: Cached set of few-shot examples per concept that are by default used with prompts during inference.
+- `stats.concepts.json`: Frequency statistics for concepts, derived from [WIMBD](https://wimbd.allen.ai) across different corpora.
+
+### Composition of Concepts
+
+This partition of `SELECT` includes data for synthesized compositions of concepts. The data for the partition is available in the following directory [`/data/SELECT/compositions/`](/data/SELECT/compositions/). Most files are analogous to the versions in the atomic data partition, along with some files specfic to compositions:
+
+- `hints.json`: Templates to derive compositions of concepts from atomic ones in `../atoms/taxonomy_plus.json`.
+- `taxonomy_plus.json`: This is the final taxonomy of compositions of concepts used in experiments. As the taxonomy is synthesized entirely from the atomic version, we directly include this file.
+- `data.json`: Comprises of queries for different concepts, for **evaluation**.
+- `data.train.json`: Queries for different concepts, for use in training or prompting.
+- `example_cache.json`: Cached set of few-shot examples per concept that are by default used with prompts during inference.
+
+### Data Format
+
+For each partition, the dataset relies primarily on two files: `taxonomy*.json` and `data.json`. These correspond to the concept taxonomy and associated set of requests for each question. While the data in `taxonomy*.json` is arranged in a tree structure, the data in `data.json` (and similarly in `data.train.json`) is linearized to a simpler mapping.
+
+#### Taxonomy
+
+The taxonomy is a tree of concepts, identified by their YAGO identifier. Each concept stores two properties: `name` - the human readable name for the concept, and `children` - the set of associated children for this concept.
+
+For compositions, the file contains a set of trees for each template used to create concepts. Each template-specific tree then has the same kind of metadata as an atomic taxonomy node (namely, the `name` and `children`).
+
+#### Request Data
+
+The data in `data.json` and `data.train.json` comprises a linear map of concepts which has metadata to decode the taxonomy structure. Each node has the following properties, in a JSON record:
+
+```json
+{
+    "concept": "YAGO identifier for the target concept",
+    "name": "human-readable concept name",
+    "context": {
+      "names": "(optional) list of human-readable names for ancestor concepts, in hierarchical order",
+      "ids": "(optional) list of YAGO identifiers for the ancestors, in hierarchical order"
+    },
+    "queries": "list of generated queries by GPT-4o.",
+    "extra_queries": "(optional) list of extra queries for use in few-shot examples or training. The same data is available in data.train.json in the queries property."
+}
+```
+
+In case of compositions, the data is grouped according to relation templates from `compose/hints.json`.
+
+#### Concept Statistics
+
+The file `stats.concepts.json`, included in the atomic partition, lists frequency statistics for various concepts from popular pretraining corpora such as [Dolma](https://arxiv.org/abs/2402.00159), [Pile](https://arxiv.org/abs/2101.00027), [C4](https://arxiv.org/abs/1910.10683) and [OpenWebText](https://skylion007.github.io/OpenWebTextCorpus/).
+
+### Statistics
+
+Statistics of the data are summarized below:
+
+| Property | Atomic Concept Partition | Compositions of Concepts Partition |
+| --- | --- | --- |
+| Concepts	|394	|156|
+| Max. Depth|	6|	5|
+| Leaves	|290|	98|
+|Avg. Children (non-leaves) | 3.7 | 2.4|
+|Avg. Ancestors | 3.2 | 1.7|
+|Questions | 11820 | 3120|
+|Lexical Diversity (Type-Token Ratio) | 0.61 | 0.57|
