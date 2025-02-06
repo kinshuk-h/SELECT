@@ -33,7 +33,7 @@ def prepare_model_for_inference(model_name: str, backend='huggingface', seed=42)
     model_kwargs = get_inference_params(model_name)
 
     if model_name.lower().startswith("openai"):
-        model_name = model_name[7:]
+        backend, model_name = model_name[:6], model_name[7:]
 
     return load_backend(backend)(model_name, seed=seed, **model_kwargs)
 
