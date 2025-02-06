@@ -4,7 +4,7 @@ from ..inference import ModelInference
 from .constants import STRINGS, PROMPTS
 
 class AbstentionTechnique(abc.ABC):
-    def __init__(self, nature, name, short_name, instruction=None, template=None) -> None:
+    def __init__(self, nature: str, name: str, short_name: str, instruction: str=None, template: str=None) -> None:
         super().__init__()
 
         self.nature = nature

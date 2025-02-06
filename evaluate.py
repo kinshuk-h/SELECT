@@ -30,7 +30,11 @@ def main():
     dataset_dtype = 'compose' if args.compose else 'atom'
     dtype_suffix  = '' if dataset_dtype == 'atom' else f'.{dataset_dtype}'
 
-    models     = common.gather(MODELS, (set(args.models) - set(args.exclude_models or [])))
+    models      = [ MODELS.get(model, model) for model in (args.models or MODELS) ]
+    excl_models = set(MODELS.get(model, model) for model in args.exclude_models)
+    resolved_models = [ model for model in models if model not in excl_models ]
+
+    models     = list(dict.fromkeys(resolved_models))
     approaches = common.gather(get_techniques(), args.approaches)
     eval_types = TYPES[dataset_dtype]
     if args.types: eval_types = { name: id for name, id in eval_types.items() if id in args.types }
