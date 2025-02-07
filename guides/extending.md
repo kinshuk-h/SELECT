@@ -54,9 +54,9 @@ from new_technique import NewAbstentionTechnique
 ...
 
 def main():
-    register_technique(alias='NAT', technique=NewAbstentionTechnique)
+    register_technique(alias='NAT', technique=NewAbstentionTechnique())
 
-    parser = make_parser()
+    parser = common.make_parser(...)
     ...
 ```
 
