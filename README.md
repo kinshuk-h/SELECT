@@ -1,6 +1,6 @@
-# Knowledge-Graph Guided Evaluation of Abstention Techniques
+# Knowledge Graph Guided Evaluation of Abstention Techniques
 
-This repository provides the code and benchmark data for the paper: "Knowledge-Graph Guided Evaluation of Abstention Techniques".
+This repository provides the code and benchmark data for the paper: ["Knowledge Graph Guided Evaluation of Abstention Techniques"](https://arxiv.org/abs.2412.07430).
 
 The repository is organized as follows:
 
