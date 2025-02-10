@@ -80,6 +80,17 @@ python3 generate.py --seed 20240828 --compose -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -
 python3 evaluate.py --compose
 ```
 
+#### Experiments
+
+Scripts corresponding to experiments part of the paper are listed below:
+
+- We assess the understanding of the hierarchy of concepts for different models in evaluation. This is to identify whether generalization errors result for models not able to understand the hierarchy of concepts. Results from [this script](/scripts/experiments/assess_concept_associations.py) show that such errors can explain only $~35\%$ of the errors on average.
+
+    ```bash
+    PYTHONPATH=. python3 scripts/experiments/assess_concept_associations.py
+    ```
+- 
+
 #### Miscellaneous Actions
 
 Some other scripts for various operations are listed as follows:
