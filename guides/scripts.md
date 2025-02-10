@@ -79,3 +79,15 @@ python3 generate.py --seed 20240828 --compose -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -
 python3 generate.py --seed 20240828 --compose -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a tuning-sft tuning-sft-dpo
 python3 evaluate.py --compose
 ```
+
+#### Miscellaneous Actions
+
+Some other scripts for various operations are listed as follows:
+
+- Summarize various characteristics of the data, such as number of questions,
+  lexical diversity (TTR), average ancestors and children, etc.
+
+    ```bash
+    python3 -m pip install nltk # for lexical diversity
+    PYTHONPATH=. python3 scripts/data/summarize_stats.py
+    ```
