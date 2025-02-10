@@ -96,7 +96,7 @@ def write_json(path, data, compress=None, **kwargs):
         json.dump(data, ofile, **__serialize_kwargs)
 
 def read_jsonl(path, compressed=None):
-    """ Loads a JSON file.
+    """ Loads a JSON with lines (JSONL) file.
 
     Args:
         path (str | pathlib.Path): Path to load the file from.
@@ -114,7 +114,7 @@ def read_jsonl(path, compressed=None):
         return [ json.loads(record) for record in ifile ]
 
 def write_jsonl(path, data, compress=None):
-    """ Loads a JSON file.
+    """ Saves data to a JSON with lines (JSONL) file.
 
     Args:
         path (str | pathlib.Path): Path to load the file from.
@@ -155,7 +155,7 @@ class Record(dict):
     @staticmethod
     def indexable(source, key):
         """ Multi-utility wrapper to determine if a key is present in source.
-            Works for both list and dict types.
+        Works for both list and dict types.
 
         Args:
             source (list|dict|tuple|Record): Source to check
@@ -205,7 +205,7 @@ class Record(dict):
     @staticmethod
     def load_if(path):
         """ De-serializes a record object from a JSON file, if the file exists.
-            Returns an empty record otherwise. """
+        Returns an empty record otherwise. """
         if os.path.exists(path):
             return Record(read_json(path))
         else:
@@ -221,7 +221,7 @@ class Record(dict):
 
     def deepget(self, deepkey, default=None):
         """ Performs a deepkey retrieval: Resolves the value at the
-                nested key if available, else falls back to default.
+        nested key if available, else falls back to default.
 
         Args:
             deepkey (str|tuple): Nested key, either a string separated by '.', or a tuple.
@@ -246,7 +246,7 @@ class Record(dict):
 
     def deepset(self, deepkey, value):
         """ Performs a deepkey set operation: Sets the value at any arbitrary nested key,
-            automatically creating parent dictionaries as required.
+        automatically creating parent dictionaries as required.
 
         Args:
             deepkey (str|tuple): Nested key, either a string separated by '.', or a tuple.
@@ -272,8 +272,8 @@ class Record(dict):
 
     def deepref(self, deepkey, value):
         """ Performs a deepkey reference operation: retrieves the reference at any arbitrary nested key,
-            automatically creating parent dictionaries as required. If the reference doesn't exist,
-            a default value as specified is used. Useful for nested object and iterables.
+        automatically creating parent dictionaries as required. If the reference doesn't exist,
+        a default value as specified is used. Useful for nested object and iterables.
 
         Args:
             deepkey (str|tuple): Nested key, either a string separated by '.', or a tuple.

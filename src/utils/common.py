@@ -36,9 +36,7 @@ class SELECTEvaluationArgumentParser(argparse.ArgumentParser):
         _print("supported evaluations (based on metrics) (use with -t, --types):\n")
         for category, cat_types in self.types.items():
             _print(f"  {'atoms' if category == 'atom' else 'compositions (w/ -c, --compose)'}\n")
-            width = max(len(eval_name) for eval_name in cat_types.values())
-            for eval_type, eval_name in cat_types.items():
-                _print(f"    {eval_name:<{width}}  {eval_type}\n")
+            _print(f"    {', '.join(cat_types.values())}")
         _print("\n")
 
         _print("registered model aliases (use with -m, --models, -M, --exclude-models):\n")
@@ -79,8 +77,13 @@ def make_parser(task, model_aliases: dict, techniques: dict, types: dict):
         parser.add_argument('-n', '--num-seeds', type=int, default=5,
                             help="number of seeds (determines replications to run)")
 
+        parser.add_argument("--config", type=pathlib.Path, default=None,
+                            help="configuration file to override initialization parameters")
+        parser.add_argument("--concepts", nargs="+", default=None,
+                            help="specific names of concepts to process, or a colon delimited range")
+
         parser.add_argument("-b", "--batch-size", type=int, default=16,
-                            help="batch size for inference, automatically scaled relative to model size")
+                            help="batch size for inference, upscaled relative to model size")
         parser.add_argument("-s", "--save-every", type=int, default=2,
                             help="number of batches processed to save afterwards")
         parser.add_argument("-x", "--preview", action="store_true",

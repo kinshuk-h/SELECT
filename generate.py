@@ -49,7 +49,7 @@ def main():
     if args.types: eval_types = { name: id for name, id in eval_types.items() if id in args.types }
 
     for type_name, eval_type in eval_types.items():
-        print("Computing", type_name, "results ...")
+        print("Computing", type_name.lower(), "results ...")
         print("-" * 100, end='\n\n')
         evaluator.run(eval_type, preview=args.preview, backend=args.backend)
         print()
