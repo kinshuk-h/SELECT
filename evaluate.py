@@ -54,7 +54,8 @@ def main():
     dataset_dtype = 'compose' if args.compose else 'atom'
     dtype_suffix  = '' if dataset_dtype == 'atom' else f'.{dataset_dtype}'
 
-    models      = [ MODELS.get(model, model) for model in (args.models or MODELS) ]
+    MODEL_ALIASES = { name: alias for alias, name in MODELS.items() }
+    models      = [ MODELS.get(model, model) for model in sorted(args.models or MODELS) ]
     excl_models = set(MODELS.get(model, model) for model in args.exclude_models)
     resolved_models = [ model for model in models if model not in excl_models ]
 
@@ -64,25 +65,19 @@ def main():
 
     if args.types: eval_types = { name: id for name, id in eval_types.items() if id in args.types }
 
-    root_path = args.root_dir / f"expr.abstain.select{dtype_suffix}"
+    processor = pipe(
+        # load the result file
+        load_result(args.root_dir / f"expr.abstain.select{dtype_suffix}"),
+        # aggregate over seeds to compute refusal (or anti-refusal) rates
+        compute_refusal,
+        # aggregate further over concepts to get mean and confidence interval
+        summarize_metric(args.method, args.compose)
+    )
 
-    # load all results
-    all_results = {
-        run_tuple: load_result(root_path)(*run_tuple)
-        for run_tuple in tqdm.tqdm(list(itertools.product(eval_types.values(), models, techniques)))
-    }
+    runs = list(itertools.product(eval_types.values(), models, techniques))
+    aggregates = { run_tuple: processor(*run_tuple) for run_tuple in tqdm.tqdm(runs) }
 
-    # aggregate over seeds
-    collated_results = {
-        run_tuple: compute_refusal(run_tuple[0], result)
-        for run_tuple, result in tqdm.tqdm(list(all_results.items())) if result
-    }
-
-    # aggregate further over concepts
-    aggregates = {
-        run_tuple: summarize_metric(args.method, args.compose)(result)
-        for run_tuple, result in tqdm.tqdm(list(collated_results.items()))
-    }
+    print('-' * 100, end='\n\n')
 
     # create a table from aggregates and show it
     for eval_name, eval_type in eval_types.items():
@@ -91,10 +86,11 @@ def main():
 
         records = []
         for model in models:
-            record = dict(Model = model)
+            record = dict(Model = MODEL_ALIASES.get(model, model))
             for technique in techniques:
-                mean, ci = aggregates.get((eval_type, model, technique), (None, None))
-                record[techniques[technique].short_name] = f"{mean} +- {ci}" if mean is not None else "---"
+                agg = aggregates.get((eval_type, model, technique))
+                agg_summ = f"{agg[0]} +- {agg[1]}" if agg is not None else "???"
+                record[techniques[technique].short_name] = agg_summ
             records.append(record)
 
         print(pandas.DataFrame.from_records(records), end='\n\n')
