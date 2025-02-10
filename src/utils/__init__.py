@@ -1,3 +1,3 @@
-from . import common, data, io, network, formatting
+from . import common, io, network, formatting
 
-__all__ = [ "common", "data", "io", "network", "formatting" ]
+__all__ = [ "common", "io", "network", "formatting" ]

@@ -45,6 +45,12 @@ def wrap(text: str, width=100, indent=0, indent_unit=' '):
         for segment in text.splitlines()
     ])
 
+def jprint(data, **kwargs):
+    """ Pretty printing by JSON serialization to STDOUT """
+    __serialize_kwargs = dict(indent=2, ensure_ascii=False)
+    __serialize_kwargs.update(**kwargs)
+    print(json.dumps(data, **__serialize_kwargs))
+
 # = Structured I/O =====================================================================================================
 
 def read_yaml(path):
@@ -297,5 +303,49 @@ class Record(dict):
             ref = ref[key]
         if keys[-1] not in ref: ref[keys[-1]] = value
         return ref[keys[-1]]
+
+class Result:
+    """ Wrapper over a record to maintain experiment results. """
+
+    def __init__(self, file) -> None:
+        self.file    = file
+        self.results = Record.load_if(self.file)
+
+    def load(self):
+        self.results = Record.load_if(self.file)
+
+    def save(self):
+        os.makedirs(os.path.dirname(self.file), exist_ok=True)
+        self.results.save(self.file)
+
+    def __getitem__(self, key):
+        return self.results[key]
+
+    def __setitem__(self, key, value):
+        self.results[key] = value
+
+    def keys(self):
+        return self.results.keys()
+
+    def values(self):
+        return self.results.values()
+
+    def items(self):
+        return self.results.items()
+
+    def deepget(self, keyset: str | list | tuple, default=None):
+        return self.results.deepget(keyset, default=default)
+
+    def deepset(self, keyset: str | list | tuple, value):
+        self.results.deepset(keyset, value=value)
+
+    def __len__(self):
+        return len(self.results)
+
+    def __iter__(self):
+        return iter(self.results)
+
+    def data(self):
+        return self.results
 
 # ======================================================================================================================

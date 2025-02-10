@@ -2,6 +2,7 @@
 import json
 
 import regex
+import tqdm.auto as tqdm
 
 from ...utils import formatting
 
@@ -14,10 +15,17 @@ class AbstentionWithPrompting(AbstentionTechnique):
 
     def __init__(self, name) -> None:
         super().__init__('PROMPTING', **TECHNIQUE_CONFIGS[name])
+        self.examples = {}
+        self.use_cache = True
 
-    def prepare(self, model_id, model, train_dataset, concept: str | tuple[str, str], **prepare_kwargs):
-        # TODO add dynamic few shot example generation here.
-        pass
+    def prepare(self, model_id, model, dataset_state, concepts: list[str | tuple[str, str]],
+                node_data, use_cache=True, seed=42, **prepare_kwargs):
+        self.use_cache = use_cache
+        if self.use_cache: self.examples = {}; return
+
+        for concept in (pbar := tqdm.tqdm(concepts)):
+            pbar.set_description(node_data.deepget(concept)['name'])
+            self.examples[node_data.deepget(concept)['name']] = []
 
     def prepare_instance(self, concept, query, examples=None, instruction=None):
         """ Creates the approach specific prompt from a query and concept (with context).
@@ -37,7 +45,7 @@ class AbstentionWithPrompting(AbstentionTechnique):
         example_insts = []
         if 'few_shot' in self.tmpl_name:
             if 'cot' in self.tmpl_name:
-                for inst in examples:
+                for inst in self.examples.get(concept, examples):
                     eg_concept = inst['concept']
                     if inst['context']: eg_concept += ' in the context of ' + ', '.join(inst['context'])
                     r_type = 'entailment' if eg_concept == concept else 'contradiction'
@@ -70,10 +78,8 @@ class AbstentionWithPrompting(AbstentionTechnique):
             return regex.sub(r"(?ui)(?:[\}\s'\"]*)$", "", match[2]).replace(r"\n", "\n")
         return output
 
-    def generate(self, model, instances: list, *args, **gen_kwargs):
-        generate_kwargs = dict(chat=True, max_new_tokens=512, do_sample=False, temperature=0)
-        generate_kwargs.update(**gen_kwargs)
-
+    def generate(self, model, instances: list, *args, **generate_kwargs):
+        generate_kwargs.pop('concepts', None)
         fmtd_prompts = model.make_prompt(instances, instructions=[], chat=True)
 
         if 'cot' in self.tmpl_name:

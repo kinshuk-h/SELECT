@@ -3,6 +3,8 @@ import timeit
 import pathlib
 import argparse
 
+from torch.utils.data import DataLoader
+
 from .formatting import format_time
 
 class SELECTEvaluationArgumentParser(argparse.ArgumentParser):
@@ -101,6 +103,21 @@ def gather(collection, entries):
     else:
         return [ value for value in collection if value in entries ]
 
+def instance_collate(instances):
+    element = instances[0]
+    if isinstance(element, dict):
+        return {
+            key: [ inst[key] for inst in instances ]
+            for key in element
+        }
+    elif isinstance(element, (list, tuple)):
+        return tuple([
+            instance_collate([ inst[i] for inst in instances ])
+            for i in range(len(element))
+        ])
+    else:
+        return instances
+
 def batchify(*lists, batch_size=8):
     """ Creates batches jointly across lists of iterables.
 
@@ -111,12 +128,10 @@ def batchify(*lists, batch_size=8):
     Yields:
         tuple[*list]: Tuple of batches.
     """
-    max_len = min(map(len, lists))
-    for ndx in range(0, max_len, batch_size):
-        yield tuple(
-            lst[ndx:min(ndx + batch_size, max_len)]
-            for lst in lists
-        )
+    return DataLoader(
+        [ (data_tuple[0] if len(data_tuple) == 1 else data_tuple) for data_tuple in zip(*lists) ],
+        batch_size=batch_size, shuffle=False, collate_fn=instance_collate
+    )
 
 class LogTime:
     """ Context manager to log the execution time taken by a code block. """
@@ -164,7 +179,7 @@ class BatchProgressTimer:
                 'batch': self.batch, 'total': self.timer.total,
                 'cur.': format_time(end_time - self.time, 'iter') + "/it",
                 'avg.': format_time(self.timer.avg_time, 'iter') + "/it",
-                'etc': format_time(self.timer.avg_time * self.remaining, 'etc')
+                'etc': format_time(self.timer.avg_time * self.remaining, 'eta')
             })
 
             if exc_val is not None: raise exc_val

@@ -1,18 +1,20 @@
 import os
-import math
 import random
+import pathlib
 import itertools
 
 import tqdm.auto as tqdm
 
-from src.utils import data, common, io
+from src.utils import common, io
 from src.evaluation import refusal, dataset
+from src.inference.base import ModelInference
+from src.techniques.base import AbstentionTechnique
 from src.inference import ModelManager, seed_all, sync_vram
 
-def model_size(model_key):
-    """ Estimates the model size with the key name (no actual parameters involved). """
+def model_size(model_name):
+    """ Parse model size from name (no actual parameters involved). """
 
-    segments = model_key.lower().split('-')
+    segments = model_name.lower().split('-')
     while segments:
         if segments[-1].endswith('b') or segments[-1].endswith('m'):
             weights = eval(segments[-1][:-1].replace('x', '*')) if 'x' in segments[-1][:-1] else int(segments[-1][:-1])
@@ -33,9 +35,24 @@ def batch_multiplier(model_key):
 
 class Evaluator(object):
     def __init__(self, dataset_state: dataset.DatasetState,
-                 models, approaches, batch_size=16, save_steps=1,
-                 root="results/expr.abstain", sample=True,
-                 seed=20240801, num_seeds=5, **kwargs):
+                 root: pathlib.Path, models, techniques, batch_size=16, save_steps=1,
+                 sample=True, seed=20240801, num_seeds=5, **kwargs):
+        """ Create a new evaluator for abstention techniques.
+
+        Args:
+            dataset_state (dataset.DatasetState): Benchmark partition to use (atoms or compositions)
+            root (pathlib.Path): Root directory for results.
+            models (list[str]): List of models to run inference for.
+            approaches (dict[str, AbstentionTechnique]): Abstention techniques to use.
+            batch_size (int, optional): Batch size for inference. Defaults to 16.
+            save_steps (int, optional): Number of batches to wait before a save. Defaults to 1.
+            sample (bool, optional): Whether to sample a subset of questions for evaluation. Defaults to True.
+            seed (int, optional): Random seed for determinism. Defaults to 20240801.
+            num_seeds (int, optional): Number of seeds to use (determines number of runs). Defaults to 5.
+
+        Raises:
+            ValueError: Missing parameters, such as the atomic dataset when working with compositions.
+        """
 
         self.dataset_state = dataset_state
 
@@ -52,7 +69,7 @@ class Evaluator(object):
         ]
 
         self.models     = models
-        self.approaches = approaches
+        self.techniques: dict[str, AbstentionTechnique] = techniques
 
         if self.dataset_state.compose:
             if 'atomic_ds_state' not in kwargs:
@@ -66,6 +83,8 @@ class Evaluator(object):
     # ------------------------------------------------------------------------------------------------------------
 
     def __getattr__(self, name):
+        """ Getter to resolve properties from the dataset instead. """
+
         if (attr_val := getattr(self.dataset_state, name, None)) is not None:
             return attr_val
         return object.__getattribute__(self, name)
@@ -85,6 +104,8 @@ class Evaluator(object):
     # ------------------------------------------------------------------------------------------------------------
 
     def sample_queries(self, concepts: list[str|tuple[str,str]], num_queries, random_state=20240616):
+        """ Deterministic sampling of queries corresponding to specific concepts. """
+
         random.seed(random_state)
         concepts = [
             concept if isinstance(concept, (list, tuple)) else (concept, )
@@ -92,442 +113,263 @@ class Evaluator(object):
         ]
         return dataset.sample_queries(self.dataset, concepts, num_queries, return_concepts=False)
 
-    def efficient_run_for_all(self, modes, compose_run, preview=False, range=None, **model_kwargs):
-        mode_data = {}
+    def prepare_instances(self, eval_type, random_state=None):
+        """ Collects instances for inference for a given evaluation type, grouped by concept. """
 
-        self.compose_state = self.dataset_state
-        if not compose_run: self.set_state(self.atomic_state)
-        concepts = [ concept for concept, _ in dataset.concept_iterator(self.node_data, self.compose_mode) ]
+        num_queries = len(next(iter(self.dataset_state.values('dataset')))['queries'])
+        collation = {}
 
-        if range:
-            start, end, *step = [ int(x) for x in range.split(':') ]
-            step = step[0] if step else 1
-            concepts = concepts[start:end:step]
+        if eval_type == 'unrelated':
+            eval_instances = [
+                f"{instance['instruction']}\n\n{instance['input']}".strip()
+                for instance in self.eval_dataset.select(range(num_queries))
+            ]
+            collation = { concept: eval_instances for concept in self.dataset_state.keys() }
 
-        for _mode, compose_flag in modes.items():
-            self.set_state(self.compose_state if compose_flag else self.atomic_state)
+        elif eval_type == 'generalization':
+            for concept, node in self.dataset_state.items('node_data'):
+                if not node.children: continue
+                # traverse subtree rooted at node to collect descendants
+                _, parent_map = dataset.level_traverse(dict(XYZ=node))
+                sub_concepts = [ (*concept[:-1], descendant) for descendant in parent_map ]
+                _num_queries = num_queries * (1 if self.sample else len(parent_map))
+                collation[concept] = self.sample_queries(sub_concepts, _num_queries, random_state)
 
-            run_mode = ('compose' if self.compose_mode else 'atomic')
-            _, num_queries = getattr(self, f'estimate_iterations_{run_mode}')(_mode)
+        elif eval_type == 'specificity':
+            for concept, datum in self.dataset_state.items():
+                tgt_concepts = self.sibling_map.deepget(concept)
+                if self.compose_mode:
+                    # add ancestors that are part of the set of compositions
+                    at_contexts = [
+                        (*self.atomic_state.dataset[_c_id].context.ids, _c_id)
+                        for _c_id in datum.compositions.ids
+                    ]
+                    tgt_concepts.extend((
+                        '#'.join(_concept) for _concept in itertools.product(*at_contexts)
+                        if '#'.join(_concept) in self.dataset[concept[0]] and \
+                            '#'.join(_concept) != concept[-1]
+                    ))
+                else:
+                    # add ancestors
+                    tgt_concepts += datum.context.ids
 
-            instances_collation = getattr(self, f'prepare_instances_{run_mode}')(
-                num_queries, _mode, random_state = self.seed
-            )
+                concepts = [ (*concept[:-1], unrelated) for unrelated in tgt_concepts ]
 
-            mode_data[_mode] = instances_collation
+                if self.compose_mode and len(concepts) == 0:
+                    for oth_relation, rel_data in self.node_data.items():
+                        if oth_relation == concept[0]: continue
+                        concepts.extend(((oth_relation, concept) for concept in rel_data))
 
-        self.set_state(self.compose_state if compose_run else self.atomic_state)
+                _num_queries = num_queries * (1 if self.sample else len(concepts))
+                collation[concept] = self.sample_queries(concepts, _num_queries, random_state)
 
-        for model_key, model_name in self.models:
-            batch_size = batch_multiplier(model_key) * self.batch_size
+        elif eval_type == 'generalization.atomic' and self.compose_mode:
+            for (relation, concept), datum in self.dataset_state.items():
+                collation[(relation, concept)] = [ ]
 
-            for seed in self.seeds:
-                seed_all(seed)
+                # set abstention concept as a part of the composition
+                for at_concept in datum.compositions.ids:
+                    concept_desc = self.atomic_state.dataset[at_concept].name
+                    if names := self.atomic_state.dataset[at_concept].context.names:
+                        concept_desc += ' in the context of ' + ', '.join(names)
 
-                print("> Using", model_key, "for inference ...")
+                    # ask queries about compositions
+                    for query in datum.queries[:num_queries]:
+                        collation[(relation, concept)].append(dict(
+                            concept=(relation, at_concept), desc=concept_desc,
+                            query=query, id=dataset.generate_id(query),
+                            examples=self.atomic_state.example_cache.get(at_concept)
+                        ))
 
-                model_kwargs['seed'] = seed
-                with ModelManager(model_name, **model_kwargs) as model:
+        elif eval_type == 'specificity.atomic' and self.compose_mode:
+            for concept, datum in self.dataset_state.items():
+                random.seed(random_state); collation[concept] = []
+                for at_concept in datum.compositions.ids:
+                    # ask queries about parts of compositions, while abstaining from the composition
+                    at_queries = self.atomic_state.dataset[at_concept].queries
+                    collation[concept].extend(random.sample(at_queries, num_queries))
 
-                    results = {
-                        mode: {
-                            approach: data.NestedListItemResult(
-                                os.path.join(self.root + ('.compose' if c_flag else ''), model_key, mode, f"{approach}.json"),
-                            )
-                            for approach in self.approaches
-                        }
-                        for mode, c_flag in modes.items()
-                    }
-                    gen_kwargs = dict(temperature=0.6, top_p=0.9, do_sample=True)
+        else: # mode == "abstention"
+            collation = {
+                concept: datum['queries'][:num_queries]
+                for concept, datum in self.dataset_state.items()
+            }
 
-                    for concept in (pbar := tqdm.tqdm(concepts)):
+        instances_collation = {}
+        for concept, instances in collation.items():
+            concept_desc = self.node_data.deepget(concept)['name']
+            if names := self.dataset.deepget((*concept, 'context', 'names')):
+                concept_desc += ' in the context of ' + ', '.join(names)
 
-                        pbar.set_description(self.node_data.deepget(concept)['name'])
+            instances_collation[concept] = [
+                instance if isinstance(instance, dict)
+                else dict(concept=concept, desc=concept_desc,
+                          query=instance, id=dataset.generate_id(instance),
+                          examples=self.example_cache.deepget(concept))
+                for instance in instances
+            ]
 
-                        dataset_state = self.compose_state if compose_run else self.atomic_state
-                        _labels =  [ concept ]
+        return instances_collation
 
-                        for approach, approach_inst in self.approaches.items():
-                            configs, ids, prompts, labels = [], [], [], []
+    def run_technique_with_model(
+            self, model_key: str,
+            model: ModelInference,
+            technique: AbstentionTechnique,
+            results: io.Result, instances: list[dict],
+            eval_type: str, seed: int, batch_size: int,
+            prepare_kwargs: dict, gen_kwargs: dict,
+            preview: bool=False, pbar: tqdm.tqdm=None,
+        ):
+        """ Collects inference results by running an abstention technique with a model.
 
-                            for mode in modes:
-                                if mode == 'generalization.atomic':
-                                    instances = []
-                                    for _instances in mode_data[mode].values():
-                                        for instance in _instances:
-                                            if instance['label'][-1] == concept:
-                                                instances.append(instance)
-                                else:
-                                    instances = mode_data[mode].get(concept, [])
+        Args:
+            model_key (str): Model identifier.
+            model (ModelInference): Model inference object to use for inference.
+            technique (AbstentionTechnique): Abstention technique to use for inference.
+            results (io.Result): Results object to update.
+            instances (list[dict]): Instances to process.
+            eval_type (str): Type of evaluation (denotes the metric).
+            seed (int): Seed to use for determinism.
+            batch_size (int): Batch size to use for inference.
+            prepare_kwargs (dict): Additional arguments to override preparation of the abstention technique.
+            gen_kwargs (dict): Additional arguments to override decoding configuration for generation.
+            preview (bool, optional): Whether to do a dry run. Defaults to False.
+            pbar (tqdm.tqdm, optional): Progress bar to sync progress with. Defaults to None.
+        """
 
-                                for instance in instances:
-                                    configs.append((mode, approach))
-                                    id = dataset.generate_id(instance['query'])
-                                    if not results[mode][approach].deepget((mode, str(seed), *instance['label'], id)):
-                                        ids.append(id); labels.append(instance['label'])
-                                        prompts.append(approach_inst.prepare_instance(
-                                            instance['concept_desc'], instance['query'],
-                                            examples=instance['examples']
-                                        ))
+        concepts = [ inst['concept'] for inst in instances ]
 
-                            if not prompts: continue
-
-                            pbar.set_postfix(dict(prepare=approach))
-                            if not preview:
-                                approach_inst.prepare(
-                                    model_key, model, dataset_state, _labels, seed=seed, node_data=self.node_data,
-                                    atomic_state=getattr(self, 'atomic_state', None), sibling_map=self.sibling_map,
-                                    aux_model=True
-                                )
-
-                            label_idx = sorted(( (lbl, i) for i, lbl in enumerate(labels) ))
-                            ids     = [ ids[idx] for _, idx in label_idx ]
-                            prompts = [ prompts[idx] for _, idx in label_idx ]
-                            labels  = [ labels[idx]  for _, idx in label_idx ]
-                            configs = [ configs[idx] for _, idx in label_idx ]
-
-                            batches = common.batchify(ids, prompts, labels, configs, batch_size=batch_size)
-                            timer = common.BatchProgressTimer(pbar, total=math.ceil(len(labels)/batch_size))
-
-                            for batch, (_ids, _prompts, _labels, _configs) in enumerate(batches):
-                                with timer.timed_operation(batch=batch+1, approach=approach):
-                                    __labels = _labels
-                                    if not compose_run:
-                                        __labels = [ _label[1:] if len(_label) > 1 else _label for _label in _labels ]
-
-                                    if not preview:
-                                        outputs = approach_inst.generate(model, _prompts, concepts=__labels, **gen_kwargs)
-                                    else:
-                                        outputs = _prompts
-
-                                    for config, label, id, response in zip(_configs, _labels, _ids, outputs):
-                                        if not preview:
-                                            results[config[0]][config[1]].deepset((config[0], str(seed), *label, id), dict(
-                                                id=id, label=label, response=response,
-                                                refusal={
-                                                    method: bool(refusal.check_refusal(
-                                                        response['answer'] if isinstance(response, dict)
-                                                        else response, method
-                                                    ))
-                                                    for method in refusal.EVALUATION_METHODS
-                                                }
-                                            ))
-
-                                    if not preview and ((batch+1) % self.save_steps == 0):
-                                        for mode, approach in set(_configs):
-                                            results[mode][approach].save()
-
-                                    if not preview:
-                                        sync_vram()
-
-                            if not preview and len(labels) > 0:
-                                sync_vram()
-                                for mode, approach in set(configs):
-                                    results[mode][approach].save()
-
-                        for approach, approach_inst in self.approaches.items():
-                            for adapter_path in getattr(approach_inst, 'adapters', {}).values():
-                                pbar.set_postfix(dict(delete=approach))
-                                # shutil.rmtree(adapter_path)
-
-    def _run(self, pbar, model_key, model, approach, results,
-             prompts, ids, labels, eval_type, seed, preview, batch_size):
-        gen_kwargs = dict(temperature=0.6, top_p=0.9, do_sample=True)
+        # sort by order of concepts
+        instances = [ instances[idx] for idx in sorted(range(len(concepts)), key=lambda i: concepts[i]) ]
 
         if not preview:
-            dataset_state = self.atomic_state if eval_type == 'generalization.atomic' else self.dataset_state
-            _labels = sorted(set(labels))
-
+            dataset_state = self.dataset_state
             if eval_type == 'generalization.atomic':
-                _labels = [ label[1:] for label in _labels ]
-                trav_vars = dataset.get_traversal_variables(self.atomic_state.taxonomy, False)
-                sibling_map, node_data = trav_vars['sibling_map'], trav_vars['node_data']
-            else:
-                sibling_map, node_data = self.sibling_map, self.node_data
+                dataset_state = self.atomic_state
 
-            approach.prepare(
-                model_key, model, dataset_state, _labels, seed=seed, node_data=node_data,
-                atomic_state=getattr(self, 'atomic_state', None), sibling_map=sibling_map
+            _concepts = sorted(set(concepts))
+            if eval_type == 'generalization.atomic':
+                _concepts = [ concept[1:] for concept in _concepts ]
+
+            technique.prepare(
+                model_key, model, dataset_state, _concepts, seed=seed,
+                node_data=dataset_state.node_data,
+                atomic_state=getattr(self, 'atomic_state', None),
+                sibling_map=dataset_state.sibling_map,
+                **prepare_kwargs
             )
 
-        label_idx = sorted(( (lbl, i) for i, lbl in enumerate(labels) ))
-        ids     = [ ids[idx] for _, idx in label_idx ]
-        prompts = [ prompts[idx] for _, idx in label_idx ]
-        labels  = [ labels[idx] for _, idx in label_idx ]
+        batches = common.batchify(instances, batch_size=batch_size)
+        timer = common.BatchProgressTimer(pbar, total=len(batches))
 
-        batches = common.batchify(ids, prompts, labels, batch_size=batch_size)
-        timer = common.BatchProgressTimer(pbar, total=math.ceil(len(labels)/batch_size))
-
-        for batch, (_ids, _prompts, _labels) in enumerate(batches):
-            with timer.timed_operation(batch=batch+1): #, save=((batch+1) % self.save_steps == 0)):
-                __labels = _labels
+        for batch_idx, batch in enumerate(batches):
+            with timer.timed_operation(batch=batch_idx+1):
+                concepts = batch['concept']
                 if eval_type == 'generalization.atomic':
-                    __labels = [ _label[1:] for _label in _labels ]
+                    concepts = [ concept[1:] for concept in concepts ]
+
                 if not preview:
-                    outputs = approach.generate(model, _prompts, concepts=__labels, **gen_kwargs)
+                    prompts = [
+                        technique.prepare_instance(concept, query, examples=examples)
+                        for concept, query, examples in zip(batch['desc'], batch['query'], batch['examples'])
+                    ]
+                    outputs = technique.generate(model, prompts, concepts=concepts, **gen_kwargs)
                 else:
-                    outputs = _prompts
+                    outputs = batch['query']
 
-                for label, id, response in zip(_labels, _ids, outputs):
+                for concept, id, response in zip(batch['concept'], batch['id'], outputs):
                     if not preview:
-                        results.deepset((eval_type, str(seed), *label, id), dict(
-                            id=id, label=label, response=response,
-                            refusal={
-                                method: bool(refusal.check_refusal(
-                                    response['answer'] if isinstance(response, dict)
-                                    else response, method
-                                ))
-                                for method in refusal.EVALUATION_METHODS
-                            }
-                        ))
-                    pbar.update()
+                        refusal_eval = {
+                            method: bool(refusal.check_refusal(
+                                response['answer'] if isinstance(response, dict) else response, method
+                            ))
+                            for method in refusal.EVALUATION_METHODS
+                        }
+                        inst_record = dict(id=id, concept=concept, response=response, refusal=refusal_eval)
+                        results.deepset((str(seed), *concept, id), inst_record)
+                    if pbar: pbar.update()
 
-                if not preview and ((batch+1) % self.save_steps == 0):
-                    results.save()
+                if not preview and ((batch_idx+1) % self.save_steps == 0): results.save()
+                if not preview: sync_vram()
 
-                if not preview:
-                    sync_vram()
+        if not preview and len(concepts) > 0:
+            sync_vram(); results.save()
 
-        if not preview and len(labels) > 0:
-            sync_vram()
-            results.save()
+    def run(self, eval_type, config: dict=None, concepts_filter: str|list[str]=None,
+            preview=False, random_state=20240416, backend='huggingface'):
+        """ Performs a series of evaluation runs with the set configuration.
 
-    def run(self, eval_type, preview=False, random_state=20240416, **model_kwargs):
-        run_mode = ('compose' if self.compose_mode else 'atomic')
+        Args:
+            eval_type (str): Metric to compute results for: abstention, generalization or specificity.
+            config (dict, optional): Execution config to override model initialization, technique
+                initialization, and decoding parameters for generation. Defaults to None.
+            concepts_filter (str|list[str], optional): Subset of concepts to filter and process.
+                Can be a range delimited by a colon, or a list of concept names.
+            preview (bool, optional): Whether to do a dry-run. Defaults to False.
+            random_state (int, optional): Value to override the default seed. Defaults to 20240416.
+        """
 
-        num_concepts, num_queries = getattr(self, f'estimate_iterations_{run_mode}')(eval_type)
-        total_iters = len(self.approaches) * len(self.seeds) * num_concepts * num_queries
+        # get questions to evaluate for each concept
+        instances_collation = self.prepare_instances(eval_type, random_state = self.seed or random_state)
 
-        instances_collation = getattr(self, f'prepare_instances_{run_mode}')(
-            num_queries, eval_type, random_state = self.seed or random_state
-        )
+        config  = io.Record(config or {})
+
+        if concepts_filter is not None:
+            # run a filter over the total set of concepts
+            all_concepts = { node['name']: concept for concept, node in self.dataset_state.items() }
+
+            if isinstance(concepts_filter, str) or (':' in concepts_filter[0]):
+                c_range = concepts_filter if isinstance(concepts_filter, str) else concepts_filter[0]
+                all_concepts = list(all_concepts.values())[slice(*[ int(x) for x in c_range.split(':') ])]
+
+            else:
+                all_concepts = [ all_concepts[name] for name in concepts_filter ]
+
+            instances_collation = { concept: instances_collation[concept] for concept in all_concepts }
+
+        # number of questions for the run
+        total_iters = sum(len(inst) for inst in instances_collation.values())
+        # scale by techniques and number of runs
+        total_iters *= len(self.techniques) * len(self.seeds)
 
         for model_name in self.models:
+            model_kwargs = dict(backend='openai' if 'openai' in model_name else backend)
+            model_kwargs.update(config.deepget(('common_model_kwargs', backend), {}))
+            model_kwargs.update(config.deepget(('model_kwargs', model_name), {}))
+
+            gen_kwargs = dict(config.get('common_gen_kwargs', {}))
+            gen_kwargs.update(config.deepget(('gen_kwargs', model_name), {}))
+
             batch_size = batch_multiplier(model_name) * self.batch_size
-            if model_kwargs.get('backend', 'huggingface') == 'vllm' and 'openai' not in model_name: batch_size = 1024
+            if backend == 'vllm': batch_size = 1024
 
             print("> Using", model_name, "for inference ...")
             pathsafe_model = io.pathsafe(model_name.replace('/', '--').lower())
 
-            with tqdm.tqdm(total = total_iters) as pbar:
+            with tqdm.tqdm(total=total_iters) as pbar:
                 for seed in self.seeds:
-                    seed_all(seed)
+                    seed_all(seed); model_kwargs['seed'] = seed
 
-                    model_kwargs['seed'] = seed
                     with ModelManager(model_name, **model_kwargs) as model:
 
-                        for approach, approach_inst in self.approaches.items():
-                            pbar.set_description(approach_inst.short_name)
+                        for tech_name, technique in self.techniques.items():
+                            pbar.set_description(technique.short_name)
 
-                            results = data.NestedListItemResult(
-                                os.path.join(self.root, pathsafe_model, eval_type, f"{approach}.json"),
-                            )
+                            results = io.Result(self.root / pathsafe_model / eval_type / f"{tech_name}.json.gz")
 
-                            ids, prompts, labels = [], [], []
-
+                            # collect prompts that were not already processed
+                            _instances = []
                             for instances in instances_collation.values():
                                 for instance in instances:
-                                    id = dataset.generate_id(instance['query'])
-                                    if not results.deepget((eval_type, str(seed), *instance['label'], id)):
-                                        ids.append(id); labels.append(instance['label'])
-                                        prompts.append(approach_inst.prepare_instance(
-                                            instance['concept_desc'], instance['query'],
-                                            examples=instance['examples']
-                                        ))
+                                    if not results.deepget((str(seed), *instance['concept'], instance['id'])):
+                                        _instances.append(instance)
                                     else: pbar.update()
 
-                            self._run(
-                                pbar, pathsafe_model, model, approach_inst, results,
-                                prompts, ids, labels, eval_type, seed, preview, batch_size
+                            self.run_technique_with_model(
+                                pathsafe_model, model, technique, results,
+                                _instances, eval_type, seed, batch_size,
+                                prepare_kwargs=config.get('prepare_kwargs', {}).get(tech_name, {}),
+                                gen_kwargs=gen_kwargs, preview=preview, pbar=pbar
                             )
-
-    def estimate_iterations_atomic(self, mode):
-        if mode != 'generalization': num_concepts = len(self.node_data)
-        else: num_concepts = sum(1 for cdata in self.node_data.values() if cdata['children'])
-
-        num_queries = len(next(iter(self.dataset.values()))['queries'])
-
-        if self.sample == False and mode in ("generalization", "specificity"):
-            if mode == "generalization":
-                num_concepts = sum(
-                    len(dataset.level_traverse(dict(XYZ=self.node_data[concept]))[1])
-                    for concept in self.node_data
-                )
-            else:
-                num_concepts = sum(
-                    len(self.sibling_map[concept] + self.dataset[concept]['context']['ids'])
-                    for concept in self.node_data
-                )
-
-        return num_concepts, num_queries
-
-    def estimate_iterations_compose(self, mode):
-        if mode == "generalization":
-            num_concepts = sum(
-                1 for rel_data in self.node_data.values()
-                for c_data in rel_data.values() if c_data['children']
-            )
-        elif mode in { "specificity.atomic", "generalization.atomic" }:
-            num_concepts = sum(
-                len(c_data['names']) for rel_data in self.node_data.values()
-                for c_data in rel_data.values()
-            )
-        else:
-            num_concepts = sum(len(rel_data) for rel_data in self.dataset.values())
-
-        num_queries = len(next(iter(next(iter(self.dataset.values())).values()))['queries'])
-
-        if self.sample == False and mode not in ("direct", "unrelated"):
-            # TODO: Implement non-sampling mode for composition queries
-            pass
-
-        return num_concepts, num_queries
-
-    def prepare_instances_atomic(self, num_queries, mode, random_state=None):
-        if mode == 'unrelated':
-            eval_instances = [
-                f"{instance['instruction']}\n\n{instance['input']}".strip()
-                for instance in self.eval_dataset.select(range(num_queries))
-            ]
-            collation = { concept: eval_instances for concept in self.node_data }
-
-        elif mode == 'generalization':
-            collation = {}
-            for concept in self.node_data:
-                if not self.node_data[concept]['children']: continue
-                _, par_map = dataset.level_traverse(dict(XYZ=self.node_data[concept]))
-                _num_queries = num_queries * (1 if self.sample else len(par_map.keys()))
-                collation[concept] = self.sample_queries(
-                    par_map.keys(), _num_queries, random_state=random_state
-                )
-
-        elif mode == 'specificity':
-            collation = {}
-            for concept in self.node_data:
-                concepts = self.sibling_map[concept] + self.dataset[concept]['context']['ids']
-                _num_queries = num_queries * (1 if self.sample else len(concepts))
-                collation[concept] = self.sample_queries(
-                    concepts, _num_queries, random_state=random_state
-                )
-
-        else: # mode == "abstention"
-            collation = { concept: self.dataset[concept]['queries'][:num_queries] for concept in self.node_data }
-
-        instances_collation = {}
-        for concept, instances in collation.items():
-            c_desc = self.node_data[concept]['name']
-            if names := self.dataset[concept]['context']['names']:
-                c_desc += ' in the context of ' + ', '.join(names)
-
-            instances_collation[(concept, )] = [
-                dict(label=(concept, ), concept_desc=c_desc, query=instance,
-                    examples=self.example_cache.get(concept))
-                for instance in instances
-            ]
-
-        return instances_collation
-
-    def prepare_instances_compose(self, num_queries, mode, random_state):
-        collation = {}
-
-        if mode == 'unrelated':
-            eval_instances = [
-                f"{instance['instruction']}\n\n{instance['input']}".strip()
-                for instance in self.eval_dataset.select(range(num_queries))
-            ]
-            collation = {
-                (relation, concept): eval_instances
-                for relation in self.dataset for concept in self.node_data[relation]
-            }
-
-        elif mode == 'generalization':
-            for relation in self.dataset:
-                for concept, c_data in self.node_data[relation].items():
-                    if not c_data['children']: continue
-                    _, par_map   = dataset.level_traverse(dict(XYZ=c_data))
-                    _num_queries = num_queries * (1 if self.sample else len(par_map.keys()))
-                    sub_concepts = [ (relation, concept) for concept in par_map ]
-                    instances = self.sample_queries(sub_concepts, _num_queries, random_state=random_state)
-                    collation[(relation, concept)] = instances
-
-        elif mode == 'generalization.atomic':
-            for relation in self.dataset:
-                for concept, c_data in self.node_data[relation].items():
-                    instances = []
-                    for _c_id in self.dataset[relation][concept]['compositions']['ids']:
-                        examples = self.atomic_state.example_cache.get(_c_id)
-                        _c_desc  = self.atomic_state.dataset[_c_id]['name']
-                        if names := self.atomic_state.dataset[_c_id]['context']['names']:
-                            _c_desc += ' in the context of ' + ', '.join(names)
-                        for query in self.dataset[relation][concept]['queries'][:num_queries]:
-                            instances.append(dict(
-                                label=(relation, _c_id), concept_desc=_c_desc,
-                                query=query, examples=examples
-                            ))
-                    collation[(relation, concept)] = instances
-
-        elif mode == 'specificity.easy':
-            for relation in self.dataset:
-                for concept, c_data in self.node_data[relation].items():
-                    sub_concepts = []
-                    for oth_relation, rel_data in self.node_data.items():
-                        if oth_relation == relation: continue
-                        sub_concepts.extend(((oth_relation, concept) for concept in rel_data))
-                    max_queries = num_queries * (1 if self.sample else len(sub_concepts))
-                    instances = self.sample_queries(sub_concepts, max_queries, random_state=random_state)
-                    collation[(relation, concept)] = instances
-
-        elif mode == 'specificity':
-            for relation in self.dataset:
-                for concept, c_data in self.node_data[relation].items():
-                    concepts = set(self.sibling_map[relation][concept])
-                    at_contexts = [
-                        (*self.atomic_state.dataset[_c_id]['context']['ids'], _c_id)
-                        for _c_id in self.dataset[relation][concept]['compositions']['ids']
-                    ]
-                    concepts.update((
-                        '#'.join(_concept) for _concept in itertools.product(*at_contexts)
-                        if '#'.join(_concept) in self.dataset[relation] and \
-                            '#'.join(_concept) != concept
-                    ))
-                    concepts = [ (relation, c_id) for c_id in concepts ]
-                    if len(concepts) == 0:
-                        for oth_relation, rel_data in self.node_data.items():
-                            if oth_relation == relation: continue
-                            concepts.extend(((oth_relation, concept) for concept in rel_data))
-                    _num_queries = num_queries * (1 if self.sample else len(concepts))
-                    instances = self.sample_queries(concepts, _num_queries, random_state=random_state)
-                    collation[(relation, concept)] = instances
-
-        elif mode == 'specificity.atomic':
-            for relation in self.dataset:
-                for concept in self.node_data[relation]:
-                    random.seed(random_state)
-                    instances = [
-                        query for _c_id in self.dataset[relation][concept]['compositions']['ids']
-                        for query in random.sample(self.atomic_state.dataset[_c_id]['queries'], num_queries)
-                    ]
-                    collation[(relation, concept)] = instances
-
-        else: # mode == "abstention"
-            collation = {
-                (relation, concept): self.dataset[relation][concept]['queries'][:num_queries]
-                for relation in self.dataset for concept in self.node_data[relation]
-            }
-
-        instances_collation = {}
-        for label, instances in collation.items():
-            concept_desc = self.node_data[label[0]][label[1]]['name']
-            if names := self.dataset[label[0]][label[1]]['context']['names']:
-                concept_desc += ' in the context of ' + ', '.join(names)
-
-            instances_collation[label] = [
-                instance if isinstance(instance, dict)
-                else dict(label=label, concept_desc=concept_desc, query=instance,
-                          examples=self.example_cache.deepget(label))
-                for instance in instances
-            ]
-
-        return instances_collation
 
 # ==================================================
