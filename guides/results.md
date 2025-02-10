@@ -26,7 +26,7 @@ For each instance we evaluate, we save the following JSON record:
 ```json
 {
     "id": "instance specific ID",
-    "label": "list of concept(s) that comprise the target concept. Has more than one element only in case of compositions.",
+    "concept": "list of concept(s) that comprise the target concept. Has more than one element only in case of compositions.",
     "response": "Model response. In case of CoT this is a dictionary of raw and formatted responses.",
     "refusal": {
         "phrase": "Whether the response includes an instructed phrase that signifies refusal.",

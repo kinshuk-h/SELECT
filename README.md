@@ -79,25 +79,7 @@ python3 {generate,evaluate}.py --help
 
 #### Replication
 
-To reproduce the results for the experiments described in the paper, use the following command(s):
-
-For atomic concept evaluations:
-
-    ```bash
-    python3 generate.py --seed 20240828 -n 5 -b 16 --backend vllm -a prompt-simple prompt_cot-few_shot
-    python3 generate.py --seed 20240828 -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a model-edit_repe
-    python3 generate.py --seed 20240828 -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a tuning-sft tuning-sft-dpo
-    python3 evaluate.py
-    ```
-
-For compositions of concepts based evaluations:
-
-    ```bash
-    python3 generate.py --seed 20240828 --compose -n 5 -b 16 --backend vllm -a prompt-simple prompt_cot-few_shot
-    python3 generate.py --seed 20240828 --compose -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a model-edit_repe
-    python3 generate.py --seed 20240828 --compose -n 1 -b 16 -M GPT-4o-U GPT-3.5-U -a tuning-sft tuning-sft-dpo
-    python3 evaluate.py --compose
-    ```
+To reproduce the results for the experiments described in the paper, refer [the scripts guide](/guides/scripts.md).
 
 ## Extending the Evaluation of `SELECT`
 
