@@ -72,7 +72,7 @@ In case of compositions, the data is grouped according to relation templates fro
 
 #### Concept Statistics
 
-The file `stats.concepts.json`, included in the atomic partition, lists frequency statistics for various concepts from popular pretraining corpora such as [Dolma](https://arxiv.org/abs/2402.00159), [Pile](https://arxiv.org/abs/2101.00027), [C4](https://arxiv.org/abs/1910.10683) and [OpenWebText](https://skylion007.github.io/OpenWebTextCorpus/).
+The file `stats.concepts.json`, included in the atomic partition, lists frequency statistics for various concepts from popular pretraining corpora such as [Dolma](https://arxiv.org/abs/2402.00159), [Pile](https://arxiv.org/abs/2101.00027), [C4](https://arxiv.org/abs/1910.10683) and [OpenWebText](https://skylion007.github.io/OpenWebTextCorpus/). This data is collected using n-gram lookup backed by the [WIMBD project](https://wimbd.allen.ai/) ([Elazar et al., 2023](https://arxiv.org/abs/2310.20707)).
 
 ### Statistics
 
