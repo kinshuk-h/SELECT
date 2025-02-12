@@ -130,14 +130,14 @@ class Evaluator(object):
             for concept, node in self.dataset_state.items('node_data'):
                 if not node.children: continue
                 # traverse subtree rooted at node to collect descendants
-                _, parent_map = dataset.level_traverse(dict(XYZ=node))
+                parent_map = dataset.level_traverse(dict(XYZ=node))[1]
                 sub_concepts = [ (*concept[:-1], descendant) for descendant in parent_map ]
                 _num_queries = num_queries * (1 if self.sample else len(parent_map))
                 collation[concept] = self.sample_queries(sub_concepts, _num_queries, random_state)
 
         elif eval_type == 'specificity':
             for concept, datum in self.dataset_state.items():
-                tgt_concepts = self.sibling_map.deepget(concept)
+                tgt_concepts = list(self.sibling_map.deepget(concept))
                 if self.compose_mode:
                     # add ancestors that are part of the set of compositions
                     at_contexts = [
@@ -253,7 +253,6 @@ class Evaluator(object):
 
             technique.prepare(
                 model_key, model, dataset_state, _concepts, seed=seed,
-                node_data=dataset_state.node_data,
                 atomic_state=getattr(self, 'atomic_state', None),
                 sibling_map=dataset_state.sibling_map,
                 **prepare_kwargs
@@ -341,7 +340,7 @@ class Evaluator(object):
             gen_kwargs.update(config.deepget(('gen_kwargs', model_name), {}))
 
             batch_size = batch_multiplier(model_name) * self.batch_size
-            if backend == 'vllm': batch_size = 1024
+            if model_kwargs['backend'] == 'vllm': batch_size = 1024
 
             print("> Using", model_name, "for inference ...")
             pathsafe_model = io.pathsafe(model_name.replace('/', '--').lower())

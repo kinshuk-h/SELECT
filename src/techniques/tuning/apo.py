@@ -29,7 +29,7 @@ class AbstentionWithDPOTraining(AbstentionByPostTraining):
         node, pos_queries, neg_queries = self.collect_concept_data(concept, num_queries, query_repeats)
 
         entries, concept_desc = [], node.name
-        if names := (node.context.ids):
+        if names := (node.context.names):
             concept_desc += ' in the context of ' + ', '.join(names)
 
         # format positive examples
