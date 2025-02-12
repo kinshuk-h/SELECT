@@ -41,7 +41,27 @@ As an example, the following configuation:
 }
 ```
 
-The defaults for abstention techiques and model inference object can be found in the corresponding implementations.
+As another example, the following configuation overrides training parameters for abstention with SFT which applies to all models. Slightly different parameters are then set specifically for Gemma 2 2B.
+
+```json
+{
+    "prepare_kwargs": {
+        "tuning-sft": {
+            "trainer_kwargs": {
+                "common": {
+                    "learning_rate": 5e-5,
+                    "num_train_epochs": 5
+                },
+                "google/gemma-2-2b-it": {
+                    "learning_rate": 5e-4,
+                }
+            }
+        }
+    }
+}
+```
+
+Here, training arguments correspond to those supported by [`trl.SFTConfig`](https://huggingface.co/docs/trl/en/sft_trainer#trl.SFTConfig). The defaults for abstention techiques and model inference object in general can be found in the corresponding implementations.
 
 #### Generating the `SELECT` Benchmark
 
