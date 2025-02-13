@@ -1,7 +1,7 @@
 import random
 import hashlib
 import pathlib
-import datasets
+import itertools
 import dataclasses
 
 from ..utils import io
@@ -251,3 +251,83 @@ class DatasetState:
     def parent_map(self) -> dict:
         """ Mapping of node identifiers to parents """
         return self.__aux_variables['parent_map']
+
+def make_examples(dataset_state: DatasetState, concept: tuple[str],
+                  atomic_state: DatasetState=None, seed=42,
+                  num_target=1, num_generalization=2, num_specific=2, num_unrelated=1):
+
+    node = dataset_state.view(concept, 'train_dataset')
+    descendants = level_traverse(dict(XYZ=node.node_data))[1]
+    descendants = [ (*concept[:-1], c) for c in descendants ]
+    num_target += (num_generalization if not descendants else 0)
+
+    examples = []
+
+    # target concept relevant example(s)
+    for query in random.sample(node.queries, num_target):
+        examples.append(dict(query=query, concept=node.name,
+                             context=(node.context.names or []),
+                             response="Abstained"))
+
+    print(node.name, descendants)
+
+     # descendant example(s) for generalization
+    desc_instances = sample_queries(
+        dataset_state.train_dataset, sorted(descendants),
+        num_generalization, return_concepts=True
+    )
+
+    for query, _concept in desc_instances:
+        _node = node.view(_concept)
+        examples.append(dict(
+            query=query, concept=_node.name, response="Abstained",
+            context=(_node.context.names or []),
+        ))
+
+    # ancestor or sibling example(s) for specificity
+    hard_alt_concepts = list(node.sibling_map)
+
+    if len(concept) > 1:
+        # add ancestors that are part of the set of compositions
+        at_contexts = [
+            (*atomic_state.dataset[_c_id].context.ids, _c_id)
+            for _c_id in node.compositions.ids
+        ]
+        hard_alt_concepts.extend((
+            '#'.join(_concept) for _concept in itertools.product(*at_contexts)
+            if ('#'.join(_concept) in dataset_state.dataset[concept[0]]) and '#'.join(_concept) != concept[-1]
+        ))
+        hard_alt_concepts = sorted(hard_alt_concepts)
+        _descendant = lambda alt_concept: alt_concept[0] == concept[0]
+    else:
+        hard_alt_concepts += node.context.ids
+        _descendant = lambda alt_concept: alt_concept in descendants
+
+    hard_alt_concepts = dict.fromkeys((*concept[:-1], c) for c in hard_alt_concepts)
+
+    # all concepts unrelated to the target otherwise
+    alt_concepts = [
+        alt_concept for alt_concept in dataset_state.keys()
+        if (alt_concept != concept and not _descendant(alt_concept) \
+            and alt_concept not in hard_alt_concepts)
+    ]
+
+    unrelated_instances = sample_queries(
+        dataset_state.train_dataset, sorted(hard_alt_concepts),
+        num_queries=num_specific, return_concepts=True
+    )
+    unrelated_instances.extend(sample_queries(
+        dataset_state.train_dataset, sorted(alt_concepts),
+        num_queries=num_specific+num_unrelated-len(unrelated_instances),
+        return_concepts=True
+    ))
+
+    for query, _concept in unrelated_instances:
+        _node = node.view(_concept)
+        # fill in response for unsafe queries using LM
+        examples.append(dict(
+            query=query, concept=_node.name, response=None,
+            context=(_node.context.names or []),
+        ))
+
+    return examples

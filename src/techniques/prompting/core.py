@@ -5,6 +5,7 @@ import regex
 import tqdm.auto as tqdm
 
 from ...utils import formatting
+from ...evaluation import dataset
 
 from ..base import AbstentionTechnique
 from ..manager import register_technique
@@ -16,16 +17,39 @@ class AbstentionWithPrompting(AbstentionTechnique):
     def __init__(self, name) -> None:
         super().__init__('PROMPTING', **TECHNIQUE_CONFIGS[name])
         self.examples = {}
-        self.use_cache = True
+        self.use_example_cache = True
 
-    def prepare(self, model_id, model, dataset_state, concepts: list[str | tuple[str, str]],
-                node_data, use_cache=True, seed=42, **prepare_kwargs):
-        self.use_cache = use_cache
-        if self.use_cache: self.examples = {}; return
+    def get_plain_response(self, query, model):
+        prompt = model.make_prompt(f"Answer the following question briefly: {query}", chat=True)
+        return model.generate(prompt, max_new_tokens=256, do_sample=False, temperature=0)[0]
 
+    def prepare(self, model_id, model, dataset_state: dataset.DatasetState,
+                concepts: list[tuple[str, str]],
+                atomic_state: dataset.DatasetState=None,
+                use_example_cache=True, seed=42, **prepare_kwargs):
+
+        self.use_example_cache = use_example_cache
         for concept in (pbar := tqdm.tqdm(concepts)):
-            pbar.set_description(node_data.deepget(concept)['name'])
-            self.examples[node_data.deepget(concept)['name']] = []
+            pbar.set_description(dataset_state.node_data.deepget(concept)['name'])
+
+            if atomic_state is not None and len(concept) < 2:
+                ds_state = atomic_state
+                has_examples = atomic_state.example_cache.deepget(concept) is not None
+            else:
+                ds_state = dataset_state
+                has_examples = dataset_state.example_cache.deepget(concept) is not None
+
+            if self.use_example_cache and has_examples:
+                self.examples.pop(dataset_state.node_data.deepget(concept)['name'], None)
+                continue
+
+            examples = dataset.make_examples(ds_state, concept, atomic_state)
+
+            for instance in examples:
+                if examples['response'] is not None: continue
+                examples['response'] = self.get_plain_response(instance['query'], model)
+
+            self.examples[dataset_state.node_data.deepget(concept)['name']] = examples
 
     def prepare_instance(self, concept, query, examples=None, instruction=None):
         """ Creates the approach specific prompt from a query and concept (with context).
@@ -80,7 +104,7 @@ class AbstentionWithPrompting(AbstentionTechnique):
 
     def generate(self, model, instances: list, *args, **generate_kwargs):
         generate_kwargs.pop('concepts', None)
-        fmtd_prompts = model.make_prompt(instances, instructions=[], chat=True)
+        fmtd_prompts = model.make_prompt(instances, chat=True)
 
         if 'cot' in self.tmpl_name:
             # Ensure sufficient generation for CoT reasoning
