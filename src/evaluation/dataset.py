@@ -1,6 +1,7 @@
 import random
 import hashlib
 import pathlib
+import datasets
 import dataclasses
 
 from ..utils import io
@@ -135,6 +136,24 @@ class DatasetState:
     visit_fn        : 'callable'           = None
     __aux_variables : dict[dict|io.Record] = dataclasses.field(default_factory=lambda: {})
 
+    class ConceptView:
+        """ Lightweight view for accessing concept specific properties. """
+        def __init__(self, state, concept, default_var='dataset'):
+            self.state = state
+            self.concept = concept
+            self.default_var = default_var
+
+        def __getattr__(self, attr):
+            val = getattr(self.state, self.default_var)
+            val = getattr(val.deepget(self.concept), attr, None)
+            if val is not None: return val
+            val: io.Record = getattr(self.state, attr)
+            return val.deepget(self.concept)
+
+        def view(self, alt_concept):
+            """ Create a view with similar defaults. """
+            return self.state.view(alt_concept, self.default_var)
+
     def __load_traversal_vars(self):
         self.__aux_variables.update(get_traversal_variables(self.taxonomy, self.compose, self.visit_fn))
 
@@ -172,6 +191,19 @@ class DatasetState:
         for prop in ( 'sibling_map', 'parents_map', 'node_data', 'node_paths' ):
             self.__aux_variables.pop(prop, None)
 
+    def view(self, concept, default_var='dataset'):
+        """ Creates a referential view for a concept, such that individual properties are accessible.
+
+        Args:
+            concept (tuple[str]): Concept identifiers.
+            default_var (str): Variable to use for property lookup by default.
+
+        Returns:
+            View: View object exposing properties from the underlying dataset state.
+        """
+
+        return self.ConceptView(self, concept, default_var)
+
     @property
     def dtype(self):
         return 'compositions' if self.compose else 'atoms'
@@ -199,19 +231,23 @@ class DatasetState:
     @property
     @lazy_loaded
     def node_data(self) -> io.Record:
+        """ Mapping of node identifiers to taxonomy nodes """
         return self.__aux_variables['node_data']
 
     @property
     @lazy_loaded
     def node_paths(self) -> io.Record:
+        """ Mapping of node identifiers to ancestry """
         return self.__aux_variables['node_paths']
 
     @property
     @lazy_loaded
     def sibling_map(self) -> io.Record:
+        """ Mapping of node identifiers to siblings """
         return self.__aux_variables['sibling_map']
 
     @property
     @lazy_loaded
     def parent_map(self) -> dict:
+        """ Mapping of node identifiers to parents """
         return self.__aux_variables['parent_map']
