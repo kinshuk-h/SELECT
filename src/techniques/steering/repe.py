@@ -1,4 +1,5 @@
-import os
+import random
+import pathlib
 import itertools
 
 import repe
@@ -16,7 +17,7 @@ from .utils import (
     get_aggregate_concept_vector, evaluate_concept_vector,
     estimate_cls_params, estimate_cls_params_with_eval_results
 )
-from ...evaluation.dataset import generate_id, level_traverse, sample_queries
+from ...evaluation.dataset import generate_id, level_traverse, sample_queries, DatasetState
 
 # Behavior control parameters for refusal vectors that were determined by manual search.
 # Known to work well for certain models than those returned by estimation methods.
@@ -73,63 +74,88 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
         super().__init__('STEERING', **TECHNIQUE_CONFIGS['steering-repe'])
         self.algorithm = 'repe-pca'
 
+        self.root = pathlib.Path("assets") / "control.act_str" / self.algorithm
+
         repe.repe_pipeline_registry()
 
-    def format_for_read(self, request, concept):
+    def format_for_read(self, request, concept_desc: str):
         """ Formats a prompt for reading (detection) by adding concept data """
-
-        concept_desc = self.node_data.deepget(concept)['name']
-        if names := self.dataset_state.dataset.deepget(concept)['context']['names']:
-            concept_desc += ' in the context of ' + ', '.join(names)
 
         return self.READING_TEMPLATE.format(concept=concept_desc, stimulus=request)
 
-    def make_concept_dataset(self, concept, hard=False):
+    def make_concept_dataset(self, concept, hard=False, num_major=15, num_minor=5, num_dev=5):
         """ Create a contrast dataset for learning steering vectors """
 
-        c_data = self.dataset_state.train_dataset.deepget(concept)
-        _, par_map   = level_traverse(dict(XYZ=self.node_data.deepget(concept)))
+        node = self.dataset_state.view(concept, 'train_dataset')
+        descendants = level_traverse(dict(XYZ=node.node_data))[1]
+
+        pos_concepts = [ (*concept[:-1], c) for c in descendants ]
+
+        # concepts we consider for specificity
+        hard_alt_concepts = list(node.sibling_map)
 
         if len(concept) > 1:
-            alt_concepts = []
-            if hard:
-                alt_concepts = set( (concept[0], sibling) for sibling in self.sibling_map.deepget(concept) )
-                atom_concepts = [
-                    (*self.atomic_state.dataset[_c_id]['context']['ids'], _c_id)
-                    for _c_id in self.dataset_state.dataset.deepget(concept)['compositions']['ids']
-                ]
-                alt_concepts.update((
-                    (concept[0], '#'.join(_concept)) for _concept in itertools.product(*atom_concepts)
-                    if '#'.join(_concept) in self.dataset_state.dataset[concept[0]] and \
-                        '#'.join(_concept) != concept[1]
-                ))
-                alt_concepts = sorted(alt_concepts)
-            if not alt_concepts:
-                for rel, rel_data in self.node_data.items():
-                    if rel == concept[0]: continue
-                    else: alt_concepts.extend(((rel, _concept) for _concept in rel_data))
+            # add ancestors that are part of the set of compositions
+            at_contexts = [
+                (*self.atomic_state.dataset[_c_id].context.ids, _c_id)
+                for _c_id in node.compositions.ids
+            ]
+            hard_alt_concepts.extend((
+                '#'.join(_concept) for _concept in itertools.product(*at_contexts)
+                if ('#'.join(_concept) in self.state.dataset[concept[0]]) and '#'.join(_concept) != concept[-1]
+            ))
+            hard_alt_concepts = sorted(hard_alt_concepts)
+            _descendant = lambda alt_concept: alt_concept[0] == concept[0]
         else:
-            alt_concepts = [ (c,) for c in self.node_data if c not in par_map and c != concept ]
-            if hard:
-                specific_concepts = [ *(c_data['context']['ids'] or []), *self.sibling_map.deepget(concept) ]
-                alt_concepts = [ (c, ) for c in specific_concepts ]
+            hard_alt_concepts += node.context.ids
+            _descendant = lambda alt_concept: alt_concept in descendants
 
-        pos_queries      = c_data['queries'][:-5]
-        pos_queries_test = c_data['queries'][-5:]
+        hard_alt_concepts = dict.fromkeys((*concept[:-1], c) for c in hard_alt_concepts)
 
-        neg_queries      = sample_queries(self.dataset_state.train_dataset, alt_concepts, num_queries=25)
-        neg_queries, neg_queries_test = neg_queries[:-5], neg_queries[-5:]
+        # all concepts unrelated to the target otherwise
+        alt_concepts = [
+            alt_concept for alt_concept in self.state.keys()
+            if (alt_concept != concept and not _descendant(alt_concept) \
+                and alt_concept not in hard_alt_concepts)
+        ]
 
-        concept_desc = self.node_data.deepget(concept)['name']
-        if names := self.dataset_state.dataset.deepget(concept)['context']['names']:
+        required_count = num_major+num_minor+num_dev
+        pos_queries = sample_queries(
+            self.dataset_state.train_dataset, pos_concepts,
+            num_queries=num_minor+num_dev,
+            return_concepts=False
+        )
+        pos_queries.extend(random.sample(node.queries, required_count-len(pos_queries)))
+        if len(pos_queries) > required_count:
+            pos_queries = random.sample(pos_queries, required_count)
+
+        pos_queries, pos_queries_test = pos_queries[:-num_dev], pos_queries[-num_dev:]
+
+        neg_queries = sample_queries(
+            self.dataset_state.train_dataset, hard_alt_concepts,
+            num_queries=required_count if hard else (num_minor+num_dev),
+            return_concepts=False
+        )
+        neg_queries.extend(sample_queries(
+            self.dataset_state.train_dataset, alt_concepts,
+            num_queries=required_count-len(neg_queries),
+            return_concepts=False
+        ))
+        if len(neg_queries) > required_count:
+            neg_queries = random.sample(neg_queries, required_count)
+
+        neg_queries, neg_queries_test = neg_queries[:-num_dev], neg_queries[-num_dev:]
+
+        concept_desc = node.name
+        if names := node.context.names:
             concept_desc += ' in the context of ' + ', '.join(names)
 
         train_dataset = [
-            [self.format_for_read(pos_query, concept), self.format_for_read(neg_query, concept)]
+            [self.format_for_read(pos_query, concept_desc), self.format_for_read(neg_query, concept_desc)]
             for pos_query, neg_query in itertools.product(pos_queries, neg_queries)
         ]
         test_dataset  = [
-            [self.format_for_read(pos_query, concept), self.format_for_read(neg_query, concept)]
+            [self.format_for_read(pos_query, concept_desc), self.format_for_read(neg_query, concept_desc)]
             for pos_query, neg_query in itertools.product(pos_queries_test, neg_queries_test)
         ]
         train_labels  = [ [True, False] for _ in range(len(train_dataset)) ]
@@ -137,17 +163,13 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
 
         return train_dataset, train_labels, test_dataset, test_labels
 
-    def get_refusal_vector(self, model_id, model):
+    def get_refusal_vector(self, model_id, model, control_kwargs):
         """ Load or learn a refusal vector """
 
-        vector_path = os.path.join(
-            "data", self.dataset_state.name.upper(), "control.act_str",
-            self.algorithm, model_id, f"vectors.notion.refusal.harm"
-        )
+        vector_path = self.root / model_id / "vectors.notion.refusal.harm"
+        if vector_path.exists(): return torch.load(vector_path)
 
-        if os.path.exists(vector_path): return torch.load(vector_path)
-
-        os.makedirs(os.path.dirname(vector_path), exist_ok=True)
+        vector_path.parent.mkdir(exist_ok=True, parents=True)
         dataset = datasets.load_dataset("justinphan3110/harmful_harmless_instructions")
 
         refusal_train_dataset = dataset['train']
@@ -167,7 +189,6 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
         )
 
         mean_refusal_vector = get_aggregate_concept_vector(refusal_vectors)
-        control_kwargs = KNOWN_CONTROL_KWARGS_FOR_REFUSAL.get(model_id)
 
         if not control_kwargs:
             results = []
@@ -201,15 +222,10 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
         """ Load or learn a concept vector """
 
         concept_id = generate_id('#'.join(concept))
+        vector_path = self.root / model_id / f"vectors.concept.{concept_id}-{seed}"
+        if vector_path.exists(): return torch.load(vector_path)
 
-        vector_path = os.path.join(
-            "data", self.dataset_state.name.upper(), "control.act_str",
-            self.algorithm, model_id, f"vectors.concept.{concept_id}-{seed}"
-        )
-
-        if os.path.exists(vector_path): return torch.load(vector_path)
-
-        os.makedirs(os.path.dirname(vector_path), exist_ok=True)
+        vector_path.parent.mkdir(exist_ok=True, parents=True)
         c_train_data, c_train_labels, c_test_data, _ = self.make_concept_dataset(concept)
 
         if not model.model: model.load()
@@ -250,23 +266,26 @@ class AbstentionWithReprEngineering(AbstentionTechnique):
 
         return concept_cls_bundle
 
-    def prepare(self, model_id, model, dataset_state, concepts: list[str | tuple[str, str]],
-                atomic_state, sibling_map, node_data, seed=42, **prepare_kwargs):
+    def prepare(self, model_id, model, dataset_state: DatasetState,
+                concepts: list[tuple[str]|tuple[str, str]],
+                atomic_state: DatasetState=None, seed=42,
+                control_kwargs: dict=None, **prepare_kwargs):
 
         self.dataset_state = dataset_state
         self.atomic_state  = atomic_state
-        self.sibling_map   = sibling_map
-        self.node_data     = node_data
 
         transformers.set_seed(seed)
 
-        self.refusal_vector = self.get_refusal_vector(model_id, model)
+        # load arguments to control refusal
+        refusal_control_kwargs = KNOWN_CONTROL_KWARGS_FOR_REFUSAL.get(model_id, {})
+        refusal_control_kwargs.update(control_kwargs.get(model_id, {}))
+
+        self.refusal_vector = self.get_refusal_vector(model_id, model, refusal_control_kwargs)
 
         self.concept_vectors = {}
         if len(concepts) == 0: return
 
         for concept in (pbar := tqdm.tqdm(concepts)):
-            pbar.set_description(node_data.deepget(concept)['name'])
             self.concept_vectors['#'.join(concept)] = self.get_concept_vector(
                 model_id, model, concept, seed=seed, pbar=pbar
             )
